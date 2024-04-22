@@ -1,0 +1,16 @@
+{
+    "name": "michaels_book_club/api",
+    "description": "H2 school project.",
+    "type": "project",
+    "require": {
+        "vlucas/phpdotenv": "^5.6",
+        "illuminate/database": "^11.4",
+        "ext-pdo_mysql": "*"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "MichaelsBookClub\\Api\\": "src/"
+        }
+    }
+}

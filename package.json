@@ -1,0 +1,17 @@
+{
+  "name": "michaels_book_club",
+  "private": true,
+  "workspaces": [
+    "api",
+    "web_client"
+  ],
+  "description": "Michael's book club project",
+  "version": "1.0.0",
+  "scripts": {
+    "api": "cd API/src/ && php -S localhost:1000",
+    "web": "cd web_client && npm run dev",
+    "bot": "cd Bot && node index.js"
+  },
+  "author": "",
+  "license": "MIT"
+}
