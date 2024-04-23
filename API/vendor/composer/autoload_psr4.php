@@ -10,7 +10,10 @@ return array(
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
     'Symfony\\Polyfill\\Ctype\\' => array($vendorDir . '/symfony/polyfill-ctype'),
     'PhpOption\\' => array($vendorDir . '/phpoption/phpoption/src/PhpOption'),
-    'MichaelsBookClub\\Api\\' => array($baseDir . '/src'),
+    'MichaelsBookClub\\Utils\\' => array($baseDir . '/src/Utils'),
+    'MichaelsBookClub\\Middleware\\' => array($baseDir . '/src/Middleware'),
+    'MichaelsBookClub\\Handlers\\' => array($baseDir . '/src/Handlers'),
+    'MichaelsBookClub\\' => array($baseDir . '/src'),
     'GrahamCampbell\\ResultType\\' => array($vendorDir . '/graham-campbell/result-type/src'),
     'Dotenv\\' => array($vendorDir . '/vlucas/phpdotenv/src'),
 );

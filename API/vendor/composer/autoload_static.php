@@ -25,7 +25,10 @@ class ComposerStaticInit1a6f3684d60a5884072b26233244cf08
         ),
         'M' => 
         array (
-            'MichaelsBookClub\\Api\\' => 21,
+            'MichaelsBookClub\\Utils\\' => 23,
+            'MichaelsBookClub\\Middleware\\' => 28,
+            'MichaelsBookClub\\Handlers\\' => 26,
+            'MichaelsBookClub\\' => 17,
         ),
         'G' => 
         array (
@@ -54,7 +57,19 @@ class ComposerStaticInit1a6f3684d60a5884072b26233244cf08
         array (
             0 => __DIR__ . '/..' . '/phpoption/phpoption/src/PhpOption',
         ),
-        'MichaelsBookClub\\Api\\' => 
+        'MichaelsBookClub\\Utils\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Utils',
+        ),
+        'MichaelsBookClub\\Middleware\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Middleware',
+        ),
+        'MichaelsBookClub\\Handlers\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Handlers',
+        ),
+        'MichaelsBookClub\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),

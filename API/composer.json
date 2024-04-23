@@ -9,7 +9,10 @@
   "license": "MIT",
   "autoload": {
     "psr-4": {
-      "MichaelsBookClub\\Api\\": "src/"
+      "MichaelsBookClub\\": "src/",
+      "MichaelsBookClub\\Utils\\": "src/Utils",
+      "MichaelsBookClub\\Handlers\\": "src/Handlers",
+      "MichaelsBookClub\\Middleware\\": "src/Middleware"
     }
   }
 }
