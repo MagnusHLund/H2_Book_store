@@ -1,15 +1,16 @@
+import '../scss/Header.scss'
+import SearchBox from './SearchBox'
+import Button from './Button'
 
 function Header() {
 
-    return <>
+    return(
         <div className="header">
-            <h1 className="logo"> Test </h1>
-            <div className="searchBox">
-                <input type="text" className="search"></input>
-            </div>
-            <button> Log In</button>
+            <h1 className="header__logo"> Test </h1>
+            <SearchBox placeholder=' Hamlet by William Shakespeare '/>
+            <Button placeholder='Log in'/>
         </div>
-    </>
+    )
 }
 
 export default Header
