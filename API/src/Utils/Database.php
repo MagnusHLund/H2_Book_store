@@ -7,7 +7,7 @@ class Database
     // init() is used as a form of constructor, but constructors are not used by static functions
     public static function init()
     {
-        // TODO: Code for database connection
+        Constants::getDatabaseInfo();
     }
 
     public static function create()

@@ -4,17 +4,17 @@ namespace MichaelsBookClub\Utils;
 
 class Constants
 {
-    public function getDatabaseInfo()
+    public static function getDatabaseInfo()
     {
         return array(
             "DB_HOST" => $_ENV['DB_HOST'],
             "DB_USER" => $_ENV['DB_USER'],
-            "DB_PASS" => $_ENV['DB_PASSWORD'],
-            "DB_NAME" => $_ENV['DB_DATABASE'],
+            "DB_PASS" => $_ENV['DB_PASS'],
+            "DB_NAME" => $_ENV['DB_NAME'],
         );
     }
 
-    public function getAllowedOrigins()
+    public static function getAllowedOrigins()
     {
         return $_ENV['ALLOWED_HOSTS'];
     }
