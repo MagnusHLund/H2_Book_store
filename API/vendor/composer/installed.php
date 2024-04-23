@@ -3,7 +3,7 @@
         'name' => 'michaels_book_club/api',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'eb0000a9d8f5990922814026ae4be846ac3799e9',
+        'reference' => '39581c95c012083408efcf7d85a6b114f5bbae43',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -112,7 +112,7 @@
         'michaels_book_club/api' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'eb0000a9d8f5990922814026ae4be846ac3799e9',
+            'reference' => '39581c95c012083408efcf7d85a6b114f5bbae43',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
