@@ -3,7 +3,7 @@ USE `BookStore`;
 
 CREATE TABLE IF NOT EXISTS `Books`(
 	BookID INT AUTO_INCREMENT,
-	ReleasedDate INT NOT NULL,
+	ReleasedDate DATE NOT NULL,
 	Stock INT NOT NULL,
 	Genre VARCHAR(20) NOT NULL,
 	Category VARCHAR(20) NOT NULL,
