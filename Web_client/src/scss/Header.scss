@@ -3,15 +3,23 @@
     height: 5vh;
 
     display: flex;
-    justify-content: space-between;
-    align-content: space-between;
-    
-    margin-top: 1vh;
+    justify-content: space-evenly;
+    align-content: space-evenly;
+    align-items: baseline;
+    margin-top: 3vh;
 
     &__logo {
         height: 5vh;
-        justify-self: center;
-        align-self: center;
-        margin-left: 5vh;
+        justify-self: left;
+        align-self: left;
+        font-style: italic;
+    }
+
+    &__buttonContainer {
+        display: flex;
+        align-items: baseline;
+        &__icon {
+            margin-right: 3vh;
+        }
     }
 }

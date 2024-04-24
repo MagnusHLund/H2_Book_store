@@ -2,12 +2,12 @@ import '../scss/Button.scss'
 import React from 'react'
 
 interface IButton {
-    placeholder: string
+    placeholder?: string
 }
 
 const Button: React.FC<IButton> = ({ placeholder }) => {
     return (
-        <button className='button'> { placeholder } </button>
+        <button className="button"> { placeholder } </button>
     )
 }
 

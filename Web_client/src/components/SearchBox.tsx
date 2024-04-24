@@ -1,7 +1,7 @@
 import '../scss/SearchBox.scss'
 
 interface ISearchBox {
-    placeholder: string
+    placeholder?: string
 }
 
 const SearchBox: React.FC<ISearchBox> = ({ placeholder }) => {
