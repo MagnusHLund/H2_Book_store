@@ -2,7 +2,7 @@
 
 namespace MichaelsBookClub\Handlers;
 
-class LoginHandler
+class CheckoutHandler
 {
     public function login($loginInfo)
     {
