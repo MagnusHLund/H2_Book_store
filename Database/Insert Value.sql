@@ -1,49 +1,62 @@
--- Inserting dummy data into the Authors table
-INSERT INTO Authors (Name, Published) VALUES
-('Manike 1', '2022-01-01'),
-('Manike½ 2', '2021-12-15'),
-('Manike1½ 3', '2020-11-20');
+-- For the Authors table:
 
--- Inserting dummy data into the Books table
-INSERT INTO Books (ReleasedOn, Stock, Genre, Category, Price, Name, ISBN, Language) VALUES
-(2022, 100, 'Fiction', 'Novel', 20, 'Book 1', 1234567890, 'English'),
-(2021, 50, 'Non-Fiction', 'Biography', 25, 'Book 2', 9876543210, 'English'),
-(2020, 75, 'Mystery', 'Thriller', 18, 'Book 3', 5678901234, 'English');
+INSERT INTO Authors (Name) VALUES
+('Author 1'),
+('Author 2'),
+('Author 3');
 
--- Inserting dummy data into the BooksAuthorID table
-INSERT INTO BooksAuthorID (AuthorID, BookID) VALUES
+-- For the Books table:
+
+INSERT INTO Books (ReleasedDate, Stock, Genre, Category, Price, Name, ISBN, Language) VALUES
+(2020, 100, 'Fiction', 'Novel', 20, 'Book 1', 'ISBN1234567890', 'English'),
+(2019, 50, 'Fantasy', 'Novel', 25, 'Book 2', 'ISBN0987654321', 'English'),
+(2021, 80, 'Mystery', 'Thriller', 18, 'Book 3', 'ISBN5432167890', 'English');
+
+-- For the AuthorBooks table (assuming each book has one author):
+
+INSERT INTO AuthorBooks (AuthorID, BookID) VALUES
 (1, 1),
 (2, 2),
 (3, 3);
 
--- Inserting dummy data into the Coupons table
-INSERT INTO Coupons (Code, Expires) VALUES
-('SAVE10', '2024-06-30'),
-('FREESHIP', '2024-05-31');
+-- For the Coupons table:
 
--- Inserting dummy data into the Cities table
+INSERT INTO Coupons (Code, DiscountPercent, Expires) VALUES
+('CODE123', 10, '2024-12-31'),
+('SALE2024', 15, '2024-06-30'),
+('DISCOUNT50', 20, '2024-07-31');
+
+-- For the Cities table:
+
 INSERT INTO Cities (City, ZipCode) VALUES
 ('New York', 10001),
 ('Los Angeles', 90001),
 ('Chicago', 60601);
 
--- Inserting dummy data into the Addresses table
+-- For the Addresses table:
+
 INSERT INTO Addresses (CityID, StreetName, HouseNumber) VALUES
 (1, 'Broadway', '123'),
 (2, 'Hollywood Blvd', '456'),
 (3, 'Michigan Ave', '789');
 
--- Inserting dummy data into the Customers table
-INSERT INTO Customers (AddressID, Name, Password, Email, CreatedAt) VALUES
-(1, 'John Doe', 'password123', 'john@example.com', '2024-04-23 12:00:00'),
-(2, 'Jane Smith', 'qwerty456', 'jane@example.com', '2024-04-23 13:00:00');
+-- For the Customers table:
 
--- Inserting dummy data into the Orders table
-INSERT INTO Orders (CustomerID, CouponID, Created, TotalPrice) VALUES
-(1, NULL, '2024-04-23 14:00:00', 20),
-(2, 1, '2024-04-23 15:00:00', 25);
+INSERT INTO Customers (AddressID, Name, Password, Email) VALUES
+(1, 'John Doe', 'password123', 'john@example.com'),
+(2, 'Jane Smith', 'pass456', 'jane@example.com'),
+(3, 'Alice Johnson', 'abc123', 'alice@example.com');
 
--- Inserting dummy data into the Orderitems table
+-- For the Orders table:
+
+INSERT INTO Orders (CustomerID, CouponID, TotalPrice) VALUES
+(1, 1, 150.50),
+(2, NULL, 75.20),
+(3, 3, 200.00);
+
+-- For the Orderitems table:
+
 INSERT INTO Orderitems (BookID, OrderID, Price, Quantity) VALUES
-(1, 1, 20, 1),
-(2, 2, 25, 1);
+(1, 1, 20.50, 5),
+(2, 1, 25.00, 2),
+(3, 3, 18.00, 10);
