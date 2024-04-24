@@ -17,7 +17,7 @@ class Router
 
         $userHandler = new UserHandler;
 
-        $loginRoute = "login/";
+        $userRoute = "User/";
 
         $productHandler = new ProductHandler;
 
@@ -36,7 +36,7 @@ class Router
         // Routes are made up in 3 parts. 1. Request type, 2. API url, 3. function to call
         $this->routes = [
             // Login
-            ["POST", $baseUrl . $loginRoute . "login", [$userHandler, "login"]]
+            ["POST", $baseUrl . $userRoute . "login", [$userHandler, "login"]]
         ];
 
         $this->routes = [
