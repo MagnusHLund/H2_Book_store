@@ -1,13 +1,16 @@
 import '../scss/Header.scss'
 import SearchBox from './SearchBox'
+import Image from './Image'
+import Button from './Button'
 import { LuShoppingBasket } from "react-icons/lu"
 import { IconContext } from "react-icons"
-import Button from './Button'
 
 function Header() {
     return (
         <div className="header">
-            <h1 className="header__logo"> Michael's book club </h1>
+            <div className='header__logo'>
+                <Image imageSrc='../src/Images/MichaelsBookClub.png'></Image>
+            </div>
             <SearchBox placeholder=' 🔎 Hamlet by William Shakespeare '/>
             <div className='header__loginAndButton'>
                 <IconContext.Provider value={{ size:'3vh'}}>

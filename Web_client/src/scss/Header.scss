@@ -4,20 +4,23 @@
 
     display: flex;
     justify-content: space-evenly;
-    align-content: space-evenly;
     align-items: baseline;
     margin-top: 3vh;
+    
 
     &__logo {
-        height: 5vh;
-        justify-self: left;
-        align-self: left;
-        font-style: italic;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        height: 100%;
+        background-size: 120%;
     }
 
     &__buttonContainer {
         display: flex;
-        align-items: baseline;
+        flex-direction: row;
+        justify-items: center;
+        align-items: center;
         &__icon {
             margin-right: 3vh;
         }
