@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 90vh;
+    width: 100vh;
     
     &__search {
         border-radius: 2vh;
@@ -11,8 +11,7 @@
         font-size: 1.85vh;
 
         padding-inline: 1vh;
-        width: 90vh;
-        margin-right: 10vh;
+        width: 100vh;
         height: 3.5vh;
 
         &:focus {
