@@ -57,9 +57,12 @@ class Router
         $this->routes = [
             // Product
             ["POST", $baseUrl . $productRoute . "Product", [$productHandler, "Product"]],
+
+            // Product
+            ["GET", $baseUrl . $productRoute . "Product", [$productHandler, "Product"]],
             
             // Product - Get product
-            ["GET", $baseUrl . $productRoute . "product", [$productHandler, "getProduct"]],
+            ["GET", $baseUrl . $productRoute . "product/{id}", [$productHandler, "getProductByID"]],
 
             // Product - Create product
             ["POST", $baseUrl . $productRoute . "product", [$productHandler, "createProduct"]],
