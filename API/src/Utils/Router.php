@@ -35,19 +35,19 @@ class Router
 
         // Routes are made up in 3 parts. 1. Request type, 2. API url, 3. function to call
         $this->routes = [
-            // Login
+            // User - Login
             ["POST", $baseUrl . $userRoute . "login", [$userHandler, "login"]],
             
-            // Logout
+            // User - Logout
             ["POST", $baseUrl . $userRoute . "logout", [$userHandler, "logout"]],
 
-            // Create
+            // User - Create
             ["GET", $baseUrl . $userRoute . "create", [$userHandler, "CreateUser"]],
             
-            // Update
+            // User - Update
             ["PUT", $baseUrl . $userRoute . "create/{id}", [$userHandler, "updateUser"]],
 
-            // Delete
+            // User - Delete
             ["DELETE", $baseUrl . $userRoute . "create", [$userHandler, "deleteUser"]]
 
 
@@ -58,16 +58,16 @@ class Router
             // Product
             ["POST", $baseUrl . $productRoute . "Product", [$productHandler, "Product"]],
             
-            // Get product
+            // Product - Get product
             ["GET", $baseUrl . $productRoute . "product", [$productHandler, "getProduct"]],
 
-            // Create product
+            // Product - Create product
             ["POST", $baseUrl . $productRoute . "product", [$productHandler, "createProduct"]],
             
-            // Update product
+            // Product - Update product
             ["PUT", $baseUrl . $productRoute . "product/{id}", [$productHandler, "updateProduct"]],
             
-            // Delete product
+            // Product - Delete product
             ["DELETE", $baseUrl . $productRoute . "product/{id}", [$productHandler, "deleteProduct"]]
         ];
 
@@ -75,17 +75,21 @@ class Router
             // Order
             ["POST", $baseUrl . $orderRoute . "order", [$orderHandler, "order"]],
             
-            // Get Order by ID
+            // Order - Get Order by ID
             ["GET", $baseUrl . $orderRoute . "order/{id}", [$orderHandler, "getOrderById"]],
             
-            // Get All Orders
+            // Order - Get All Orders
             ["GET", $baseUrl . $orderRoute . "order", [$orderHandler, "getAllOrders"]]
         ];
 
         $this->routes = [
             // Checkout - Place Order
-            ["POST", $baseUrl . $checkoutRoute . "placeOrder", [$checkoutHandler, "placeOrder"]]
+            ["POST", $baseUrl . $checkoutRoute . "placeOrder", [$checkoutHandler, "placeOrder"]],
+            
+            // Checkout - Get City from Zipcode
+            ["GET", $baseUrl . $checkoutRoute . "getCityFromZipcode/{zipcode}", [$checkoutHandler, "getCityFromZipcode"]]
         ];
+        
     }
 
 
