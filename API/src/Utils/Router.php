@@ -36,22 +36,55 @@ class Router
         // Routes are made up in 3 parts. 1. Request type, 2. API url, 3. function to call
         $this->routes = [
             // Login
-            ["POST", $baseUrl . $userRoute . "login", [$userHandler, "login"]]
+            ["POST", $baseUrl . $userRoute . "login", [$userHandler, "login"]],
+            
+            // Logout
+            ["POST", $baseUrl . $userRoute . "logout", [$userHandler, "logout"]],
+
+            // Create
+            ["GET", $baseUrl . $userRoute . "create", [$userHandler, "CreateUser"]],
+            
+            // Update
+            ["PUT", $baseUrl . $userRoute . "create/{id}", [$userHandler, "updateUser"]],
+
+            // Delete
+            ["DELETE", $baseUrl . $userRoute . "create", [$userHandler, "deleteUser"]]
+
+
+            
         ];
 
         $this->routes = [
             // Product
-            ["POST", $baseUrl . $productRoute . "login", [$productHandler, "login"]]
+            ["POST", $baseUrl . $productRoute . "Product", [$productHandler, "Product"]],
+            
+            // Get product
+            ["GET", $baseUrl . $productRoute . "product", [$productHandler, "getProduct"]],
+
+            // Create product
+            ["POST", $baseUrl . $productRoute . "product", [$productHandler, "createProduct"]],
+            
+            // Update product
+            ["PUT", $baseUrl . $productRoute . "product/{id}", [$productHandler, "updateProduct"]],
+            
+            // Delete product
+            ["DELETE", $baseUrl . $productRoute . "product/{id}", [$productHandler, "deleteProduct"]]
         ];
 
         $this->routes = [
             // Order
-            ["POST", $baseUrl . $orderRoute . "login", [$orderHandler, "login"]]
+            ["POST", $baseUrl . $orderRoute . "order", [$orderHandler, "order"]],
+            
+            // Get Order by ID
+            ["GET", $baseUrl . $orderRoute . "order/{id}", [$orderHandler, "getOrderById"]],
+            
+            // Get All Orders
+            ["GET", $baseUrl . $orderRoute . "order", [$orderHandler, "getAllOrders"]]
         ];
 
         $this->routes = [
-            // Checkout
-            ["POST", $baseUrl . $checkoutRoute . "login", [$checkoutHandler, "login"]]
+            // Checkout - Place Order
+            ["POST", $baseUrl . $checkoutRoute . "placeOrder", [$checkoutHandler, "placeOrder"]]
         ];
     }
 

@@ -4,8 +4,8 @@ namespace MichaelsBookClub\Handlers;
 
 class CheckoutHandler
 {
-    public function login($loginInfo)
+    public function placeOrder($checkOutInfo)
     {
-        // TODO: Write code which logs in the user
+        // TODO: Write code which places order 
     }
 }
