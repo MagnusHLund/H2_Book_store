@@ -4,7 +4,7 @@ namespace MichaelsBookClub\Handlers;
 
 class OrderHandler
 {
-    public function login($loginInfo)
+    public function orderproduct($productInfo)
     {
         // TODO: Write code which logs in the user
     }
