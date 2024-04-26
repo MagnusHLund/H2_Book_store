@@ -53,12 +53,12 @@ INSERT INTO Users (address_id, name, password, email, created_at, is_admin) VALU
 (4, 'Lucas Bangsborg', 'hashedvalue', 'LucasBangersborg@outlook.com', NOW(), 1),
 (5, 'Magnus Lund', 'hashedvalue', 'magussy@hotmail.com', NOW(), 0);
 
-INSERT INTO Orders (user_id, coupon_id, created_at, total_price) VALUES
-(1, 1, '2024-10-03 16:14:32', 90),
-(2, 2, '2027-01-21 07:25:27', 180),
-(3, 3, '2033-11-05 12:17:54', 270),
-(4, 4, '2034-06-06 16:25:31', 360),
-(5, 5, '2028-07-16 18:21:53', 450);
+INSERT INTO Orders (address_id, user_id, coupon_id, created_at, total_price) VALUES
+(1, 1, 1, '2024-10-03 16:14:32', 90),
+(2, 2, 2, '2027-01-21 07:25:27', 180),
+(3, 3, 3, '2033-11-05 12:17:54', 270),
+(4, 4, 4, '2034-06-06 16:25:31', 360),
+(5, 5, 5, '2028-07-16 18:21:53', 450);
 
 INSERT INTO OrderItems (book_id, order_id, price, quantity) VALUES
 (1, 1, 59, 2),
