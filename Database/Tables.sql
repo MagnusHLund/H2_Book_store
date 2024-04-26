@@ -32,15 +32,20 @@ CREATE TABLE IF NOT EXISTS `Coupons`(
 CREATE TABLE IF NOT EXISTS `Books`(
     `book_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `release_date` DATE NOT NULL,
-    `stock` SMALLINT UNSIGNED NOT NULL CHECK (stock >= 0),
-    `genre` VARCHAR(25) NOT NULL,
-    `category` VARCHAR(25) NOT NULL,
-    `price` SMALLINT UNSIGNED NOT NULL CHECK (price >= 0),
-    `name` VARCHAR(50) NOT NULL,
+    `stock` SMALLINT UNSIGNED NOT NULL,
+    `genre` VARCHAR(35) NOT NULL,
+    `category` VARCHAR(35) NOT NULL,
+    `price` SMALLINT UNSIGNED NOT NULL,
+    `name` VARCHAR(256) NOT NULL,
     `isbn` VARCHAR(13) NOT NULL,
     `language` VARCHAR(20) NOT NULL,
 
-    PRIMARY KEY (`book_id`)
+    PRIMARY KEY (`book_id`),
+    KEY `name_index` (`name`),
+    KEY `isbn_index` (`isbn`),
+    KEY `genre_index` (`genre`),
+    KEY `category_index` (`category`),
+    KEY `language_index` (`language`)
 );
 
 -- The Authors table has 3 columns, of which author_id is the primary key.
@@ -49,7 +54,8 @@ CREATE TABLE IF NOT EXISTS `Authors`(
     `author_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(35) NOT NULL,
 
-    PRIMARY KEY(`author_id`)
+    PRIMARY KEY(`author_id`),
+    KEY `name_index` (`name`)
 );
 
 -- The AuthorBooks table is a many to many table.
@@ -61,8 +67,8 @@ CREATE TABLE IF NOT EXISTS `AuthorsBooks`(
     `book_id` INT UNSIGNED NOT NULL,
 
     PRIMARY KEY(`ab_id`),
-    CONSTRAINT authors_books_fk_1 FOREIGN KEY(`author_id`) REFERENCES `Authors` (`author_id`),
-    CONSTRAINT authors_books_fk_2 FOREIGN KEY(`book_id`) REFERENCES `Books` (`book_id`)
+    CONSTRAINT `authors_books_fk_1` FOREIGN KEY(`author_id`) REFERENCES `Authors` (`author_id`) ON DELETE CASCADE,
+    CONSTRAINT `authors_books_fk_2` FOREIGN KEY(`book_id`) REFERENCES `Books` (`book_id`) ON DELETE CASCADE
 );
 
 -- The Cities table has zip codes and cities, from Denmark.
@@ -90,7 +96,7 @@ CREATE TABLE IF NOT EXISTS `Addresses`(
     `house_number` VARCHAR(15) NOT NULL,
 
     PRIMARY KEY(`address_id`),
-    CONSTRAINT addresses_fk_1 FOREIGN KEY (`city_id`) REFERENCES `Cities` (`city_id`) ON DELETE CASCADE ON UPDATE CASCADE
+    CONSTRAINT `addresses_fk_1` FOREIGN KEY (`city_id`) REFERENCES `Cities` (`city_id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- The users table has 7 columns, user_id is the primary key.
@@ -103,13 +109,17 @@ CREATE TABLE IF NOT EXISTS `Users`(
     `address_id` INT UNSIGNED NOT NULL,
     `name` VARCHAR(50) NOT NULL,
     `password` VARCHAR(256) NOT NULL,
-    `email` VARCHAR(256) NOT NULL UNIQUE,
+    `email` VARCHAR(256) NOT NULL,
     `created_at` DATETIME NOT NULL,
     `is_admin` TINYINT NOT NULL CHECK (is_admin BETWEEN 0 and 1),
 
     PRIMARY KEY(`user_id`),
-    CONSTRAINT users_fk_1 FOREIGN KEY (`address_id`) REFERENCES `Addresses` (`address_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-    KEY `is_admin_key` (`is_admin`)
+    KEY `name_index` (`name`),
+    UNIQUE `email_unique` (`email`),
+    KEY `is_admin_index` (`is_admin`),
+    KEY `password_index` (`password`),
+    KEY `created_at_index` (`created_at`),
+    CONSTRAINT users_fk_1 FOREIGN KEY (`address_id`) REFERENCES `Addresses` (`address_id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- The Orders table keeps track of all orders made.
@@ -118,28 +128,56 @@ CREATE TABLE IF NOT EXISTS `Users`(
 -- total_price is a float, because the price might include decimal points.
 CREATE TABLE IF NOT EXISTS `Orders`(
     `order_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `address_id` INT UNSIGNED NOT NULL,
     `user_id` INT UNSIGNED NOT NULL,
     `coupon_id` INT UNSIGNED,
-    `total_price` FLOAT UNSIGNED NOT NULL CHECK (total_price >= 0),
+    `total_price` FLOAT UNSIGNED NOT NULL,
     `created_at` DATETIME NOT NULL,
 
     PRIMARY KEY(`order_id`),
-    CONSTRAINT orders_fk_1 FOREIGN KEY (`user_id`) REFERENCES `Users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-	CONSTRAINT orders_fk_2 FOREIGN KEY (`coupon_id`) REFERENCES `Coupons` (`coupon_id`) ON DELETE CASCADE ON UPDATE CASCADE
+    CONSTRAINT `orders_fk_1` FOREIGN KEY (`user_id`) REFERENCES `Users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT `orders_fk_2` FOREIGN KEY (`coupon_id`) REFERENCES `Coupons` (`coupon_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT `orders_fk_3` FOREIGN KEY (`address_id`) REFERENCES `Addresses` (`address_id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
--- The order is a table with 5 columns. order_items_id is the primary key.
+-- OrderItems is a table with 5 columns. order_items_id is the primary key.
 -- book_id and order_id are foreign keys, from Books and Orders.
 -- OrderItems keeps track of the products added to an order.
--- price and quantity can not be less than 0.
 CREATE TABLE IF NOT EXISTS `OrderItems`(
     `order_items_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `book_id` INT UNSIGNED NOT NULL,
     `order_id` INT UNSIGNED NOT NULL,
-    `price` FLOAT UNSIGNED NOT NULL CHECK (price >= 0),
-    `quantity` SMALLINT UNSIGNED NOT NULL CHECK (quantity >= 0),
+    `price` FLOAT UNSIGNED NOT NULL,
+    `quantity` SMALLINT UNSIGNED NOT NULL,
 
     PRIMARY KEY(`order_items_id`),
-    CONSTRAINT order_items_fk_1 FOREIGN KEY (`book_id`) REFERENCES `Books` (`book_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-	CONSTRAINT order_items_fk_2 FOREIGN KEY (`order_id`) REFERENCES `Orders` (`order_id`) ON DELETE CASCADE ON UPDATE CASCADE
+    CONSTRAINT `order_items_fk_1` FOREIGN KEY (`book_id`) REFERENCES `Books` (`book_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT `order_items_fk_2` FOREIGN KEY (`order_id`) REFERENCES `Orders` (`order_id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+-- The bookImages holds information about which images should be shown for a book.
+-- It also keeps track of which order the images should be shown.
+-- book_images_id is the primary key and book_id is a foreign key from the Books table.
+CREATE TABLE IF NOT EXISTS `BookImages`(
+    `book_images_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `book_id` INT UNSIGNED NOT NULL,
+    `file_path` VARCHAR(256) NOT NULL,
+    `display_order` TINYINT UNSIGNED NOT NULL,
+
+    PRIMARY KEY(`book_images_id`),
+    CONSTRAINT `book_images_fk_1` FOREIGN KEY (`book_id`) REFERENCES `Books` (`book_id`) ON DELETE CASCADE
+);
+
+-- This table is responsible for keeping track of logs, regarding what happens within the database.
+-- It has a primary key called bogreden_log_id.
+-- log_type and created_at has been indexed, to quickly find a specific log.
+CREATE TABLE IF NOT EXISTS `BogredenLog` (
+    `bogreden_log_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `log_type` VARCHAR(30) NOT NULL,
+    `created_at` DATETIME NOT NULL,
+    `log_text` TEXT NOT NULL,
+
+    PRIMARY KEY (`bogreden_log_id`),
+    KEY `log_type_index` (`log_type`),
+    KEY `created_at_index` (`created_at`)
+)

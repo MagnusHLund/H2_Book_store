@@ -11,6 +11,27 @@ INSERT INTO Coupons (code, discount_percentage, expiration_date) VALUES
 ('75OFF', 75, '2028-01-01 00:00:00'),
 ('GUNPOINT_DISCOUNT', 100, '2034-08-14 14:08:04');
 
+INSERT INTO Books (release_date, stock, genre, category, price, name, isbn, language) VALUES
+('2012-02-01', 6, 'Romance', 'Women', 59, 'The lover boyz', 1234567890, 'English'),
+('2022-05-22', 8, 'Fiction', 'Teenagers', 29, 'No facts', 1234567891, 'English'),
+('2024-03-04', 15, 'Sci-fi', 'Boys', 39, 'Star claws', 1234567892, 'English'),
+('2021-11-14', 22, 'Fiction', 'Boys', 69, 'Doomsday', 1234567893, 'English'),
+('2018-12-19', 5, 'Horror', 'Adults', 100, 'Zombies in spaceland', 1234567894, 'English');
+
+INSERT INTO Authors (name) VALUES
+('Michael Hansen'),
+('Tom Stevns'),
+('David Svarrer'),
+('Yordan Yapster'),
+('Mikkel Krøll');
+
+INSERT INTO AuthorsBooks (author_id, book_id) VALUES
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 5);
+
 INSERT INTO Cities (city, zip_code) VALUES
 ('Slagelse', 4200),
 ('Amagerbro', 2300),
@@ -31,28 +52,6 @@ INSERT INTO Users (address_id, name, password, email, created_at, is_admin) VALU
 (3, 'Yordan Mitov', 'hashedvalue', 'linuxlover@gmail.com', NOW(), 0),
 (4, 'Lucas Bangsborg', 'hashedvalue', 'LucasBangersborg@outlook.com', NOW(), 1),
 (5, 'Magnus Lund', 'hashedvalue', 'magussy@hotmail.com', NOW(), 0);
-
-
-INSERT INTO Authors (name) VALUES
-('Michael Hansen'),
-('Tom Stevns'),
-('David Svarrer'),
-('Yordan Yapster'),
-('Mikkel Krøll');
-
-INSERT INTO Books (release_date, stock, genre, category, price, name, isbn, language) VALUES
-('2012-02-01', 6, 'Romance', 'Women', 59, 'The lover boyz', 1234567890, 'English'),
-('2022-05-22', 8, 'Fiction', 'Teenagers', 29, 'No facts', 1234567891, 'English'),
-('2024-03-04', 15, 'Sci-fi', 'Boys', 39, 'Star claws', 1234567892, 'English'),
-('2021-11-14', 22, 'Fiction', 'Boys', 69, 'Doomsday', 1234567893, 'English'),
-('2018-12-19', 5, 'Horror', 'Adults', 100, 'Zombies in spaceland', 1234567894, 'English');
-
-INSERT INTO AuthorsBooks (author_id, book_id) VALUES
-(1, 1),
-(2, 2),
-(3, 3),
-(4, 4),
-(5, 5);
 
 INSERT INTO Orders (user_id, coupon_id, created_at, total_price) VALUES
 (1, 1, '2024-10-03 16:14:32', 90),

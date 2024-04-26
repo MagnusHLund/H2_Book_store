@@ -107,7 +107,7 @@ DELIMITER ;
 -- This procedure works but is not completed so please wait a bit
 
 DELIMITER //
-CREATE PROCEDURE IF NOT EXISTS GetAllBooksByText(
+CREATE PROCEDURE IF NOT EXISTS GetAllBooksBySearch(
     IN searchText VARCHAR(250)
 )
 BEGIN
