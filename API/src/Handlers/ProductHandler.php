@@ -2,9 +2,9 @@
 
 namespace MichaelsBookClub\Handlers;
 
-class LoginHandler
+class ProductHandler
 {
-    public function login($loginInfo)
+    public function product($productInfo)
     {
         // TODO: Write code which logs in the user
     }

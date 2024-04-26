@@ -2,7 +2,10 @@
 
 namespace MichaelsBookClub\Utils;
 
-use MichaelsBookClub\Handlers\LoginHandler;
+use MichaelsBookClub\Handlers\UserHandler;
+use MichaelsBookClub\Handlers\ProductHandler;
+use MichaelsBookClub\Handlers\OrderHandler;
+use MichaelsBookClub\Handlers\CheckoutHandler;
 
 class Router
 {
@@ -12,16 +15,79 @@ class Router
     {
         $baseUrl = "api/";
 
-        $loginHandler = new LoginHandler;
+        $userHandler = new UserHandler;
 
-        $loginRoute = "login/";
+        $userRoute = "User/";
+
+        $productHandler = new ProductHandler;
+
+        $productRoute = "Products/";
+
+        $orderHandler = new OrderHandler;
+
+        $orderRoute = "Orders/";
+
+        $checkoutHandler = new CheckoutHandler;
+
+        $checkoutRoute = "Checkout/";
+        
+        
 
         // Routes are made up in 3 parts. 1. Request type, 2. API url, 3. function to call
         $this->routes = [
             // Login
-            ["POST", $baseUrl . $loginRoute . "login", [$loginHandler, "login"]]
+            ["POST", $baseUrl . $userRoute . "login", [$userHandler, "login"]],
+            
+            // Logout
+            ["POST", $baseUrl . $userRoute . "logout", [$userHandler, "logout"]],
+
+            // Create
+            ["GET", $baseUrl . $userRoute . "create", [$userHandler, "CreateUser"]],
+            
+            // Update
+            ["PUT", $baseUrl . $userRoute . "create/{id}", [$userHandler, "updateUser"]],
+
+            // Delete
+            ["DELETE", $baseUrl . $userRoute . "create", [$userHandler, "deleteUser"]]
+
+
+            
+        ];
+
+        $this->routes = [
+            // Product
+            ["POST", $baseUrl . $productRoute . "Product", [$productHandler, "Product"]],
+            
+            // Get product
+            ["GET", $baseUrl . $productRoute . "product", [$productHandler, "getProduct"]],
+
+            // Create product
+            ["POST", $baseUrl . $productRoute . "product", [$productHandler, "createProduct"]],
+            
+            // Update product
+            ["PUT", $baseUrl . $productRoute . "product/{id}", [$productHandler, "updateProduct"]],
+            
+            // Delete product
+            ["DELETE", $baseUrl . $productRoute . "product/{id}", [$productHandler, "deleteProduct"]]
+        ];
+
+        $this->routes = [
+            // Order
+            ["POST", $baseUrl . $orderRoute . "order", [$orderHandler, "order"]],
+            
+            // Get Order by ID
+            ["GET", $baseUrl . $orderRoute . "order/{id}", [$orderHandler, "getOrderById"]],
+            
+            // Get All Orders
+            ["GET", $baseUrl . $orderRoute . "order", [$orderHandler, "getAllOrders"]]
+        ];
+
+        $this->routes = [
+            // Checkout - Place Order
+            ["POST", $baseUrl . $checkoutRoute . "placeOrder", [$checkoutHandler, "placeOrder"]]
         ];
     }
+
 
     public function handleRequest($method, $path, $requestBody)
     {
