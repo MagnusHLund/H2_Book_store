@@ -1,6 +1,3 @@
-
-
-
 --  __  __   __  _  __ __   _____ ___ _  __  __ ___ ___   __  
 -- |  \/__\ /__\| |/ /' _/ |_   _| _ \ |/ _]/ _] __| _ \/' _/ 
 -- | -< \/ | \/ |   <`._`.   | | | v / | [/\ [/\ _|| v /`._`. 
@@ -75,29 +72,29 @@ DELIMITER ;
 --         \/                 \/                    \/                   \/     \/                 /_____//_____/      \/           \/ 
 
 DELIMITER $$
-CREATE TRIGGER author_books_log_inserts AFTER INSERT ON AuthorBooks
+CREATE TRIGGER author_books_log_inserts AFTER INSERT ON AuthorsBooks
 FOR EACH ROW
 BEGIN
    INSERT INTO BogredenLog (Log_type, created_at, log_text)
-   VALUES ('AuthorBooks', NOW(), CONCAT('New Author-book relation inserted. ID:', NEW.ab_id));
+   VALUES ('AuthorsBooks', NOW(), CONCAT('New Author-book relation inserted. ID:', NEW.ab_id));
 END$$
 DELIMITER ;
 
 DELIMITER $$
-CREATE TRIGGER author_books_log_update AFTER UPDATE ON AuthorBooks
+CREATE TRIGGER author_books_log_update AFTER UPDATE ON AuthorsBooks
 FOR EACH ROW
 BEGIN
    INSERT INTO BogredenLog (Log_type, created_at, log_text)
-   VALUES ('AuthorBooks', NOW(), CONCAT('New Author-book relation updated. ID:', OLD.ab_id));
+   VALUES ('AuthorsBooks', NOW(), CONCAT('New Author-book relation updated. ID:', OLD.ab_id));
 END$$
 DELIMITER ;
 
 DELIMITER $$
-CREATE TRIGGER author_books_log_delete AFTER DELETE ON AuthorBooks
+CREATE TRIGGER author_books_log_delete AFTER DELETE ON AuthorsBooks
 FOR EACH ROW
 BEGIN
    INSERT INTO BogredenLog (Log_type, created_at, log_text)
-   VALUES ('AuthorBooks', NOW(), CONCAT('New Author-book relation deleted. ID:', OLD.ab_id));
+   VALUES ('AuthorsBooks', NOW(), CONCAT('New Author-book relation deleted. ID:', OLD.ab_id));
 END$$
 DELIMITER ;
 
@@ -215,7 +212,7 @@ CREATE TRIGGER coupons_inserts AFTER INSERT ON coupons
 FOR EACH ROW
 BEGIN
    INSERT INTO BogredenLog (Log_type, created_at, log_text)
-   VALUES ('orderitems', NOW(), CONCAT('New coupons inserted. ID:', NEW.coupon_id));
+   VALUES ('coupons', NOW(), CONCAT('New coupons inserted. ID:', NEW.coupon_id));
 END$$
 DELIMITER ;
 
@@ -224,7 +221,7 @@ CREATE TRIGGER coupons_update AFTER UPDATE ON coupons
 FOR EACH ROW
 BEGIN
    INSERT INTO BogredenLog (Log_type, created_at, log_text)
-   VALUES ('orderitems', NOW(), CONCAT('New coupons updated. ID:', OLD.coupon_id));
+   VALUES ('coupons', NOW(), CONCAT('New coupons updated. ID:', OLD.coupon_id));
 END$$
 DELIMITER ;
 
@@ -249,7 +246,7 @@ CREATE TRIGGER address_inserts AFTER INSERT ON addresses
 FOR EACH ROW
 BEGIN
    INSERT INTO BogredenLog (Log_type, created_at, log_text)
-   VALUES ('orderitems', NOW(), CONCAT('New address inserted. ID:', NEW.adress_id));
+   VALUES ('addresses', NOW(), CONCAT('New address inserted. ID:', NEW.address_id));
 END$$
 DELIMITER ;
 
@@ -258,7 +255,7 @@ CREATE TRIGGER address_update AFTER UPDATE ON addresses
 FOR EACH ROW
 BEGIN
    INSERT INTO BogredenLog (Log_type, created_at, log_text)
-   VALUES ('orderitems', NOW(), CONCAT('New address updated. ID:', OLD.adress_id));
+   VALUES ('addresses', NOW(), CONCAT('New address updated. ID:', OLD.address_id));
 END$$
 DELIMITER ;
 
@@ -267,7 +264,7 @@ CREATE TRIGGER address_delete AFTER DELETE ON addresses
 FOR EACH ROW
 BEGIN
    INSERT INTO BogredenLog (Log_type, created_at, log_text)
-   VALUES ('address', NOW(), CONCAT('New address deleted. ID:', OLD.adress_id));
+   VALUES ('addresses', NOW(), CONCAT('New address deleted. ID:', OLD.address_id));
 END$$
 DELIMITER ;
 
@@ -283,7 +280,7 @@ CREATE TRIGGER city_inserts AFTER INSERT ON cities
 FOR EACH ROW
 BEGIN
    INSERT INTO BogredenLog (Log_type, created_at, log_text)
-   VALUES ('orderitems', NOW(), CONCAT('New city inserted. ID:', NEW.city_id));
+   VALUES ('cities', NOW(), CONCAT('New city inserted. ID:', NEW.city_id));
 END$$
 DELIMITER ;
 
@@ -292,7 +289,7 @@ CREATE TRIGGER city_update AFTER UPDATE ON cities
 FOR EACH ROW
 BEGIN
    INSERT INTO BogredenLog (Log_type, created_at, log_text)
-   VALUES ('orderitems', NOW(), CONCAT('New city updated. ID:', OLD.city_id));
+   VALUES ('cities', NOW(), CONCAT('New city updated. ID:', OLD.city_id));
 END$$
 DELIMITER ;
 
@@ -301,7 +298,7 @@ CREATE TRIGGER city_delete AFTER DELETE ON cities
 FOR EACH ROW
 BEGIN
    INSERT INTO BogredenLog (Log_type, created_at, log_text)
-   VALUES ('city', NOW(), CONCAT('New city deleted. ID:', OLD.city_id));
+   VALUES ('cities', NOW(), CONCAT('New city deleted. ID:', OLD.city_id));
 END$$
 DELIMITER ;
 
@@ -313,34 +310,28 @@ DELIMITER ;
 --         \/                   \/        \/     \//_____/      \/     \/                 /_____//_____/      \/           \/ 
 
 DELIMITER $$
-CREATE TRIGGER book_image_inserts AFTER INSERT ON cities
+CREATE TRIGGER book_image_inserts AFTER INSERT ON BookImages
 FOR EACH ROW
 BEGIN
    INSERT INTO BogredenLog (Log_type, created_at, log_text)
-   VALUES ('orderitems', NOW(), CONCAT('New bookimage inserted. ID:', NEW.book_image_id));
+   VALUES ('BookImages', NOW(), CONCAT('New bookimage inserted. ID:', NEW.book_image_id));
 END$$
 DELIMITER ;
 
 DELIMITER $$
-CREATE TRIGGER book_image_update AFTER UPDATE ON cities
+CREATE TRIGGER book_image_update AFTER UPDATE ON BookImages
 FOR EACH ROW
 BEGIN
    INSERT INTO BogredenLog (Log_type, created_at, log_text)
-   VALUES ('orderitems', NOW(), CONCAT('New bookimage updated. ID:', OLD.book_image_id));
+   VALUES ('BookImages', NOW(), CONCAT('New bookimage updated. ID:', OLD.book_image_id));
 END$$
 DELIMITER ;
 
 DELIMITER $$
-CREATE TRIGGER book_image_delete AFTER DELETE ON cities
+CREATE TRIGGER book_image_delete AFTER DELETE ON BookImages
 FOR EACH ROW
 BEGIN
    INSERT INTO BogredenLog (Log_type, created_at, log_text)
-   VALUES ('bookimage', NOW(), CONCAT('New bookimage deleted. ID:', OLD.book_image_id));
+   VALUES ('BookImages', NOW(), CONCAT('New bookimage deleted. ID:', OLD.book_image_id));
 END$$
 DELIMITER ;
-
--- This trigger decreases the book stock after an insert inside the orderItems table.
-CREATE TRIGGER `decrease_stock` AFTER INSERT ON `OrderItems` FOR EACH ROW BEGIN
-   UPDATE Books
-   SET stock = stock - NEW.quantity
-   WHERE book_id = NEW.book_id;

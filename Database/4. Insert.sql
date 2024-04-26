@@ -67,3 +67,11 @@ INSERT INTO OrderItems (book_id, order_id, price, quantity) VALUES
 (3, 3, 39, 1),
 (4, 4, 69, 1),
 (5, 5, 100, 1);
+
+INSERT INTO BookImages (book_id, display_order, file_path) VALUES 
+(1, 1, 'c:/davidsBookClub/images/1/1.jpg'),
+(1, 2, 'c:/davidsBookClub/images/1/2.jpg'),
+(2, 1, 'c:/davidsBookClub/images/2/1.jpg'),
+(3, 1, 'c:/davidsBookClub/images/3/1.jpg'),
+(4, 1, 'c:/davidsBookClub/images/4/1.jpg'),
+(5, 1, 'c:/davidsBookClub/images/5/1.jpg');

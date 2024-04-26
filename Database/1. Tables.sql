@@ -157,14 +157,14 @@ CREATE TABLE IF NOT EXISTS `OrderItems`(
 
 -- The bookImages holds information about which images should be shown for a book.
 -- It also keeps track of which order the images should be shown.
--- book_images_id is the primary key and book_id is a foreign key from the Books table.
+-- book_image_id is the primary key and book_id is a foreign key from the Books table.
 CREATE TABLE IF NOT EXISTS `BookImages`(
-    `book_images_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `book_image_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `book_id` INT UNSIGNED NOT NULL,
-    `file_path` VARCHAR(256) NOT NULL,
     `display_order` TINYINT UNSIGNED NOT NULL,
+    `file_path` VARCHAR(256) NOT NULL,
 
-    PRIMARY KEY(`book_images_id`),
+    PRIMARY KEY(`book_image_id`),
     CONSTRAINT `book_images_fk_1` FOREIGN KEY (`book_id`) REFERENCES `Books` (`book_id`) ON DELETE CASCADE
 );
 
