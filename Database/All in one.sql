@@ -967,3 +967,10 @@ INSERT INTO BookImages (book_id, display_order, file_path) VALUES
 (3, 1, 'c:/davidsBookClub/images/3/1.jpg'),
 (4, 1, 'c:/davidsBookClub/images/4/1.jpg'),
 (5, 1, 'c:/davidsBookClub/images/5/1.jpg');
+
+LOAD DATA INFILE 'C:/bulk.csv'
+INTO TABLE Cities 
+FIELDS TERMINATED  BY ','
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES
+(zip_code, city);
