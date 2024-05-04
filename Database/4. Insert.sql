@@ -6,7 +6,7 @@ USE `DavidsBookClub`;
 
 INSERT INTO Coupons (code, discount_percentage, expiration_date) VALUES
 ('10OFF', 10, '2025-05-10 22:55:52'),
-('20OFF', 25, '2027-12-31 23:59:59'),
+('25OFF', 25, '2027-12-31 23:59:59'),
 ('HALF', 50, '2031-10-13 12:00:00'),
 ('75OFF', 75, '2028-01-01 00:00:00'),
 ('GUNPOINT_DISCOUNT', 100, '2034-08-14 14:08:04');
