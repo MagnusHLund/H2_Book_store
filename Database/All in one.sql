@@ -39,13 +39,15 @@ CREATE TABLE IF NOT EXISTS `Books`(
     `name` VARCHAR(256) NOT NULL,
     `isbn` VARCHAR(13) NOT NULL,
     `language` VARCHAR(20) NOT NULL,
+    `display` TINYINT(1) NOT NULL CHECK (display BETWEEN 0 AND 1),
 
     PRIMARY KEY (`book_id`),
     KEY `name_index` (`name`),
     KEY `isbn_index` (`isbn`),
     KEY `genre_index` (`genre`),
     KEY `category_index` (`category`),
-    KEY `language_index` (`language`)
+    KEY `language_index` (`language`),
+    KEY `display` (`display`)
 );
 
 -- The Authors table has 3 columns, of which author_id is the primary key.
@@ -108,10 +110,11 @@ CREATE TABLE IF NOT EXISTS `Users`(
     `user_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `address_id` INT UNSIGNED NOT NULL,
     `name` VARCHAR(50) NOT NULL,
-    `password` VARCHAR(256) NOT NULL,
-    `email` VARCHAR(256) NOT NULL,
+    `email` VARCHAR(255) NOT NULL,
+    `password` VARCHAR(255) NOT NULL,
+    `salt` VARCHAR(60) NOT NULL,
     `created_at` DATETIME NOT NULL,
-    `is_admin` TINYINT NOT NULL CHECK (is_admin BETWEEN 0 and 1),
+    `is_admin` TINYINT NOT NULL CHECK (is_admin BETWEEN 0 AND 1),
 
     PRIMARY KEY(`user_id`),
     KEY `name_index` (`name`),
@@ -903,12 +906,12 @@ INSERT INTO Coupons (code, discount_percentage, expiration_date) VALUES
 ('75OFF', 75, '2028-01-01 00:00:00'),
 ('GUNPOINT_DISCOUNT', 100, '2034-08-14 14:08:04');
 
-INSERT INTO Books (release_date, stock, genre, category, price, name, isbn, language) VALUES
-('2012-02-01', 6, 'Romance', 'Women', 59, 'The lover boyz', 1234567890, 'English'),
-('2022-05-22', 8, 'Fiction', 'Teenagers', 29, 'No facts', 1234567891, 'English'),
-('2024-03-04', 15, 'Sci-fi', 'Boys', 39, 'Star claws', 1234567892, 'English'),
-('2021-11-14', 22, 'Fiction', 'Boys', 69, 'Doomsday', 1234567893, 'English'),
-('2018-12-19', 5, 'Horror', 'Adults', 100, 'Zombies in spaceland', 1234567894, 'English');
+INSERT INTO Books (release_date, stock, genre, category, price, name, isbn, language, display) VALUES
+('2012-02-01', 6, 'Romance', 'Women', 59, 'The lover boyz', 1234567890, 'English', 1),
+('2022-05-22', 8, 'Fiction', 'Teenagers', 29, 'No facts', 1234567891, 'English', 1),
+('2024-03-04', 15, 'Sci-fi', 'Boys', 39, 'Star claws', 1234567892, 'English', 1),
+('2021-11-14', 22, 'Fiction', 'Boys', 69, 'Doomsday', 1234567893, 'English', 1),
+('2018-12-19', 5, 'Horror', 'Adults', 100, 'Zombies in spaceland', 1234567894, 'English', 1);
 
 INSERT INTO Authors (name) VALUES
 ('Michael Hansen'),
@@ -938,12 +941,12 @@ INSERT INTO Addresses (city_id, street_name, house_number) VALUES
 (4, 'Forårsvej', '4'),
 (5, 'Teglmosevej', '5');
 
-INSERT INTO Users (address_id, name, password, email, created_at, is_admin) VALUES
-(1, 'Shazil Shahid', 'hashedvalue', 'terrorist@techtonic.com', NOW(), 0),
-(2, 'Marcus Lystrup', 'hashedvalue', 'Marcusse@gmail.com', NOW(), 0),
-(3, 'Yordan Mitov', 'hashedvalue', 'linuxlover@gmail.com', NOW(), 0),
-(4, 'Lucas Bangsborg', 'hashedvalue', 'LucasBangersborg@outlook.com', NOW(), 1),
-(5, 'Magnus Lund', 'hashedvalue', 'magussy@hotmail.com', NOW(), 0);
+INSERT INTO Users (address_id, name, password, salt, email, created_at, is_admin) VALUES
+(1, 'Shazil Shahid', 'hashedvalue', 'saltyValue', 'terrorist@techtonic.com', NOW(), 0),
+(2, 'Marcus Lystrup', 'hashedvalue', 'saltyValue', 'Marcusse@gmail.com', NOW(), 0),
+(3, 'Yordan Mitov', 'hashedvalue', 'saltyValue', 'linuxlover@gmail.com', NOW(), 0),
+(4, 'Lucas Bangsborg', 'hashedvalue', 'saltyValue', 'LucasBangersborg@outlook.com', NOW(), 1),
+(5, 'Magnus Lund', 'hashedvalue', 'saltyValue', 'magussy@hotmail.com', NOW(), 0);
 
 INSERT INTO Orders (address_id, user_id, coupon_id, created_at, total_price) VALUES
 (1, 1, 1, '2024-10-03 16:14:32', 132.3),

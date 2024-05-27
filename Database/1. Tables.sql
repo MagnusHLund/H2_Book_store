@@ -36,16 +36,18 @@ CREATE TABLE IF NOT EXISTS `Books`(
     `genre` VARCHAR(35) NOT NULL,
     `category` VARCHAR(35) NOT NULL,
     `price` SMALLINT UNSIGNED NOT NULL,
-    `name` VARCHAR(256) NOT NULL,
+    `name` VARCHAR(255) NOT NULL,
     `isbn` VARCHAR(13) NOT NULL,
     `language` VARCHAR(20) NOT NULL,
+    `display` TINYINT(1) NOT NULL CHECK (display BETWEEN 0 AND 1),
 
     PRIMARY KEY (`book_id`),
     KEY `name_index` (`name`),
     KEY `isbn_index` (`isbn`),
     KEY `genre_index` (`genre`),
     KEY `category_index` (`category`),
-    KEY `language_index` (`language`)
+    KEY `language_index` (`language`),
+    KEY `display` (`display`)
 );
 
 -- The Authors table has 3 columns, of which author_id is the primary key.
@@ -108,10 +110,11 @@ CREATE TABLE IF NOT EXISTS `Users`(
     `user_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `address_id` INT UNSIGNED NOT NULL,
     `name` VARCHAR(50) NOT NULL,
-    `password` VARCHAR(256) NOT NULL,
-    `email` VARCHAR(256) NOT NULL,
+    `email` VARCHAR(255) NOT NULL,
+    `password` VARCHAR(255) NOT NULL,
+    `salt` VARCHAR(60) NOT NULL,
     `created_at` DATETIME NOT NULL,
-    `is_admin` TINYINT NOT NULL CHECK (is_admin BETWEEN 0 and 1),
+    `is_admin` TINYINT NOT NULL CHECK (is_admin BETWEEN 0 AND 1),
 
     PRIMARY KEY(`user_id`),
     KEY `name_index` (`name`),
