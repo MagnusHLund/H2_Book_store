@@ -111,17 +111,20 @@ CREATE TABLE IF NOT EXISTS `Users`(
     `address_id` INT UNSIGNED NOT NULL,
     `name` VARCHAR(50) NOT NULL,
     `email` VARCHAR(255) NOT NULL,
-    `password` VARCHAR(255) NOT NULL,
+    `phone_number` VARCHAR(11) NOT NULL,
+    `password` VARCHAR(255),
     `salt` VARCHAR(60) NOT NULL,
     `created_at` DATETIME NOT NULL,
     `is_admin` TINYINT NOT NULL CHECK (is_admin BETWEEN 0 AND 1),
+    `is_guest` TINYINT NOT NULL CHECK (is_admin BETWEEN 0 AND 1),
 
     PRIMARY KEY(`user_id`),
     KEY `name_index` (`name`),
     UNIQUE `email_unique` (`email`),
     KEY `is_admin_index` (`is_admin`),
-    KEY `password_index` (`password`),
     KEY `created_at_index` (`created_at`),
+    KEY `is_guest_index` (`is_guest`),
+    KEY `phone_number_index` (`phone_number`),
     CONSTRAINT users_fk_1 FOREIGN KEY (`address_id`) REFERENCES `Addresses` (`address_id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
