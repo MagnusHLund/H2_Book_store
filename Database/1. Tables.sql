@@ -108,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `Addresses`(
 -- is_admin is indexed. It can help performance when 1 of the 2 boolean values are much more common than the other.
 CREATE TABLE IF NOT EXISTS `Users`(
     `user_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    `address_id` INT UNSIGNED NOT NULL,
+    `address_id` INT UNSIGNED,
     `name` VARCHAR(50) NOT NULL,
     `email` VARCHAR(255) NOT NULL,
     `phone_number` VARCHAR(11) NOT NULL,
