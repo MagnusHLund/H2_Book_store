@@ -23,13 +23,6 @@ class ComposerStaticInit1a6f3684d60a5884072b26233244cf08
         array (
             'PhpOption\\' => 10,
         ),
-        'M' => 
-        array (
-            'MichaelsBookClub\\Utils\\' => 23,
-            'MichaelsBookClub\\Middleware\\' => 28,
-            'MichaelsBookClub\\Handlers\\' => 26,
-            'MichaelsBookClub\\' => 17,
-        ),
         'G' => 
         array (
             'GrahamCampbell\\ResultType\\' => 26,
@@ -37,6 +30,11 @@ class ComposerStaticInit1a6f3684d60a5884072b26233244cf08
         'D' => 
         array (
             'Dotenv\\' => 7,
+            'DavidsBookClub\\Utils\\' => 21,
+            'DavidsBookClub\\Models\\' => 22,
+            'DavidsBookClub\\Middleware\\' => 26,
+            'DavidsBookClub\\Handlers\\' => 24,
+            'DavidsBookClub\\' => 15,
         ),
     );
 
@@ -57,22 +55,6 @@ class ComposerStaticInit1a6f3684d60a5884072b26233244cf08
         array (
             0 => __DIR__ . '/..' . '/phpoption/phpoption/src/PhpOption',
         ),
-        'MichaelsBookClub\\Utils\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src/Utils',
-        ),
-        'MichaelsBookClub\\Middleware\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src/Middleware',
-        ),
-        'MichaelsBookClub\\Handlers\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src/Handlers',
-        ),
-        'MichaelsBookClub\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src',
-        ),
         'GrahamCampbell\\ResultType\\' => 
         array (
             0 => __DIR__ . '/..' . '/graham-campbell/result-type/src',
@@ -80,6 +62,26 @@ class ComposerStaticInit1a6f3684d60a5884072b26233244cf08
         'Dotenv\\' => 
         array (
             0 => __DIR__ . '/..' . '/vlucas/phpdotenv/src',
+        ),
+        'DavidsBookClub\\Utils\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Utils',
+        ),
+        'DavidsBookClub\\Models\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Models',
+        ),
+        'DavidsBookClub\\Middleware\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Middleware',
+        ),
+        'DavidsBookClub\\Handlers\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Handlers',
+        ),
+        'DavidsBookClub\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src',
         ),
     );
 

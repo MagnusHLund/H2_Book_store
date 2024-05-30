@@ -1,26 +1,20 @@
 <?php
 
-namespace MichaelsBookClub\Middleware;
+namespace davidsBookClub\Middleware;
 
-use MichaelsBookClub\Utils\Constants;
+use davidsBookClub\Utils\Constants;
 
-class CORSMiddleware
+class CorsMiddleware
 {
-    private $allowedOrigins;
-
-    public function __construct()
+    public static function handleCors()
     {
-        $constants = new Constants;
-        $this->allowedOrigins = explode(", ", $constants->getAllowedOrigins());
-    }
+        $allowedOrigins = Constants::getAllowedOrigins();
 
-    public function handle()
-    {
         $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
         $requestMethod = $_SERVER['REQUEST_METHOD'] ?? '';
         $requestHeaders = $_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS'] ?? '';
 
-        if (!empty($origin) && in_array($origin, $this->allowedOrigins)) {
+        if (!empty($origin) && in_array($origin, $allowedOrigins)) {
             header("Access-Control-Allow-Origin: {$origin}");
             header("Access-Control-Allow-Credentials: true");
             header("Access-Control-Max-Age: 86400");

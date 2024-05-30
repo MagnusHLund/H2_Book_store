@@ -1,6 +1,6 @@
 <?php
 
-namespace MichaelsBookClub\Utils;
+namespace davidsBookClub\Utils;
 
 class Constants
 {
@@ -17,5 +17,21 @@ class Constants
     public static function getAllowedOrigins()
     {
         return $_ENV['ALLOWED_HOSTS'];
+    }
+
+    public function getPublicRoutes()
+    {
+    }
+
+    public function getKid()
+    {
+    }
+
+    public function getPepper()
+    {
+    }
+
+    public function getEncryptionKey()
+    {
     }
 }

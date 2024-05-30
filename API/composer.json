@@ -1,5 +1,5 @@
 {
-  "name": "michaels_book_club/api",
+  "name": "davids_book_club/api",
   "description": "H2 school project.",
   "type": "project",
   "require": {
@@ -9,10 +9,11 @@
   "license": "MIT",
   "autoload": {
     "psr-4": {
-      "MichaelsBookClub\\": "src/",
-      "MichaelsBookClub\\Utils\\": "src/Utils",
-      "MichaelsBookClub\\Handlers\\": "src/Handlers",
-      "MichaelsBookClub\\Middleware\\": "src/Middleware"
+      "DavidsBookClub\\": "src/",
+      "DavidsBookClub\\Utils\\": "src/Utils",
+      "DavidsBookClub\\Models\\": "src/Models",
+      "DavidsBookClub\\Handlers\\": "src/Handlers",
+      "DavidsBookClub\\Middleware\\": "src/Middleware"
     }
   }
 }
