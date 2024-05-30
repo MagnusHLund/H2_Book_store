@@ -1,6 +1,6 @@
 
 -- Uses the database
-USE `DavidsBookClub`;
+USE `davidsbookclub`;
 
 -- This query creates dummy data for each of the tables inside of Tables.sql
 
@@ -46,12 +46,12 @@ INSERT INTO Addresses (city_id, street_name, house_number) VALUES
 (4, 'Forårsvej', '4'),
 (5, 'Teglmosevej', '5');
 
-INSERT INTO Users (address_id, name, password, salt, email, created_at, is_admin) VALUES
-(1, 'Shazil Shahid', 'hashedvalue', 'saltyValue', 'terrorist@techtonic.com', NOW(), 0),
-(2, 'Marcus Lystrup', 'hashedvalue', 'saltyValue', 'Marcusse@gmail.com', NOW(), 0),
-(3, 'Yordan Mitov', 'hashedvalue', 'saltyValue', 'linuxlover@gmail.com', NOW(), 0),
-(4, 'Lucas Bangsborg', 'hashedvalue', 'saltyValue', 'LucasBangersborg@outlook.com', NOW(), 1),
-(5, 'Magnus Lund', 'hashedvalue', 'saltyValue', 'magussy@hotmail.com', NOW(), 0);
+INSERT INTO Users (address_id, name, password, salt, email, phone_number, created_at, role) VALUES
+(null, 'Shazil Shahid', 'hashedvalue', 'saltyValue', 'terrorist@techtonic.com', "12312312", NOW(), "guest"),
+(2, 'Marcus Lystrup', 'hashedvalue', 'saltyValue', 'Marcusse@gmail.com', "87654321", NOW(), "customer"),
+(3, 'Yordan Mitov', 'hashedvalue', 'saltyValue', 'linuxlover@gmail.com', "12341234", NOW(), "customer"),
+(4, 'David Svarre', 'hashedvalue', 'saltyValue', 'MrDavid@outlook.com', "12345678", NOW(), "admin"),
+(5, 'Magnus Lund', 'hashedvalue', 'saltyValue', 'magussy@hotmail.com', "43214321", NOW(), "customer");
 
 INSERT INTO Orders (address_id, user_id, coupon_id, created_at, total_price) VALUES
 (1, 1, 1, '2024-10-03 16:14:32', 132.3),

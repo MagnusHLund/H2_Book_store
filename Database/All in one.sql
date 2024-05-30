@@ -115,16 +115,14 @@ CREATE TABLE IF NOT EXISTS `Users`(
     `password` VARCHAR(255),
     `salt` VARCHAR(60) NOT NULL,
     `created_at` DATETIME NOT NULL,
-    `is_admin` TINYINT NOT NULL CHECK (is_admin BETWEEN 0 AND 1),
-    `is_guest` TINYINT NOT NULL CHECK (is_admin BETWEEN 0 AND 1),
+    `role` VARCHAR(8) NOT NULL,
 
     PRIMARY KEY(`user_id`),
-    KEY `name_index` (`name`),
     UNIQUE `email_unique` (`email`),
-    KEY `is_admin_index` (`is_admin`),
+    UNIQUE `phone_number_unique` (`phone_number`),
+    KEY `name_index` (`name`),
+    KEY `role_index` (`role`),
     KEY `created_at_index` (`created_at`),
-    KEY `is_guest_index` (`is_guest`),
-    KEY `phone_number_index` (`phone_number`),
     CONSTRAINT users_fk_1 FOREIGN KEY (`address_id`) REFERENCES `Addresses` (`address_id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -142,7 +140,7 @@ CREATE TABLE IF NOT EXISTS `Orders`(
 
     PRIMARY KEY(`order_id`),
     CONSTRAINT `orders_fk_1` FOREIGN KEY (`user_id`) REFERENCES `Users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-	CONSTRAINT `orders_fk_2` FOREIGN KEY (`coupon_id`) REFERENCES `Coupons` (`coupon_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT `orders_fk_2` FOREIGN KEY (`coupon_id`) REFERENCES `Coupons` (`coupon_id`) ON DELETE SET NULL ON UPDATE CASCADE,
     CONSTRAINT `orders_fk_3` FOREIGN KEY (`address_id`) REFERENCES `Addresses` (`address_id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -944,12 +942,12 @@ INSERT INTO Addresses (city_id, street_name, house_number) VALUES
 (4, 'Forårsvej', '4'),
 (5, 'Teglmosevej', '5');
 
-INSERT INTO Users (address_id, name, password, salt, email, created_at, is_admin) VALUES
-(1, 'Shazil Shahid', 'hashedvalue', 'saltyValue', 'terrorist@techtonic.com', NOW(), 0),
-(2, 'Marcus Lystrup', 'hashedvalue', 'saltyValue', 'Marcusse@gmail.com', NOW(), 0),
-(3, 'Yordan Mitov', 'hashedvalue', 'saltyValue', 'linuxlover@gmail.com', NOW(), 0),
-(4, 'Lucas Bangsborg', 'hashedvalue', 'saltyValue', 'LucasBangersborg@outlook.com', NOW(), 1),
-(5, 'Magnus Lund', 'hashedvalue', 'saltyValue', 'magussy@hotmail.com', NOW(), 0);
+INSERT INTO Users (address_id, name, password, salt, email, phone_number, created_at, role) VALUES
+(null, 'Shazil Shahid', 'hashedvalue', 'saltyValue', 'terrorist@techtonic.com', "12312312", NOW(), "guest"),
+(2, 'Marcus Lystrup', 'hashedvalue', 'saltyValue', 'Marcusse@gmail.com', "87654321", NOW(), "customer"),
+(3, 'Yordan Mitov', 'hashedvalue', 'saltyValue', 'linuxlover@gmail.com', "12341234", NOW(), "customer"),
+(4, 'David Svarre', 'hashedvalue', 'saltyValue', 'MrDavid@outlook.com', "12345678", NOW(), "admin"),
+(5, 'Magnus Lund', 'hashedvalue', 'saltyValue', 'magussy@hotmail.com', "43214321", NOW(), "customer");
 
 INSERT INTO Orders (address_id, user_id, coupon_id, created_at, total_price) VALUES
 (1, 1, 1, '2024-10-03 16:14:32', 132.3),
@@ -1006,8 +1004,8 @@ IGNORE 1 LINES
 
 
 
-CREATE USER 'MrDavid'@'%' IDENTIFIED BY 'SuperStrongPassword!';
-GRANT ALL PRIVILEGES ON davidsbookclub.* TO 'MrDavid'@'%';
+CREATE USER IF NOT EXISTS 'MrDavid'@'%' IDENTIFIED BY 'SuperStrongPassword!';
+GRANT ALL PRIVILEGES ON `davidsbookclub`.* TO 'MrDavid'@'%';
 
-CREATE USER 'BookClub'@'%' IDENTIFIED BY 'StrongPassword';
-GRANT EXECUTE ON davidsbookclub.* TO 'BookClub'@'%';
+CREATE USER IF NOT EXISTS 'BookClub'@'%' IDENTIFIED BY 'StrongPassword';
+GRANT EXECUTE ON `davidsbookclub`.* TO 'BookClub'@'%';

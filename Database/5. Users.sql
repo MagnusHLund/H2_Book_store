@@ -1,5 +1,7 @@
-CREATE USER 'MrDavid'@'%' IDENTIFIED BY 'SuperStrongPassword!';
-GRANT ALL PRIVILEGES ON davidsbookclub.* TO 'MrDavid'@'%';
+USE `davidsbookclub`;
 
-CREATE USER 'BookClub'@'%' IDENTIFIED BY 'StrongPassword';
-GRANT EXECUTE ON davidsbookclub.* TO 'BookClub'@'%';
+CREATE USER IF NOT EXISTS 'MrDavid'@'%' IDENTIFIED BY 'SuperStrongPassword!';
+GRANT ALL PRIVILEGES ON `davidsbookclub`.* TO 'MrDavid'@'%';
+
+CREATE USER IF NOT EXISTS 'BookClub'@'%' IDENTIFIED BY 'StrongPassword';
+GRANT EXECUTE ON `davidsbookclub`.* TO 'BookClub'@'%';

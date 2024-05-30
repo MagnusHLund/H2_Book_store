@@ -115,16 +115,14 @@ CREATE TABLE IF NOT EXISTS `Users`(
     `password` VARCHAR(255),
     `salt` VARCHAR(60) NOT NULL,
     `created_at` DATETIME NOT NULL,
-    `is_admin` TINYINT NOT NULL CHECK (is_admin BETWEEN 0 AND 1),
-    `is_guest` TINYINT NOT NULL CHECK (is_admin BETWEEN 0 AND 1),
+    `role` VARCHAR(8) NOT NULL,
 
     PRIMARY KEY(`user_id`),
-    KEY `name_index` (`name`),
     UNIQUE `email_unique` (`email`),
-    KEY `is_admin_index` (`is_admin`),
+    UNIQUE `phone_number_unique` (`phone_number`),
+    KEY `name_index` (`name`),
+    KEY `role_index` (`role`),
     KEY `created_at_index` (`created_at`),
-    KEY `is_guest_index` (`is_guest`),
-    KEY `phone_number_index` (`phone_number`),
     CONSTRAINT users_fk_1 FOREIGN KEY (`address_id`) REFERENCES `Addresses` (`address_id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -142,7 +140,7 @@ CREATE TABLE IF NOT EXISTS `Orders`(
 
     PRIMARY KEY(`order_id`),
     CONSTRAINT `orders_fk_1` FOREIGN KEY (`user_id`) REFERENCES `Users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-	CONSTRAINT `orders_fk_2` FOREIGN KEY (`coupon_id`) REFERENCES `Coupons` (`coupon_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT `orders_fk_2` FOREIGN KEY (`coupon_id`) REFERENCES `Coupons` (`coupon_id`) ON DELETE SET NULL ON UPDATE CASCADE,
     CONSTRAINT `orders_fk_3` FOREIGN KEY (`address_id`) REFERENCES `Addresses` (`address_id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -186,4 +184,4 @@ CREATE TABLE IF NOT EXISTS `BogredenLog` (
     PRIMARY KEY (`bogreden_log_id`),
     KEY `log_type_index` (`log_type`),
     KEY `created_at_index` (`created_at`)
-)
+);
