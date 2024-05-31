@@ -17,4 +17,8 @@ class ProductsHandler
     public function searchProducts($searchInput)
     {
     }
+
+    public function toggleBookDisplay()
+    {
+    }
 }
