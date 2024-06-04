@@ -1,6 +1,6 @@
 <?php
 
-namespace davidsBookClub\Utils;
+namespace DavidsBookClub\Utils;
 
 class Constants
 {
@@ -9,29 +9,40 @@ class Constants
         return array(
             "DB_HOST" => $_ENV['DB_HOST'],
             "DB_USER" => $_ENV['DB_USER'],
-            "DB_PASS" => $_ENV['DB_PASSWORD'],
-            "DB_NAME" => $_ENV['DB_DATABASE'],
+            "DB_PASS" => $_ENV['DB_PASS'],
+            "DB_NAME" => $_ENV['DB_NAME'],
         );
     }
 
     public static function getAllowedOrigins()
     {
-        return $_ENV['ALLOWED_HOSTS'];
+        $rawOrigins = $_ENV['ALLOWED_HOSTS'];
+        return array_map('trim', explode(",", $rawOrigins));
     }
 
-    public function getPublicRoutes()
+    public static function getPublicRoutes()
     {
+        $rawRoutes = $_ENV['PUBLIC_ROUTES'];
+        return array_map('trim', explode(",", $rawRoutes));
     }
 
-    public function getKid()
+    public static function getKid()
     {
+        return $_ENV["KID"];
     }
 
-    public function getPepper()
+    public static function getPepper()
     {
+        return $_ENV["PEPPER"];
     }
 
-    public function getEncryptionKey()
+    public static function getEncryptionKey()
     {
+        return $_ENV["ENCRYPTION_KEY"];
+    }
+
+    public static function getJwtSecretKey()
+    {
+        return $_ENV["SECRET_KEY"];
     }
 }

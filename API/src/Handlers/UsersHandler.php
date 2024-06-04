@@ -1,10 +1,10 @@
 <?php
 
-namespace davidsBookClub\Handlers;
+namespace DavidsBookClub\Handlers;
 
-use davidsBookClub\Models\User;
-use davidsBookClub\Utils\Database;
-use davidsBookClub\Utils\JwtManager;
+use DavidsBookClub\Models\User;
+use DavidsBookClub\Utils\Database;
+use DavidsBookClub\Utils\JwtManager;
 
 class UsersHandler
 {

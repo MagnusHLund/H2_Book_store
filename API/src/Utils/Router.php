@@ -1,10 +1,10 @@
 <?php
 
-namespace davidsBookClub\Utils;
+namespace DavidsBookClub\Utils;
 
-use davidsBookClub\Handlers\ProductsHandler;
-use davidsBookClub\Handlers\OrdersHandler;
-use davidsBookClub\Handlers\UsersHandler;
+use DavidsBookClub\Handlers\ProductsHandler;
+use DavidsBookClub\Handlers\OrdersHandler;
+use DavidsBookClub\Handlers\UsersHandler;
 
 class Router
 {
@@ -13,22 +13,42 @@ class Router
     public function __construct()
     {
         $baseUrl = "api/v1/";
+        $users = $baseUrl . "users/";
+        $orders = $baseUrl . "orders/";
+        $products = $baseUrl . "products/";
 
-        $userHandler = new UsersHandler;
-        $userRoute = "User/";
+        $this->routes = [
+            // User routes
+            ["GET", $users, [(new UsersHandler), "getUserBillingInfo"]],
+            ["POST", $users, [(new UsersHandler), "createUser"]],
+            ["POST", $users, [(new UsersHandler), "logoutUser"]],
+            ["POST", $users, [(new UsersHandler), "loginUser"]],
 
-        $productHandler = new ProductsHandler;
-        $productRoute = "Products/";
+            // Order routes
+            ["GET", $orders, [(new OrdersHandler), "getOrders"]],
+            ["GET", $orders, [(new OrdersHandler), "verifyCoupon"]],
+            ["GET", $orders, [(new OrdersHandler), "searchOrders"]],
+            ["GET", $orders, [(new OrdersHandler), "getUserOrders"]],
+            ["GET", $orders, [(new OrdersHandler), "getCityFromZipCode"]],
+            ["POST", $orders, [(new OrdersHandler), "createOrder"]],
 
-        $orderHandler = new OrdersHandler;
-        $orderRoute = "Orders/";
+            // Product routes
+            ["GET", $products, [(new ProductsHandler), "getProduct"]],
+            ["GET", $products, [(new ProductsHandler), "getProducts"]],
+            ["GET", $products, [(new ProductsHandler), "searchProducts"]],
+            ["POST", $products, [(new ProductsHandler), "toggleBookDisplay"]],
+        ];
     }
 
 
     public function handleRequest($method, $path, $requestBody)
     {
         foreach ($this->routes as $route) {
-            list($routeMethod, $routePath, $handler, $params) = $route + [null, null, null, []];
+            $routeMethod = $route[0];
+            $routePath = $route[1];
+            $handler = $route[2];
+            $params = $route[3] ?? [];
+
             if ($method === $routeMethod && $path === $routePath) {
                 call_user_func_array([$handler[0], $handler[1]], [[$requestBody], $params]);
                 return;
@@ -36,7 +56,7 @@ class Router
         }
 
         http_response_code(404);
-        echo json_encode(["error" => "Route does not exist!"]);
+        echo json_encode(["error" => "This route does not exist!"]);
         exit;
     }
 }

@@ -11,9 +11,9 @@
   "autoload": {
     "psr-4": {
       "DavidsBookClub\\": "src/",
-      "DavidsBookClub\\Utils\\": "src/Utils",
-      "DavidsBookClub\\Handlers\\": "src/Handlers",
-      "DavidsBookClub\\Middleware\\": "src/Middleware"
+      "DavidsBookClub\\Utils\\": "src/Utils/",
+      "DavidsBookClub\\Handlers\\": "src/Handlers/",
+      "DavidsBookClub\\Middleware\\": "src/Middleware/"
     }
   }
 }

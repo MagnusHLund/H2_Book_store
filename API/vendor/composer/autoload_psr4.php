@@ -14,7 +14,6 @@ return array(
     'Firebase\\JWT\\' => array($vendorDir . '/firebase/php-jwt/src'),
     'Dotenv\\' => array($vendorDir . '/vlucas/phpdotenv/src'),
     'DavidsBookClub\\Utils\\' => array($baseDir . '/src/Utils'),
-    'DavidsBookClub\\Models\\' => array($baseDir . '/src/Models'),
     'DavidsBookClub\\Middleware\\' => array($baseDir . '/src/Middleware'),
     'DavidsBookClub\\Handlers\\' => array($baseDir . '/src/Handlers'),
     'DavidsBookClub\\' => array($baseDir . '/src'),
