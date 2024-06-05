@@ -1,11 +1,11 @@
 <?php
 
-namespace davidsBookClub;
+namespace DavidsBookClub;
 
 use Dotenv\Dotenv;
-use davidsBookClub\Middleware\AuthenticationMiddleware;
-use davidsBookClub\Middleware\CORSMiddleware;
-use davidsBookClub\Utils\Router;
+use DavidsBookClub\Middleware\AuthenticationMiddleware;
+use DavidsBookClub\Middleware\CorsMiddleware;
+use DavidsBookClub\Utils\Router;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 $dotenv = Dotenv::createUnsafeImmutable(__DIR__);
@@ -30,7 +30,7 @@ class ApiEntry
 
     private function handleMiddleware($path)
     {
-        corsMiddleware::handleCors();
+        CorsMiddleware::handleCors();
         AuthenticationMiddleware::handleAuthentication($path);
     }
 }

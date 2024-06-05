@@ -1,12 +1,12 @@
 <?php
 
-namespace davidsBookClub\Handlers;
+namespace DavidsBookClub\Handlers;
 
-use davidsBookClub\Utils\Database;
+use DavidsBookClub\Utils\Database;
 
 class OrdersHandler
 {
-    public function getAllOrders()
+    public function getOrders()
     {
     }
 

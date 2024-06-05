@@ -3,7 +3,7 @@
         'name' => 'davids_book_club/api',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '27be3dbc5dbca819c5b13f28e8d316c60c300da4',
+        'reference' => 'c0c1bfe226218fa108ee1a0e7b917c4c330c1e18',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'davids_book_club/api' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '27be3dbc5dbca819c5b13f28e8d316c60c300da4',
+            'reference' => 'c0c1bfe226218fa108ee1a0e7b917c4c330c1e18',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

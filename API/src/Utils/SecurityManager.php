@@ -1,8 +1,8 @@
 <?php
 
-namespace davidsBookClub\Utils;
+namespace DavidsBookClub\Utils;
 
-use davidsBookClub\Utils\Constants;
+use DavidsBookClub\Utils\Constants;
 
 class SecurityManager
 {
