@@ -1,0 +1,6 @@
+### Get Product
+GET http://localhost:1000/api/v1/products/getProduct
+Content-Type: application/json
+{
+  "book_id": "your_book_id"
+}

@@ -1,0 +1,15 @@
+### Create Order
+POST http://localhost:1000/api/v1/orders/createOrder
+Content-Type: application/json
+{
+  "full_name": "your_full_name",
+  "zip_code": "your_zip_code",
+  "street_name": "your_street_name",
+  "house_number": "your_house_number",
+  "phone_number": "your_phone_number",
+  "email": "your_email",
+  "card_number": "your_card_number",
+  "cvv": "your_cvv",
+  "card_expiration_date": "your_card_expiration_date",
+  "shipping_method": "your_shipping_method"
+}

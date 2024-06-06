@@ -1,0 +1,6 @@
+### Get City from Zipcode
+GET http://localhost:1000/api/v1/orders/getCityfromZipcode
+Content-Type: application/json
+{
+  "zipcode": "your_zipcode"
+}
