@@ -1,0 +1,6 @@
+### Get Orders
+GET http://localhost:1000/api/v1/orders/getOrders
+Content-Type: application/json
+{
+  "collection": "your_collection"
+}
