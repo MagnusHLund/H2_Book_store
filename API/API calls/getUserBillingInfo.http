@@ -1,6 +1,7 @@
 ### Get User Billing Info
 GET http://localhost:1000/api/v1/users/getUserBillingInfo
 Content-Type: application/json
+
 {
   "jwt": "your_jwt"
 }

@@ -1,6 +1,7 @@
 ### Search Products
 GET http://localhost:1000/api/v1/products/searchProducts
 Content-Type: application/json
+
 {
   "search_query": "your_search_query"
 }

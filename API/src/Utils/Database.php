@@ -12,9 +12,8 @@ class Database
     {
         try {
             self::connectToDatabase();
-        } catch (PDOException $exception) {
-            http_response_code(500);
-            echo json_encode(["error" => "Database procedure error " . $exception->getMessage()]);
+        } catch (PDOException $e) {
+            MessageManager::sendError("Database procedure error", 500, "Encountered an error in relation to calling a stored procedure: " . $e->getMessage());
         }
     }
 
@@ -23,16 +22,15 @@ class Database
         try {
             $databaseInfo = Constants::getDatabaseInfo();
 
-            $host = $databaseInfo['DB_HOST'];
-            $user = $databaseInfo['DB_USER'];
+            $hostname = $databaseInfo['DB_HOST'];
+            $username = $databaseInfo['DB_USER'];
             $password = $databaseInfo['DB_PASS'];
             $database = $databaseInfo['DB_NAME'];
 
-            $conn = new PDO("mysql:host=$host;dbname=$database", $user, $password);
+            $conn = new PDO("mysql:host=$hostname;dbname=$database", $username, $password);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (PDOException $exception) {
-            http_response_code(500);
-            echo json_encode(["error" => "Database connection error " . $exception->getMessage()]);
+        } catch (PDOException $e) {
+            MessageManager::sendError("Database connection error", 500, "Error connecting to the database" . $e->getMessage());
             exit;
         }
     }
