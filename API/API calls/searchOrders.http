@@ -1,6 +1,7 @@
 ### Search Orders
 GET http://localhost:1000/api/v1/orders/searchOrders
 Content-Type: application/json
+
 {
   "name_or_order_id": "your_name_or_order_id",
   "collection": "your_collection"
