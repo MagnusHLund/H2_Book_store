@@ -55,8 +55,7 @@ class Router
             }
         }
 
-        http_response_code(404);
-        echo json_encode(["error" => "This route does not exist!"]);
+        MessageManager::sendError("This route does not exist!", 404);
         exit;
     }
 }
