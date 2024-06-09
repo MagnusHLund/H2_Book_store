@@ -5,3 +5,4 @@ These dependencies are:
 
 - vlucas/phpdotenv
 - ext-pdo_mysql
+- firebase/php-jwt
