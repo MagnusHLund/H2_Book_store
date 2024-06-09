@@ -8,6 +8,7 @@ use DavidsBookClub\Handlers\UsersHandler;
 
 class Router
 {
+    // This variable holds all the routes for the API. For example: /api/v1/users/createUser
     private $routes = [];
 
     public function __construct()
@@ -17,44 +18,60 @@ class Router
         $orders = $baseUrl . "orders/";
         $products = $baseUrl . "products/";
 
+        /**
+         * Each route consists of 3 mandatory parts and 1 optional part:
+         * 1. The request type, which for this API is either "GET" or "POST".
+         * 2. The API call itself, which could be /api/v1/users/getUserBillingInfo
+         * 3. An array, which holds the class (instance) and function (string) which should be called.
+         * 4. (Optional) An array, which holds the request body. Used for calling a function with a parameter. 
+         *    Within the routes variable, it has a placeholder value of "requestBody", which will be overridden.
+         */
         $this->routes = [
             // User routes
-            ["GET", $users, [(new UsersHandler), "getUserBillingInfo"]],
-            ["POST", $users, [(new UsersHandler), "createUser"]],
-            ["POST", $users, [(new UsersHandler), "logoutUser"]],
-            ["POST", $users, [(new UsersHandler), "loginUser"]],
+            ["GET", $users . "/getUserBillingInfo", [(new UsersHandler), "getUserBillingInfo"]],
+            ["POST", $users . "/createUser", [(new UsersHandler), "createUser"], ["requestBody"]],
+            ["POST", $users . "/loginUser", [(new UsersHandler), "loginUser"], ["requestBody"]],
+            ["POST", $users . "/logoutUser", [(new UsersHandler), "logoutUser"]],
 
             // Order routes
-            ["GET", $orders, [(new OrdersHandler), "getOrders"]],
-            ["GET", $orders, [(new OrdersHandler), "verifyCoupon"]],
-            ["GET", $orders, [(new OrdersHandler), "searchOrders"]],
-            ["GET", $orders, [(new OrdersHandler), "getUserOrders"]],
-            ["GET", $orders, [(new OrdersHandler), "getCityFromZipCode"]],
-            ["POST", $orders, [(new OrdersHandler), "createOrder"]],
+            ["GET", $orders . "/getOrders", [(new OrdersHandler), "getOrders"]],
+            ["GET", $orders . "/getUserOrders", [(new OrdersHandler), "getUserOrders"]],
+            ["GET", $orders . "/getCityFromZipCode", [(new OrdersHandler), "getCityFromZipCode"]],
+            ["GET", $orders . "/verifyCoupon", [(new OrdersHandler), "verifyCoupon"], ["requestBody"]],
+            ["GET", $orders . "/searchOrders", [(new OrdersHandler), "searchOrders"], ["requestBody"]],
+            ["POST", $orders . "/createOrder", [(new OrdersHandler), "createOrder"]],
 
             // Product routes
-            ["GET", $products, [(new ProductsHandler), "getProduct"]],
-            ["GET", $products, [(new ProductsHandler), "getProducts"]],
-            ["GET", $products, [(new ProductsHandler), "searchProducts"]],
-            ["POST", $products, [(new ProductsHandler), "toggleBookDisplay"]],
+            ["GET", $products . "/getProducts", [(new ProductsHandler), "getProducts"]],
+            ["GET", $products . "/getProduct", [(new ProductsHandler), "getProduct"], ["requestBody"]],
+            ["GET", $products . "/searchProducts", [(new ProductsHandler), "searchProducts"], ["requestBody"]],
+            ["POST", $products . "/toggleBookDisplay", [(new ProductsHandler), "toggleBookDisplay"]],
         ];
     }
 
-
+    /**
+     * This function maps the API call, to a specific function. If no route is found, an error is sent to the caller.
+     * @param string $method The request method type used to call the API. It can be either "GET" or "POST".
+     * @param string $path The API call itself, which could be /api/v1/products/getProduct for example.
+     * @param array<string,mixed> $requestBody The body of the API call.
+     */
     public function handleRequest($method, $path, $requestBody)
     {
         foreach ($this->routes as $route) {
+            // Assigns new variables, which are more readable than array items.
             $routeMethod = $route[0];
-            $routePath = $route[1];
+            $routePath = strtolower($route[1]);
             $handler = $route[2];
             $params = $route[3] ?? [];
 
-            if ($method === $routeMethod && $path === $routePath) {
+            // If the network request method and path matches, then it calls a specific class.
+            if ($method === $routeMethod && strtolower($path) === $routePath) {
                 call_user_func_array([$handler[0], $handler[1]], [[$requestBody], $params]);
                 return;
             }
         }
 
+        // If no route matches the API call, then an error is sent to the caller.
         MessageManager::sendError("This route does not exist!", 404);
         exit;
     }
