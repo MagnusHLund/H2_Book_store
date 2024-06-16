@@ -6,7 +6,7 @@ use DavidsBookClub\Models\User;
 use DavidsBookClub\Utils\Database;
 use DavidsBookClub\Utils\JwtManager;
 
-class UsersHandler
+class UsersController
 {
     public function getUserBillingInfo()
     {

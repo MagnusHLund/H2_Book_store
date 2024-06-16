@@ -2,9 +2,9 @@
 
 namespace DavidsBookClub\Utils;
 
-use DavidsBookClub\Handlers\ProductsHandler;
-use DavidsBookClub\Handlers\OrdersHandler;
-use DavidsBookClub\Handlers\UsersHandler;
+use DavidsBookClub\Handlers\ProductsController;
+use DavidsBookClub\Handlers\OrdersController;
+use DavidsBookClub\Handlers\UsersController;
 
 class Router
 {
@@ -13,7 +13,7 @@ class Router
 
     public function __construct()
     {
-        $baseUrl = "api/v1/";
+        $baseUrl = "/api/v1/";
         $users = $baseUrl . "users/";
         $orders = $baseUrl . "orders/";
         $products = $baseUrl . "products/";
@@ -28,24 +28,24 @@ class Router
          */
         $this->routes = [
             // User routes
-            ["GET", $users . "/getUserBillingInfo", [(new UsersHandler), "getUserBillingInfo"]],
-            ["POST", $users . "/createUser", [(new UsersHandler), "createUser"], ["requestBody"]],
-            ["POST", $users . "/loginUser", [(new UsersHandler), "loginUser"], ["requestBody"]],
-            ["POST", $users . "/logoutUser", [(new UsersHandler), "logoutUser"]],
+            ["GET", $users . "getUserBillingInfo", [(new UsersController), "getUserBillingInfo"]],
+            ["POST", $users . "createUser", [(new UsersController), "createUser"], ["requestBody"]],
+            ["POST", $users . "loginUser", [(new UsersController), "loginUser"], ["requestBody"]],
+            ["POST", $users . "logoutUser", [(new UsersController), "logoutUser"]],
 
             // Order routes
-            ["GET", $orders . "/getOrders", [(new OrdersHandler), "getOrders"]],
-            ["GET", $orders . "/getUserOrders", [(new OrdersHandler), "getUserOrders"]],
-            ["GET", $orders . "/getCityFromZipCode", [(new OrdersHandler), "getCityFromZipCode"]],
-            ["GET", $orders . "/verifyCoupon", [(new OrdersHandler), "verifyCoupon"], ["requestBody"]],
-            ["GET", $orders . "/searchOrders", [(new OrdersHandler), "searchOrders"], ["requestBody"]],
-            ["POST", $orders . "/createOrder", [(new OrdersHandler), "createOrder"]],
+            ["GET", $orders . "getOrders", [(new OrdersController), "getOrders"]],
+            ["GET", $orders . "getUserOrders", [(new OrdersController), "getUserOrders"]],
+            ["GET", $orders . "getCityFromZipCode", [(new OrdersController), "getCityFromZipCode"]],
+            ["GET", $orders . "verifyCoupon", [(new OrdersController), "verifyCoupon"], ["requestBody"]],
+            ["GET", $orders . "searchOrders", [(new OrdersController), "searchOrders"], ["requestBody"]],
+            ["POST", $orders . "createOrder", [(new OrdersController), "createOrder"]],
 
             // Product routes
-            ["GET", $products . "/getProducts", [(new ProductsHandler), "getProducts"]],
-            ["GET", $products . "/getProduct", [(new ProductsHandler), "getProduct"], ["requestBody"]],
-            ["GET", $products . "/searchProducts", [(new ProductsHandler), "searchProducts"], ["requestBody"]],
-            ["POST", $products . "/toggleBookDisplay", [(new ProductsHandler), "toggleBookDisplay"]],
+            ["GET", $products . "getProducts", [(new ProductsController), "getProducts"]],
+            ["GET", $products . "getProduct", [(new ProductsController), "getProduct"], ["requestBody"]],
+            ["GET", $products . "searchProducts", [(new ProductsController), "searchProducts"], ["requestBody"]],
+            ["POST", $products . "toggleBookDisplay", [(new ProductsController), "toggleBookDisplay"]],
         ];
     }
 

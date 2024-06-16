@@ -4,7 +4,7 @@ namespace DavidsBookClub\Handlers;
 
 use DavidsBookClub\Utils\Database;
 
-class ProductsHandler
+class ProductsController
 {
     public function getProducts()
     {

@@ -2,7 +2,7 @@
   "name": "api",
   "private": true,
   "scripts": {
-    "start": "php -S localhost:1000"
+    "api": "php -S localhost:1000"
   },
   "version": "1.0.0",
   "description": "API for Michael's book club",
