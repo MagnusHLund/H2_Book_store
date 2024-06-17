@@ -6,7 +6,7 @@ use DavidsBookClub\Utils\Database;
 
 class ProductsController
 {
-    public function getProducts()
+    public function getProducts($collection)
     {
     }
 
@@ -18,7 +18,7 @@ class ProductsController
     {
     }
 
-    public function toggleBookDisplay()
+    public function toggleBookDisplay($bookId)
     {
     }
 }
