@@ -34,6 +34,11 @@ class MessageManager
         exit;
     }
 
+    public static function missingParameters()
+    {
+        self::sendError("Missing parameters, when calling the API.", 422);
+    }
+
     /**
      * This function creates a log file, with a given message inside. The log files will be located within the /API/logs/ directory. Log file names are the timestamp of their creation.
      * @param string $logMessage Message to put into the log file
