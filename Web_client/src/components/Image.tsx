@@ -6,7 +6,7 @@ interface IImage {
 
 const Image: React.FC<IImage> = ({ imageSrc }) => {
     return (
-        <img src={ imageSrc }   className="image" />
+        <img src={ imageSrc }  alt=''  className="image" />
     )
 }
 
