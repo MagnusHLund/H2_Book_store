@@ -1,4 +1,4 @@
-import '../scss/Header.scss'
+import './Header.scss'
 import SearchBox from './SearchBox'
 import Image from './Image'
 import Button from './Button'
@@ -9,7 +9,7 @@ function Header() {
     return (
         <div className="header">
             <div className='header__logo'>
-                <Image imageSrc='../src/Images/DavidsBookClub.png'></Image>
+                <Image imageSrc='DavidsBookClub.png'></Image>
             </div>
             <SearchBox placeholder=' 🔎 Hamlet by William Shakespeare '/>
             <div className='header__loginAndButton'>

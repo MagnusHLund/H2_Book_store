@@ -1,15 +1,10 @@
-import '../scss/ProductDisplay.scss'
+import './ProductDisplay.scss'
 import Image from './Image'
 import Button from './Button'
 
-interface IProductDisplay {
-    name?: string
-
-}
-
 const numberOfProducts = 7
 
-const ProductDisplay: React.FC<IProductDisplay> = () => {
+const ProductDisplay: React.FC = () => {
     return (
         <div className='productsContainer'>
         <section className="productsContainer__productDisplay">

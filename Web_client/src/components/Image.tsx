@@ -1,12 +1,13 @@
-import '../scss/Image.scss'
+import './Image.scss'
 
 interface IImage {
     imageSrc?: string
+    description?: string
 }
 
-const Image: React.FC<IImage> = ({ imageSrc }) => {
+const Image: React.FC<IImage> = ({ imageSrc , description }) => {
     return (
-        <img src={ imageSrc }   className="Image" />
+        <img src={ imageSrc } alt={ description } className="image" />
     )
 }
 

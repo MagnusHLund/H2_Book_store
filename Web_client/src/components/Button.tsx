@@ -1,4 +1,4 @@
-import '../scss/Button.scss'
+import './Button.scss'
 import React from 'react'
 
 interface IButton {

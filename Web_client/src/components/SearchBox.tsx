@@ -1,4 +1,4 @@
-import '../scss/SearchBox.scss'
+import './SearchBox.scss'
 
 interface ISearchBox {
     placeholder?: string

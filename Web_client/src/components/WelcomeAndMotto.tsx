@@ -1,4 +1,4 @@
-import '../scss/WelcomeAndMotto.scss'
+import './WelcomeAndMotto.scss'
 
 function WelcomeAndMotto() {
     return (

@@ -10,13 +10,12 @@
 
     &__logo {
         display: flex;
-        flex-direction: row;
         justify-content: space-around;
         margin-top: 3vh;
         margin-right: 15vh;
         height: 100%;
-        width: 0%;
-        scale: 250%;
+        width: 0;
+        scale: 300%;
     }
 
     &__buttonContainer {
