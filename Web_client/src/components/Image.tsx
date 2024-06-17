@@ -1,4 +1,4 @@
-import '../scss/Image.scss'
+import './Image.scss'
 
 interface IImage {
     imageSrc?: string
@@ -6,7 +6,7 @@ interface IImage {
 
 const Image: React.FC<IImage> = ({ imageSrc }) => {
     return (
-        <img src={ imageSrc }   className="Image" />
+        <img src={ imageSrc }   className="image" />
     )
 }
 
