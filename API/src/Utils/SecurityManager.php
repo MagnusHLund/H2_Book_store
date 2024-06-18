@@ -48,13 +48,33 @@ class SecurityManager
      * @param string $salt The salt used to generate the hashed password
      * @return bool If the $password matches the $hashedPassword, then it returns true, else false.
      */
-    public function verifyPassword($password, $hashedPassword, $salt)
+    public function verifyHashedPassword($password, $hashedPassword, $salt)
     {
         try {
             return password_verify($password . $salt . $this->pepper, $hashedPassword);
         } catch (Exception $e) {
             MessageManager::sendError(self::GENERIC_ERROR_MESSAGE, 500, "Error validating password: " . $e->getMessage());
         }
+    }
+
+    /**
+     * This function adds a layer of security, by checking that the password follows the rules.
+     * @param string $password The password which has to be verified
+     */
+    public function verifyNewPassword($password): bool
+    {
+        $minimumLength = 6;
+        $minimumNumbers = 2;
+        $requiredMixedCase = true;
+
+        if (strlen($password) <= $minimumLength) {
+            return false;
+        }
+
+        if (!preg_match('/(.*\d.*){' . $minimumNumbers . ',}/', $password)) {
+        }
+
+        return true;
     }
 
     /**

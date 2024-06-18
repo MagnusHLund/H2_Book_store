@@ -152,7 +152,7 @@ class OrdersController
                 // If user does not exist, then create the user and return user id, using SP.
             }
 
-            // Create order using SP
+            // Create order using SP. Return order_id.
 
             MessageManager::sendSuccess("Order created");
         } else {
