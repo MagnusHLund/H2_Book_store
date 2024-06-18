@@ -1,11 +1,13 @@
-import ProductDisplay from '../ProductDisplay.tsx'
+import ProductDisplay from './sub sections/Home section/ProductDisplay.tsx'
 import WelcomeBanner from '../WelcomeBanner.tsx'
 
 function Home() {
-    return <>
-        <WelcomeBanner/>
-        <ProductDisplay/>
+  return (
+    <>
+      <WelcomeBanner />
+      <ProductDisplay />
     </>
+  )
 }
 
 export default Home
