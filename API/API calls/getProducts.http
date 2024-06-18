@@ -1,0 +1,7 @@
+### Get Products
+GET http://localhost:1000/api/v1/products/getProducts
+Content-Type: application/json
+
+{
+  "collection": "your_collection"
+}

@@ -1,34 +1,37 @@
 <?php
 
-namespace MichaelsBookClub\Utils;
+namespace DavidsBookClub\Utils;
+
+use PDO;
+use PDOException;
+use DavidsBookClub\Utils\Constants;
 
 class Database
 {
-    // init() is used as a form of constructor, but constructors are not used by static functions
-    public static function init()
+    public static function callStoredProcedure($procedureName, $params)
     {
-        // TODO: Code for database connection
+        try {
+            self::connectToDatabase();
+        } catch (PDOException $e) {
+            MessageManager::sendError("Database procedure error", 500, "Encountered an error in relation to calling a stored procedure: " . $e->getMessage());
+        }
     }
 
-    public static function create()
+    private static function connectToDatabase()
     {
-        // TODO: Create stuff in database
-    }
+        try {
+            $databaseInfo = Constants::getDatabaseInfo();
 
-    public static function read()
-    {
-        // TODO: Read stuff in database
-    }
+            $hostname = $databaseInfo['DB_HOST'];
+            $username = $databaseInfo['DB_USER'];
+            $password = $databaseInfo['DB_PASS'];
+            $database = $databaseInfo['DB_NAME'];
 
-    public static function update()
-    {
-        // TODO: Update stuff in database
-    }
-
-    public static function delete()
-    {
-        // TODO: Delete stuff in database
+            $conn = new PDO("mysql:host=$hostname;dbname=$database", $username, $password);
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (PDOException $e) {
+            MessageManager::sendError("Database connection error", 500, "Error connecting to the database" . $e->getMessage());
+            exit;
+        }
     }
 }
-
-Database::init();

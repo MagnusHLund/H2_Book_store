@@ -1,15 +1,19 @@
 {
-  "name": "michaels_book_club/api",
+  "name": "davids_book_club/api",
   "description": "H2 school project.",
   "type": "project",
   "require": {
     "vlucas/phpdotenv": "^5.6",
-    "ext-pdo_mysql": "*"
+    "ext-pdo_mysql": "*",
+    "firebase/php-jwt": "^6.10"
   },
   "license": "MIT",
   "autoload": {
     "psr-4": {
-      "MichaelsBookClub\\Api\\": "src/"
+      "DavidsBookClub\\": "src/",
+      "DavidsBookClub\\Utils\\": "src/Utils/",
+      "DavidsBookClub\\Handlers\\": "src/Handlers/",
+      "DavidsBookClub\\Middleware\\": "src/Middleware/"
     }
   }
 }

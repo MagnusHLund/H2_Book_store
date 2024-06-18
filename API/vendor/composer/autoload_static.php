@@ -23,17 +23,21 @@ class ComposerStaticInit1a6f3684d60a5884072b26233244cf08
         array (
             'PhpOption\\' => 10,
         ),
-        'M' => 
-        array (
-            'MichaelsBookClub\\Api\\' => 21,
-        ),
         'G' => 
         array (
             'GrahamCampbell\\ResultType\\' => 26,
         ),
+        'F' => 
+        array (
+            'Firebase\\JWT\\' => 13,
+        ),
         'D' => 
         array (
             'Dotenv\\' => 7,
+            'DavidsBookClub\\Utils\\' => 21,
+            'DavidsBookClub\\Middleware\\' => 26,
+            'DavidsBookClub\\Handlers\\' => 24,
+            'DavidsBookClub\\' => 15,
         ),
     );
 
@@ -54,17 +58,33 @@ class ComposerStaticInit1a6f3684d60a5884072b26233244cf08
         array (
             0 => __DIR__ . '/..' . '/phpoption/phpoption/src/PhpOption',
         ),
-        'MichaelsBookClub\\Api\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src',
-        ),
         'GrahamCampbell\\ResultType\\' => 
         array (
             0 => __DIR__ . '/..' . '/graham-campbell/result-type/src',
         ),
+        'Firebase\\JWT\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
+        ),
         'Dotenv\\' => 
         array (
             0 => __DIR__ . '/..' . '/vlucas/phpdotenv/src',
+        ),
+        'DavidsBookClub\\Utils\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Utils',
+        ),
+        'DavidsBookClub\\Middleware\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Middleware',
+        ),
+        'DavidsBookClub\\Handlers\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Handlers',
+        ),
+        'DavidsBookClub\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src',
         ),
     );
 

@@ -1,24 +1,21 @@
 <?php
 
-namespace MichaelsBookClub;
+namespace DavidsBookClub;
 
-use Dotenv;
-use MichaelsBookClub\Utils\Router;
-use MichaelsBookClub\Middleware\CORSMiddleware;
+use Dotenv\Dotenv;
+use DavidsBookClub\Middleware\AuthenticationMiddleware;
+use DavidsBookClub\Middleware\CorsMiddleware;
+use DavidsBookClub\Utils\Router;
 
 require_once __DIR__ . '/../vendor/autoload.php';
-$dotenv = Dotenv\Dotenv::createUnsafeImmutable(__DIR__);
+$dotenv = Dotenv::createUnsafeImmutable(__DIR__);
 $dotenv->load();
 
 class ApiEntry
 {
-    private $router;
-
     public function __construct()
     {
         session_start();
-
-        $this->router = new Router;
     }
 
     public function handleRequest()
@@ -27,16 +24,15 @@ class ApiEntry
         $path = $_SERVER['REQUEST_URI'];
         $requestBody = json_decode(file_get_contents('php://input'), true);
 
-        $this->applyMiddleware($path);
-        $this->router->handleRequest($method, $path, $requestBody);
+        $this->handleMiddleware($path);
+        (new Router)->handleRequest($method, $path, $requestBody);
     }
 
-    private function applyMiddleware()
+    private function handleMiddleware($path)
     {
-        $corsMiddleware = new CORSMiddleware;
-        $corsMiddleware->handle();
+        CorsMiddleware::handleCors();
+        AuthenticationMiddleware::handleAuthentication($path);
     }
 }
 
-$apiEntry = new ApiEntry;
-$apiEntry->handleRequest();
+(new ApiEntry)->handleRequest();

@@ -1,0 +1,7 @@
+### Verify Coupon
+GET http://localhost:1000/api/v1/orders/verifyCoupon
+Content-Type: application/json
+
+{
+  "coupon": "your_coupon"
+}
