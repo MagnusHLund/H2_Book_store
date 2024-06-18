@@ -1,0 +1,23 @@
+.product-section__upper {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal columns */
+    
+    align-items: center; /* Centers the items vertically */
+    justify-items: center; /* Centers the items horizontally */
+    margin-top: 15vh;
+}
+
+.product-section__upper__pic {
+    /* Additional styling for the first div, if needed */
+}
+
+.product-section__upper__info {
+    /* Additional styling for the second div, if needed */
+}
+
+.product-section__lower {
+    margin-top: 30vh;
+    max-width: 60vw;
+    margin: 20vh auto 0 auto; 
+
+}
