@@ -1,7 +1,7 @@
 import './Header.scss'
-import SearchBox from '../SearchBox'
+import SearchBox from '../inputs/SearchBox'
 import Image from './Image'
-import Button from './Button'
+import Button from './../inputs/Button'
 import { LuShoppingBasket } from 'react-icons/lu'
 import { IconContext } from 'react-icons'
 
