@@ -113,7 +113,7 @@ CREATE TABLE IF NOT EXISTS `Users`(
     `email` VARCHAR(255) NOT NULL,
     `phone_number` VARCHAR(11) NOT NULL,
     `password` VARCHAR(255),
-    `salt` VARCHAR(60) NOT NULL,
+    `salt` VARCHAR(60),
     `created_at` DATETIME NOT NULL,
     `role` VARCHAR(8) NOT NULL,
 
