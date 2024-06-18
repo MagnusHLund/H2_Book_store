@@ -51,21 +51,45 @@ class UsersController
         )) {
             if ($payload->password != $payload->verifyPassword) {
                 MessageManager::sendError("Passwords do not match", 401);
+                exit;
             }
 
             if (!$this->securityManager->verifyNewPassword($payload->password)) {
                 MessageManager::sendError("Password does not follow requirements", 401);
+                exit;
             }
+        } else {
+            MessageManager::missingParameters();
         }
     }
 
     /**
-     * loginUser
+     * This function is used to login a user.
+     * @param object $payload `$payload->email` and `$payload->password` is used to login the user.
      */
-    public function loginUser($loginDetails)
+    public function loginUser($payload)
     {
+        if (isset($payload->email, $payload->password)) {
+            // Call SP to receive userId, password and salt, from the user.
+
+            $response = "";
+            if (empty($response)) {
+                MessageManager::sendError("Invalid credentials", 403);
+                exit;
+            }
+
+            if (!$this->securityManager->verifyHashedPassword($payload->password, $response->password, $response->salt)) {
+                MessageManager::sendError("Invalid credentials", 403);
+                exit;
+            }
+
+            $jwt = $this->securityManager->encodeJwt($response->userId);
+        }
     }
 
+    /**
+     * This function removes the user within the API session storage.
+     */
     public function logoutUser()
     {
     }

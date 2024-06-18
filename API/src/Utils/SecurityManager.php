@@ -48,12 +48,13 @@ class SecurityManager
      * @param string $salt The salt used to generate the hashed password
      * @return bool If the $password matches the $hashedPassword, then it returns true, else false.
      */
-    public function verifyHashedPassword($password, $hashedPassword, $salt)
+    public function verifyHashedPassword($password, $hashedPassword, $salt): bool
     {
         try {
             return password_verify($password . $salt . $this->pepper, $hashedPassword);
         } catch (Exception $e) {
             MessageManager::sendError(self::GENERIC_ERROR_MESSAGE, 500, "Error validating password: " . $e->getMessage());
+            return false;
         }
     }
 
