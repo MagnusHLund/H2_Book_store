@@ -12,9 +12,9 @@ function Header() {
                 <Image imageSrc='DavidsBookClub.png'></Image>
             </div>
             <SearchBox placeholder=' 🔎 Hamlet by William Shakespeare '/>
-            <div className='header__loginAndButton'>
+            <div>
                 <IconContext.Provider value={{ size:'3vh', style: { verticalAlign: 'middle', cursor:'pointer' }}}>
-                    <LuShoppingBasket className='header__buttonContainer__icon'/>
+                    <LuShoppingBasket className='header__button-container__icon'/>
                 </IconContext.Provider>
                 <Button placeholder='Log in'/>
             </div>

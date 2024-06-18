@@ -1,6 +1,6 @@
-import './components/App.scss'
+import './App.scss'
 import { Route, useLocation, Routes } from "react-router-dom";
-import Home from './Sections/Home'
+import Home from './components/sections/Home'
 import Header from "./components/Header.tsx";
 
 function App() {

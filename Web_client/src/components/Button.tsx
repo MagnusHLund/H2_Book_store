@@ -5,7 +5,7 @@ interface IButton {
     placeholder?: string
 }
 
-const Button: React.FC<IButton> = ({ placeholder }) => {
+const Button: React.FC<IButton> = ({ placeholder = "" }) => {
     return (
         <button className="button"> { placeholder } </button>
     )
