@@ -1,7 +1,10 @@
 .button {
-    border-radius: 2vh;
-    border-color: black;
-    border-width: 0.2vh;
+    border-radius: 1vh;
+    border: none;
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 4px #999;
 
     padding-left: 2vh;
     padding-right: 2vh;
@@ -9,6 +12,12 @@
     padding-bottom: 0.5vh;
     
     height: 4vh;
-    margin-right: 5vh;
-    
+
+    &:hover:focus:active {
+        background-color: gray;
+        color: black;
+        box-shadow: 0 4px #666;
+        cursor: pointer;
+        transform: translateY(4px);
+    }
 }

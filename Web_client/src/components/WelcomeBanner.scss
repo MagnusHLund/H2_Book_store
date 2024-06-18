@@ -1,0 +1,17 @@
+.welcome-banner {
+    margin-top: 20vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    
+    &__welcome {
+        font-style: italic;
+        font-size: 250%;
+    }
+    &__motto {
+        margin-top: 5vh;
+        font-weight: normal;
+    }
+}
