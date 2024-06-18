@@ -31,6 +31,7 @@ class Router
             ["GET", $users . "getUserBillingInfo", [(new UsersController), "getUserBillingInfo"]],
             ["POST", $users . "createUser", [(new UsersController), "createUser"], ["requestBody"]],
             ["POST", $users . "loginUser", [(new UsersController), "loginUser"], ["requestBody"]],
+            ["POST", $users . "verifyLoggedIn", [(new UsersController), "verifyLoggedIn"]],
             ["POST", $users . "logoutUser", [(new UsersController), "logoutUser"]],
 
             // Order routes

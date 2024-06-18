@@ -18,8 +18,8 @@ class AuthenticationMiddleware
 
         // Checks if the API call path is not a public route
         if (!in_array($path, $publicRoutes)) {
-            if (isset($_SESSION['jwt'])) {
-                SecurityManager::decodeJwt($_SESSION['jwt']);
+            if (isset($_COOKIE['jwt'])) {
+                SecurityManager::decodeJwt($_COOKIE['jwt']);
                 return;
             }
 

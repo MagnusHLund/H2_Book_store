@@ -68,15 +68,24 @@ class SecurityManager
         $minimumNumbers = 2;
         $requiredMixedCase = true;
 
+        // Check if the length is above the minimum length.
         if (strlen($password) <= $minimumLength) {
             return false;
         }
 
+        // Check if password has the minimally required numbers.
         if (!preg_match('/(.*\d.*){' . $minimumNumbers . ',}/', $password)) {
+            return false;
+        }
+
+        // Check for mixed case letters
+        if ($requiredMixedCase && !preg_match('/(?=.*[a-z])(?=.*[A-Z])/', $password)) {
+            return false;
         }
 
         return true;
     }
+
 
     /**
      * Generates a string of hexadecimal characters.

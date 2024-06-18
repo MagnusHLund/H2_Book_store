@@ -24,7 +24,13 @@ class UsersController
         // Call SP with the UserId as a parameter. Return stored user billing information.
 
         $billingInfo = "";
-        MessageManager::sendSuccess($billingInfo);
+
+        $decryptedEmail = $this->securityManager->decryptData($billingInfo->email);
+        $decryptedPhoneNumber = $this->securityManager->decryptData($billingInfo->phoneNumber);
+
+        $decryptedInfo = "";
+
+        MessageManager::sendSuccess($decryptedInfo);
     }
 
     /**
@@ -37,6 +43,7 @@ class UsersController
      *              `$payload->houseNumber`
      *              `$payload->zipCode`
      *              `$payload->streetName`
+     *              `$payload->phoneNumber`
      */
     public function createUser($payload)
     {
@@ -47,8 +54,17 @@ class UsersController
             $payload->verifyPassword,
             $payload->houseNumber,
             $payload->zipCode,
-            $payload->streetName
+            $payload->streetName,
+            $payload->phoneNumber
         )) {
+            // Call stored procedure to verify that the email does not already exist.
+
+            if (false) {
+                // If email exists
+                MessageManager::sendError("Email is already in use", 409);
+                exit;
+            }
+
             if ($payload->password != $payload->verifyPassword) {
                 MessageManager::sendError("Passwords do not match", 401);
                 exit;
@@ -58,6 +74,19 @@ class UsersController
                 MessageManager::sendError("Password does not follow requirements", 401);
                 exit;
             }
+
+            $salt = $this->securityManager->generateSalt();
+            $hashedPassword = $this->securityManager->hashPassword($payload->password, $salt);
+
+            $encryptedEmail = $this->securityManager->encryptData($payload->email);
+            $phoneNumber = $this->securityManager->encryptData($payload->phoneNumber);
+
+            // Stored procedure to create the user. Return userId.
+
+            $jwt = $this->securityManager->encodeJwt($response->userId);
+
+            $oneDay = 86400;
+            setcookie("jwt", $jwt,  time() + $oneDay, "/", null, null, true);
         } else {
             MessageManager::missingParameters();
         }
@@ -84,13 +113,33 @@ class UsersController
             }
 
             $jwt = $this->securityManager->encodeJwt($response->userId);
+
+            $oneDay = 86400;
+            setcookie("jwt", $jwt,  time() + $oneDay, "/", null, null, true);
         }
     }
 
     /**
-     * This function removes the user within the API session storage.
+     * This function removes the cookie, holding the JWT.
+     * It sets the expiration to an hour ago, which is common practice for removing a cookie.
      */
     public function logoutUser()
     {
+        $oneHour = 3600;
+        setcookie("jwt", "",  time() - $oneHour, "/", null, null, true);
+    }
+
+    public function verifyLoggedIn()
+    {
+        if (isset($_COOKIE['jwt'])) {
+            $jwt = $_COOKIE['jwt'];
+            // Decode and verify the JWT
+            $decodedJwt = $this->securityManager->decodeJwt($jwt);
+            if ($decodedJwt) {
+                MessageManager::sendSuccess("You are logged in!");
+            }
+        }
+
+        MessageManager::sendError("You are not logged in", 401);
     }
 }
