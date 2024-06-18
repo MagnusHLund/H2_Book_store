@@ -14,7 +14,7 @@ function Header() {
             <SearchBox placeholder=' 🔎 Hamlet by William Shakespeare '/>
             <div>
                 <IconContext.Provider value={{ size:'3vh', style: { verticalAlign: 'middle', cursor:'pointer' }}}>
-                    <LuShoppingBasket className='header__button-container__icon'/>
+                    <LuShoppingBasket className='header__basket--icon'/>
                 </IconContext.Provider>
                 <Button placeholder='Log in'/>
             </div>

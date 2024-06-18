@@ -18,13 +18,7 @@
         scale: 300%;
     }
 
-    &__button-container {
-        display: flex;
-        flex-direction: row;
-        justify-items: center;
-        align-items: center;
-        &__icon {
+    &__basket--icon {
             margin-right: 3vh;
-        }
     }
 }
