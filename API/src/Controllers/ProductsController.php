@@ -29,7 +29,7 @@ class ProductsController
      * This function gets all information on a single product.
      * @param object $payload `$payload->productId` is used to identify the product, which has to be fetched.
      */
-    public function getProduct($payload)
+    public function getProductById($payload)
     {
         if (isset($payload->productId)) {
             // Call SP with the productId parameter

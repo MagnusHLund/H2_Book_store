@@ -1,5 +1,5 @@
 ### Get Product
-GET http://localhost:1000/api/v1/products/getProduct
+GET http://localhost:1000/api/v1/products/getProductById
 Content-Type: application/json
 
 {

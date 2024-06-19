@@ -44,7 +44,7 @@ class Router
 
             // Product routes
             ["GET", $products . "getProducts", [(new ProductsController), "getProducts"]],
-            ["GET", $products . "getProduct", [(new ProductsController), "getProduct"], ["requestBody"]],
+            ["GET", $products . "getProductById", [(new ProductsController), "getProductById"], ["requestBody"]],
             ["GET", $products . "searchProducts", [(new ProductsController), "searchProducts"], ["requestBody"]],
             ["POST", $products . "toggleBookDisplay", [(new ProductsController), "toggleBookDisplay"]],
         ];
