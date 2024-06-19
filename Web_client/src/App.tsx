@@ -1,22 +1,12 @@
 import './App.scss'
-import { Route, useLocation, Routes } from 'react-router-dom'
-import Home from './components/sections/HomeSection.tsx'
-import Header from './components/content/Header.tsx'
+import AdminNavbar from './components/sections/AdminPanelSection/AdminNavbar'
+import HelloAdmin from './components/sections/AdminPanelSection/HelloAdmin'
 
 function App() {
-  const location = useLocation()
-
-  const navlinks = [
-    { name: 'Home', path: '/' },
-    { name: 'Login', path: '/login' },
-  ]
-
   return (
     <>
-      <Header />
-      <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<Home />} />
-      </Routes>
+        <AdminNavbar></AdminNavbar>
+        <HelloAdmin></HelloAdmin>
     </>
   )
 }
