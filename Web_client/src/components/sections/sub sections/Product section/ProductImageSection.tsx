@@ -7,7 +7,6 @@ function ProductImageSection() {
         <button className="" content="<"></button>
         <img src="path" alt="image of book" />
         <button className="" content=">"></button>
-        <p>dwadwadwadwadwa</p>
       </div>
     </div>
   )
