@@ -1,23 +1,50 @@
+@use './../../App.scss' as app;
+
+body{
+    background-color:   #e6e6e6;
+}
+
 .product-section__upper {
     display: grid;
     grid-template-columns: 1fr 1fr; /* Two equal columns */
     
     align-items: center; /* Centers the items vertically */
     justify-items: center; /* Centers the items horizontally */
-    margin-top: 15vh;
+    // margin-top: 15vh;
+    background-color: app.$secondary;
+    // width: 80vw;
+    margin: 3vh auto 0 auto; 
+    height: 60vh;
+    max-width: 80vw;
+    padding: 2vh;
+    border-radius: 0.5vw 0.5vw 0 0;
+    
+
 }
 
 .product-section__upper__pic {
     /* Additional styling for the first div, if needed */
+    background-color: app.$secondary;
+    padding: 2vh;
+    border-radius: 0.5vh;
+    border: 5px solid app.$accent;
+    
 }
 
 .product-section__upper__info {
     /* Additional styling for the second div, if needed */
+    background-color: app.$secondary;
+    padding: 2vh;
+    border-radius: 0.5vh;
+    border:   5px solid app.$accent;
 }
 
 .product-section__lower {
     margin-top: 30vh;
-    max-width: 60vw;
-    margin: 20vh auto 0 auto; 
-
+    max-width: 80vw;
+    margin: 0 auto 0 auto; 
+    background-color: app.$secondaryAlt;
+    height: 5vh;
+    padding: 2vh;
+    border-radius: 0 0 0.5vw 0.5vw;
 }

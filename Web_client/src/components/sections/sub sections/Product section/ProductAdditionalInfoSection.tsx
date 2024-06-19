@@ -1,15 +1,11 @@
-
 import './ProductAdditionalInfoSection.scss'
 
 function ProductAdditionalInfoSection() {
   return (
-    <div>
-      <p>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio,
-        inventore labore deleniti dolorum perspiciatis ex aut vel et rerum
-        cupiditate libero architecto quaerat pariatur error rem dolor.
-        Temporibus, odio est!
-      </p>
+    <div className="ProductInfo">
+      <h4>ISBN:</h4>
+      <h4>Release date:</h4>
+      <h4>Language:</h4>
     </div>
   )
 }
