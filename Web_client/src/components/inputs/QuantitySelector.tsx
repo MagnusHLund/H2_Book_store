@@ -3,18 +3,19 @@ import './QuantityButton.scss'
 import Button from './Button'
 import TextInput from './TextInput'
 
-interface IQuantityButton {
+interface IQuantitySelector {
   defaultValue: string
 }
 
-const QuantityButton: React.FC<IQuantityButton> = ({ defaultValue = '' }) => {
+const QuantitySelector: React.FC<IQuantitySelector> = ({ defaultValue }) => {
+  const fgfggf = () => {}
   return (
     <div>
-      <Button></Button>
+      <Button onClick={fgfggf}>-</Button>
       <TextInput placeholder={defaultValue}></TextInput>
-      <Button></Button>
+      <Button>+</Button>
     </div>
   )
 }
 
-export default QuantityButton
+export default QuantitySelector
