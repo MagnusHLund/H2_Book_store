@@ -1390,12 +1390,37 @@ INSERT INTO OrderItems (book_id, order_id, price, quantity) VALUES
 (5, 5, 100, 1);
 
 INSERT INTO BookImages (book_id, display_order, file_path) VALUES 
-(1, 1, 'c:/davidsBookClub/images/1/1.jpg'),
-(1, 2, 'c:/davidsBookClub/images/1/2.jpg'),
-(2, 1, 'c:/davidsBookClub/images/2/1.jpg'),
-(3, 1, 'c:/davidsBookClub/images/3/1.jpg'),
-(4, 1, 'c:/davidsBookClub/images/4/1.jpg'),
-(5, 1, 'c:/davidsBookClub/images/5/1.jpg');
+(1, 1, 'c:/davidsBookClub/images/1/1.png'),
+(1, 2, 'c:/davidsBookClub/images/1/2.png'),
+(2, 1, 'c:/davidsBookClub/images/2/1.png'),
+(3, 1, 'c:/davidsBookClub/images/3/1.png'),
+(4, 1, 'c:/davidsBookClub/images/4/1.png'),
+(5, 1, 'c:/davidsBookClub/images/5/1.png'),
+(5, 1, 'c:/davidsBookClub/images/6/1.png'),
+(5, 1, 'c:/davidsBookClub/images/7/1.png'),
+(5, 1, 'c:/davidsBookClub/images/8/1.png'),
+(5, 1, 'c:/davidsBookClub/images/9/1.png'),
+(5, 1, 'c:/davidsBookClub/images/10/1.png'),
+(5, 1, 'c:/davidsBookClub/images/11/1.png'),
+(5, 1, 'c:/davidsBookClub/images/12/1.png'),
+(5, 1, 'c:/davidsBookClub/images/13/1.png'),
+(5, 1, 'c:/davidsBookClub/images/14/1.jpg'),
+(5, 1, 'c:/davidsBookClub/images/15/1.jpg'),
+(5, 1, 'c:/davidsBookClub/images/16/1.jpg'),
+(5, 1, 'c:/davidsBookClub/images/17/1.jpg'),
+(5, 1, 'c:/davidsBookClub/images/18/1.jpg'),
+(5, 1, 'c:/davidsBookClub/images/19/1.jpg'),
+(5, 1, 'c:/davidsBookClub/images/20/1.jpg'),
+(5, 1, 'c:/davidsBookClub/images/21/1.jpg'),
+(5, 1, 'c:/davidsBookClub/images/22/1.jpg'),
+(5, 1, 'c:/davidsBookClub/images/23/1.jpg'),
+(5, 1, 'c:/davidsBookClub/images/24/1.jpg'),
+(5, 1, 'c:/davidsBookClub/images/25/1.jpg'),
+(5, 1, 'c:/davidsBookClub/images/26/1.jpg'),
+(5, 1, 'c:/davidsBookClub/images/27/1.jpg'),
+(5, 1, 'c:/davidsBookClub/images/28/1.jpg'),
+(5, 1, 'c:/davidsBookClub/images/29/1.jpg'),
+(5, 1, 'c:/davidsBookClub/images/30/1.jpg');
 
 
 
