@@ -25,7 +25,6 @@ INSERT INTO Books (release_date, stock, genre, category, price, name, isbn, lang
 ('2017-06-02', 2, 'Self-help', 'Adults', 139, 'Usårlig', 8573657365, 'Danish', 1),
 ('2022-11-21', 7, 'Novel', 'Adults', 110, 'Showman', 8492754395, 'English', 1),
 ('1950-05-03', 4, 'History', 'Grandparents', 300, 'Hamlet - Prince of Denmark', 1853920544, 'English', 1),
-
 ('2021-05-18', 10, 'Science Fiction', 'Novel', 14.99, 'Project Hail Mary', '9780593135204', 'English', 'Paperback'),
 ('2020-10-06', 15, 'Fantasy', 'Novel', 16.99, 'The Invisible Life of Addie LaRue', '9780765387561', 'English', 'Hardcover'),
 ('2018-04-24', 12, 'Biography', 'Non-Fiction', 18.00, 'Educated: A Memoir', '9780399590504', 'English', 'Paperback'),
@@ -100,11 +99,28 @@ INSERT INTO BookImages (book_id, display_order, file_path) VALUES
 (3, 1, 'c:/davidsBookClub/images/3/1.png'),
 (4, 1, 'c:/davidsBookClub/images/4/1.png'),
 (5, 1, 'c:/davidsBookClub/images/5/1.png'),
-(6, 1, 'c:/davidsBookClub/images/6/1.png');
-(7, 1, 'c:/davidsBookClub/images/7/1.png');
-(8, 1, 'c:/davidsBookClub/images/8/1.png');
-(9, 1, 'c:/davidsBookClub/images/9/1.png');
-(10, 1, 'c:/davidsBookClub/images/10/1.png');
-(11, 1, 'c:/davidsBookClub/images/11/1.png');
-(12, 1, 'c:/davidsBookClub/images/12/1.png');
-(13, 1, 'c:/davidsBookClub/images/13/1.png');
+(6, 1, 'c:/davidsBookClub/images/6/1.png'),
+(7, 1, 'c:/davidsBookClub/images/7/1.png'),
+(8, 1, 'c:/davidsBookClub/images/8/1.png'),
+(9, 1, 'c:/davidsBookClub/images/9/1.png'),
+(10, 1, 'c:/davidsBookClub/images/10/1.png'),
+(11, 1, 'c:/davidsBookClub/images/11/1.png'),
+(12, 1, 'c:/davidsBookClub/images/12/1.png'),
+(13, 1, 'c:/davidsBookClub/images/13/1.png'),
+(14, 1, 'c:/davidsBookClub/images/14/1.jpg'),
+(15, 1, 'c:/davidsBookClub/images/15/1.jpg'),
+(16, 1, 'c:/davidsBookClub/images/16/1.jpg'),
+(17, 1, 'c:/davidsBookClub/images/17/1.jpg'),
+(18, 1, 'c:/davidsBookClub/images/18/1.jpg'),
+(19, 1, 'c:/davidsBookClub/images/19/1.jpg'),
+(20, 1, 'c:/davidsBookClub/images/20/1.jpg'),
+(21, 1, 'c:/davidsBookClub/images/21/1.jpg'),
+(22, 1, 'c:/davidsBookClub/images/22/1.jpg'),
+(23, 1, 'c:/davidsBookClub/images/23/1.jpg'),
+(24, 1, 'c:/davidsBookClub/images/24/1.jpg'),
+(25, 1, 'c:/davidsBookClub/images/25/1.jpg'),
+(26, 1, 'c:/davidsBookClub/images/26/1.jpg'),
+(27, 1, 'c:/davidsBookClub/images/27/1.jpg'),
+(28, 1, 'c:/davidsBookClub/images/28/1.jpg'),
+(29, 1, 'c:/davidsBookClub/images/29/1.jpg'),
+(30, 1, 'c:/davidsBookClub/images/30/1.jpg');
