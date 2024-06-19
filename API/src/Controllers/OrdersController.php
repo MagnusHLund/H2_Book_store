@@ -18,6 +18,7 @@ class OrdersController
     {
         if (isset($payload->totalReceivedItems, $payload->limit)) {
             // Call SP, to make sure that the user (userId provided by the JWT) is an admin.
+            Database::callStoredProcedure()
 
             // Call SP, which gets the amount of total received items and how many to return
             // Then the SP returns the next 12 rows.
