@@ -1,0 +1,6 @@
+### Verify logged in
+GET http://localhost:1000/api/v1/orders/verifyLoggedIn
+Content-Type: application/json
+
+{
+}
