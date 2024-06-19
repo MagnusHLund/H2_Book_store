@@ -1,7 +1,7 @@
 import React from 'react'
-import './ThankU.scss'
+import './ThankYou.scss'
 
-function ThankUText(){
+function ThankYouText(){
   return (
     <div className="thank-you-customer">
         <label  className="thank-you">Thank you for choosing David's Book Store!</label>
@@ -11,4 +11,4 @@ function ThankUText(){
   )
 }
 
-export default ThankUText
+export default ThankYouText
