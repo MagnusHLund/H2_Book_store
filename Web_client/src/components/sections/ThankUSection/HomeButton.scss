@@ -1,0 +1,31 @@
+.home-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .home-button {
+    background-color: #3498db; /* Button background color */
+    color: white; /* Button text color */
+    border: none; /* Remove default border */
+    border-radius: 12px; /* Rounded corners */
+    padding: 12px 24px; /* Padding inside the button */
+    font-size: 18px; /* Font size of the text */
+    font-weight: bold; /* Make the text bold */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+  
+    /* Transition effects for smooth hover effect */
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  .home-button:hover {
+    background-color: #2980b9; /* Darken the background on hover */
+    transform: translateY(-2px); /* Slight lift effect on hover */
+  }
+  
+  .home-button:active {
+    background-color: #1a5a7b; /* Darken more on active click */
+    transform: translateY(1px); /* Slight press effect on click */
+  }
+  
