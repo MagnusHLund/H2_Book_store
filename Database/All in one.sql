@@ -1333,7 +1333,6 @@ INSERT INTO Coupons (code, discount_percentage, expiration_date) VALUES
 ('GUNPOINT_DISCOUNT', 100, '2034-08-14 14:08:04');
 
 INSERT INTO Books (release_date, stock, genre, category, price, name, isbn, language, display) VALUES
-INSERT INTO Books (release_date, stock, genre, category, price, name, isbn, language, display) VALUES
 ('2012-02-01', 6, 'Romance', 'Women', 59, 'The lover boyz', 1234567890, 'English', 1),
 ('2022-05-22', 8, 'Fiction', 'Teenagers', 29, 'No facts', 1234567891, 'English', 1),
 ('2024-03-04', 15, 'Sci-fi', 'Boys', 39, 'Star claws', 1234567892, 'English', 1),
@@ -1377,7 +1376,32 @@ INSERT INTO AuthorsBooks (author_id, book_id) VALUES
 (2, 2),
 (3, 3),
 (4, 4),
-(5, 5);
+(5, 5),
+(1, 6),
+(2, 7),
+(3, 8),
+(4, 9),
+(5, 10),
+(1, 11),
+(2, 12),
+(3, 13),
+(4, 14),
+(5, 15),
+(1, 16),
+(2, 17),
+(3, 18),
+(4, 19),
+(5, 20),
+(1, 21),
+(2, 22),
+(3, 23),
+(4, 24),
+(5, 25),
+(1, 26),
+(2, 27),
+(3, 28),
+(4, 29),
+(5, 30);
 
 INSERT INTO Cities (city, zip_code) VALUES
 ('Slagelse', 4200),
