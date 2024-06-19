@@ -2,9 +2,9 @@
 
 namespace DavidsBookClub\Utils;
 
-use DavidsBookClub\Handlers\ProductsController;
-use DavidsBookClub\Handlers\OrdersController;
-use DavidsBookClub\Handlers\UsersController;
+use DavidsBookClub\Controllers\ProductsController;
+use DavidsBookClub\Controllers\OrdersController;
+use DavidsBookClub\Controllers\UsersController;
 
 class Router
 {
@@ -67,7 +67,7 @@ class Router
 
             // If the network request method and path matches, then it calls a specific class.
             if ($method === $routeMethod && strtolower($path) === $routePath) {
-                call_user_func_array([$handler[0], $handler[1]], [[$requestBody], $params]);
+                call_user_func_array([$handler[0], $handler[1]], [$requestBody, $params]);
                 return;
             }
         }

@@ -1,6 +1,6 @@
 <?php
 
-namespace DavidsBookClub\Handlers;
+namespace DavidsBookClub\Controllers;
 
 use DavidsBookClub\Utils\Database;
 use DavidsBookClub\Utils\MessageManager;

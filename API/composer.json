@@ -12,7 +12,7 @@
     "psr-4": {
       "DavidsBookClub\\": "src/",
       "DavidsBookClub\\Utils\\": "src/Utils/",
-      "DavidsBookClub\\Handlers\\": "src/Handlers/",
+      "DavidsBookClub\\Controllers\\": "src/Controllers/",
       "DavidsBookClub\\Middleware\\": "src/Middleware/"
     }
   }
