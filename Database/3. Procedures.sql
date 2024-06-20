@@ -766,23 +766,22 @@ DROP PROCEDURE IF EXISTS InsertAddress;
 DELIMITER $$
 
 CREATE PROCEDURE IF NOT EXISTS InsertAddress(
-    IN cityName VARCHAR(18), 
+    IN zipCode VARCHAR(4), 
     IN streetName VARCHAR(34), 
     IN houseNumber VARCHAR(15)
 )
 BEGIN
     DECLARE cityId INT UNSIGNED;
-    DECLARE cityZipCode VARCHAR(4);
 
     -- Sanitize input to prevent SQL injection
-    SET cityName = TRIM(REPLACE(REPLACE(REPLACE(cityName, "'", "''"), ";", ""), "--", ""));
+    SET zipCode = TRIM(REPLACE(REPLACE(REPLACE(zipCode, "'", "''"), ";", ""), "--", ""));
     SET streetName = TRIM(REPLACE(REPLACE(REPLACE(streetName, "'", "''"), ";", ""), "--", ""));
     SET houseNumber = TRIM(REPLACE(REPLACE(REPLACE(houseNumber, "'", "''"), ";", ""), "--", ""));
     
-    -- Check if the city exists
-    SELECT city_id, zip_code INTO cityId, cityZipCode 
+    -- Check if the city exists based on zip code
+    SELECT city_id INTO cityId 
     FROM Cities 
-    WHERE city = cityName;
+    WHERE zip_code = zipCode;
     
     IF cityId IS NULL THEN
         -- City does not exist, return a message

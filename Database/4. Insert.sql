@@ -82,13 +82,6 @@ INSERT INTO AuthorsBooks (author_id, book_id) VALUES
 (4, 29),
 (5, 30);
 
-INSERT INTO Cities (city, zip_code) VALUES
-('Slagelse', 4200),
-('Amagerbro', 2300),
-('Sorø', 4180),
-('Hellerup', 2900),
-('Albertslund', 2620);
-
 INSERT INTO Addresses (city_id, street_name, house_number) VALUES
 (1, 'Sorøvej', '1'),
 (2, 'Store mølle vej', '2'),
