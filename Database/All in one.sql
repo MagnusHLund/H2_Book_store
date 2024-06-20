@@ -1295,8 +1295,45 @@ END //
 
 DELIMITER ;
 
+-- -------------------------------------------------this procedure will insert an address and return it's id
 
+DROP PROCEDURE IF EXISTS InsertAddress;
 
+DELIMITER $$
+
+CREATE PROCEDURE IF NOT EXISTS InsertAddress(
+    IN cityName VARCHAR(18), 
+    IN streetName VARCHAR(34), 
+    IN houseNumber VARCHAR(15)
+)
+BEGIN
+    DECLARE cityId INT UNSIGNED;
+    DECLARE cityZipCode VARCHAR(4);
+
+    -- Sanitize input to prevent SQL injection
+    SET cityName = TRIM(REPLACE(REPLACE(REPLACE(cityName, "'", "''"), ";", ""), "--", ""));
+    SET streetName = TRIM(REPLACE(REPLACE(REPLACE(streetName, "'", "''"), ";", ""), "--", ""));
+    SET houseNumber = TRIM(REPLACE(REPLACE(REPLACE(houseNumber, "'", "''"), ";", ""), "--", ""));
+    
+    -- Check if the city exists
+    SELECT city_id, zip_code INTO cityId, cityZipCode 
+    FROM Cities 
+    WHERE city = cityName;
+    
+    IF cityId IS NULL THEN
+        -- City does not exist, return a message
+        SELECT 'City does not exist in the Cities table.' AS message;
+    ELSE
+        -- City exists, insert data into Addresses table
+        INSERT INTO Addresses (city_id, street_name, house_number)
+        VALUES (cityId, streetName, houseNumber);
+
+        -- Return the newly inserted address_id
+        SELECT LAST_INSERT_ID() AS address_id;
+    END IF;
+END$$
+
+DELIMITER ;
 
 
 
