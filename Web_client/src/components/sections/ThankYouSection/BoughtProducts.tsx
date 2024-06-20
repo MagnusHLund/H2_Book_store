@@ -12,43 +12,43 @@ interface IAggregatedProduct extends IBoughtProducts {
 }
 
 const purchasedProducts: IBoughtProducts[] = [
-    {
+  {
     image: "https://image.bog-ide.dk/4870012-1137906-1000-665/webp/0/640/4870012-1137906-1000-665.webp",
     name: "Skygger På Silkevejen",
     price: 229.95,
-    },
-    {
+  },
+  {
     image: "https://image.bog-ide.dk/4870012-1137906-1000-665/webp/0/640/4870012-1137906-1000-665.webp",
     name: "Skygger På Silkevejen",
     price: 229.95,
-    },
-    {
+  },
+  {
     image: "https://image.bog-ide.dk/4870012-1137906-1000-665/webp/0/640/4870012-1137906-1000-665.webp",
     name: "Skygger På Silkevejen",
     price: 229.95,
-    },
-    {
+  },
+  {
     image: "https://image.bog-ide.dk/4870012-1137906-1000-665/webp/0/640/4870012-1137906-1000-665.webp",
     name: "Skygger På Silkevejen",
     price: 229.95,
-    },
-    
-    {
+  },
+
+  {
     image: "https://image.bog-ide.dk/4300066-692754-1000-624/webp/0/640/4300066-692754-1000-624.webp",
     name: "Vane Dyr",
     price: 259.95,
-    },
-    {
+  },
+  {
     image: "https://image.bog-ide.dk/4521994-879043-1000-677/webp/0/640/4521994-879043-1000-677.webp",
     name: "Kan Man Tænke Sig Rask",
     price: 299.95,
-    },
-    ];
+  },
+];
 
 function aggregateProducts(products: IBoughtProducts[]): IAggregatedProduct[] {
   const aggregated: Record<string, IAggregatedProduct> = {};
 
-  products.forEach(product => {
+  products.forEach((product) => {
     if (aggregated[product.name]) {
       aggregated[product.name].count += 1;
     } else {
@@ -65,13 +65,23 @@ function BoughtProducts() {
   return (
     <div className="bought-products">
       {aggregatedProducts.map((product, index) => (
-        <div key={index} className="bought-products__item">
-          <img className="bought-products__item__image" src={product.image} alt={product.name} />
-          <div className="bought-products__item__details">
-            <label className="bought-products__item__details__name">{product.name}</label>
-            <br></br>
-            <label className="bought-products__item__details__price">{product.price.toFixed(2)} DKK</label>
-            {product.count > 1 && <span className="bought-products__item__details__count">x{product.count}</span>}
+        <div key={index} className="product__item">
+          <img
+            className="product__item--image"
+            src={product.image}
+            alt={product.name}
+          />
+          <div className="product__item__details">
+            <label className="product__item__details--name">{product.name}</label>
+            <br />
+            <label className="product__item__details--price">
+              {product.price.toFixed(2)} DKK
+            </label>
+            {product.count > 1 && (
+              <span className="product__item__details--amount">
+                x{product.count}
+              </span>
+            )}
           </div>
         </div>
       ))}

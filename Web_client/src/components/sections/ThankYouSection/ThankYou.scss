@@ -1,17 +1,12 @@
-/* ThankYou.scss */
-
-/* Block */
 .thank-you-customer {
     font-family: 'Calibri';
     display: grid;
     text-align: center;
     margin-bottom: 3vh;
   
-    /* Elements */
     &__message {
       place-self: center;
   
-      /* Modifiers for specific messages */
       &--main {
         font-size: 6vh;
         margin-top: 12vh;

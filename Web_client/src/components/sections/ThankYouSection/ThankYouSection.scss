@@ -1,22 +1,13 @@
-/* ThankYouSection.scss */
-
-/* Block */
 .thank-you {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center the section content */
+    align-items: center;
   
-    /* Element for the button container */
     &__button-container {
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-top: 20px; /* Add space between the products and the button */
-    }
-  
-    /* Element for the button */
-    &__button {
-      /* Any specific styling for the button itself can go here */
+      margin-top: 20px;
     }
   }
   
