@@ -314,7 +314,7 @@ DROP PROCEDURE IF EXISTS CheckUserPhoneExists;
 DELIMITER //
 
 CREATE PROCEDURE IF NOT EXISTS CheckUserPhoneExists(
-    IN input_phone_number VARCHAR(11) 
+    IN input_phone_number VARCHAR(255) 
 )
 BEGIN
     DECLARE user_not_found CONDITION FOR SQLSTATE '02000';
@@ -344,7 +344,7 @@ DELIMITER //
 CREATE PROCEDURE IF NOT EXISTS CreateGuestAccount(
     IN input_name VARCHAR(50),
     IN input_email VARCHAR(255),
-    IN input_phone_number VARCHAR(11),
+    IN input_phone_number VARCHAR(255),
     IN input_role VARCHAR(8),
     IN input_created_at DATETIME
 )
@@ -628,7 +628,7 @@ BEGIN
     DECLARE v_address VARCHAR(34);
     DECLARE v_zip_code VARCHAR(4);
     DECLARE v_city VARCHAR(18);
-    DECLARE v_phone_number VARCHAR(11);
+    DECLARE v_phone_number VARCHAR(255);
 
     -- Declare variables to hold the results
     SELECT
@@ -700,7 +700,7 @@ DELIMITER //
 CREATE PROCEDURE IF NOT EXISTS CreateUser(
     IN userName VARCHAR(50),
     IN userEmail VARCHAR(255),
-    IN userPhoneNumber VARCHAR(11),
+    IN userPhoneNumber VARCHAR(255),
     IN userPassword VARCHAR(255),
     IN userSalt VARCHAR(60),
     IN userRole VARCHAR(8),
