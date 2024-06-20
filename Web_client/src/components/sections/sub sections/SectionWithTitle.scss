@@ -1,0 +1,19 @@
+/* SectionWithTitle.scss */
+
+/* Block */
+.section-with-title {
+    text-align: center;
+    margin-bottom: 20px;
+  
+    /* Element for the header/title */
+    &__header {
+      font-size: 2em; /* Adjust as needed */
+      margin-bottom: 10px; /* Space between title and content */
+    }
+  
+    /* Element for the content container */
+    &__content {
+      /* Additional styling for content can go here */
+    }
+  }
+  
