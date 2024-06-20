@@ -1,6 +1,6 @@
 <?php
 
-namespace DavidsBookClub\Handlers;
+namespace DavidsBookClub\Controllers;
 
 use DavidsBookClub\Utils\Database;
 use DavidsBookClub\Utils\MessageManager;
@@ -47,19 +47,23 @@ class UsersController
      */
     public function createUser($payload)
     {
-        if (isset(
-            $payload->name,
-            $payload->email,
-            $payload->password,
-            $payload->verifyPassword,
-            $payload->houseNumber,
-            $payload->zipCode,
-            $payload->streetName,
-            $payload->phoneNumber
-        )) {
+        if (
+            isset(
+                $payload['name'],
+                $payload['email'],
+                $payload['password'],
+                $payload['verifyPassword'],
+                $payload['houseNumber'],
+                $payload['zipCode'],
+                $payload['streetName'],
+                $payload['phoneNumber']
+            )
+        ) {
             // Call stored procedure to verify that the email does not already exist.
+            //$uniqueEmail = Database::callStoredProcedure("CheckEmailUnique", array("userEmail" => $payload['email'], "PDO::PARAM_STR"));
+            $uniqueEmail = Database::testSP();
 
-            if (false) {
+            if ($uniqueEmail) {
                 // If email exists
                 MessageManager::sendError("Email is already in use", 409);
                 exit;

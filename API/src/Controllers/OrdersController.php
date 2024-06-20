@@ -1,6 +1,6 @@
 <?php
 
-namespace DavidsBookClub\Handlers;
+namespace DavidsBookClub\Controllers;
 
 use DavidsBookClub\Utils\Database;
 use DavidsBookClub\Utils\MessageManager;
@@ -18,9 +18,9 @@ class OrdersController
     {
         if (isset($payload->totalReceivedItems, $payload->limit)) {
             // Call SP, to make sure that the user (userId provided by the JWT) is an admin.
+            Database::callStoredProcedure("", "");
 
             // Call SP, which gets the amount of total received items and how many to return
-            // Then the SP returns the next 12 rows.
 
             if (true) {
                 // If any rows are returned then they get returned to the API caller here
@@ -72,10 +72,15 @@ class OrdersController
      */
     public function searchOrders($payload)
     {
-        if (isset($payload->searchInput, $payload->totalReceivedItems, $payload->limit)) {
-            // Call SP to find orders matching based on a payload
+        if (isset($payload['searchInput'], $payload['totalReceivedItems'], $payload['limit'])) {
 
-            $orders = "";
+            // Call SP to get the user role.
+
+
+            // Call SP to find orders matching based on a payload
+            $storedProcedureParameters = array("totalReceivedItems" => $payload['totalReceivedItems'], "orderLimit" => $payload['limit'], "userRole" => "admin", "filterValue" => $payload['searchInput']);
+            $orders = Database::callStoredProcedure("GetFilteredOrdersDetails", $storedProcedureParameters);
+
             MessageManager::sendSuccess($orders);
         } else {
             MessageManager::missingParameters();
