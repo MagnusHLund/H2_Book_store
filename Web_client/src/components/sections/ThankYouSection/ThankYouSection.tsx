@@ -1,8 +1,8 @@
 import React from 'react';
 import './ThankYouSection.scss';
-import Button from './../../inputs/Button.tsx';
+import Button from '../../inputs/Button.tsx';
 import BoughtProducts from './BoughtProducts.tsx';
-import SectionWithTitle from '../../sections/sub sections/SectionWithTitle.tsx';
+import SectionWithTitle from '../sub sections/SectionWithTitle.tsx';
 
 const ThankYouSection = () => {
   return (

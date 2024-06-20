@@ -1,5 +1,5 @@
 import './App.scss'
-import ThankYouSection from './components/sections/ThankYouSection/ThankYouText'
+import ThankYouSection from './components/sections/ThankYouSection/ThankYouSection'
 
 function App() {
 
