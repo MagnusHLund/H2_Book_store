@@ -65,18 +65,10 @@ DROP PROCEDURE IF EXISTS VerifyCoupon;
 DELIMITER //
 
 CREATE PROCEDURE IF NOT EXISTS VerifyCoupon(
-    IN couponCode VARCHAR(30),
-    OUT valid TINYINT,
-    OUT discountPercentage TINYINT,
-    OUT expirationDate DATETIME
+    IN couponCode VARCHAR(30)
 )
 BEGIN
     DECLARE couponExists INT;
-
-    -- Initialize output parameters
-    SET valid = 0;
-    SET discountPercentage = NULL;
-    SET expirationDate = NULL;
 
     -- Check if the coupon exists and is not expired
     SELECT COUNT(*)
@@ -86,21 +78,10 @@ BEGIN
 
     IF couponExists = 0 THEN
         -- Coupon is not valid
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid or expired coupon';
+        SELECT 0 AS isValid;
     ELSE
         -- Coupon is valid
-        SELECT 
-            discount_percentage,
-            expiration_date
-        INTO 
-            discountPercentage,
-            expirationDate
-        FROM 
-            Coupons
-        WHERE 
-            code = couponCode;
-
-        SET valid = 1;
+        SELECT 1 AS isValid;
     END IF;
 END //
 
@@ -176,9 +157,11 @@ DELIMITER ;
 
 -- -----------------------------------------------------this procedure will take user id and return all orders for that user id
 
+DROP PROCEDURE IF EXISTS GetUserOrdersDetails;
+
 DELIMITER //
 
-CREATE PROCEDURE GetUserOrdersDetails(
+CREATE PROCEDURE IF NOT EXISTS GetUserOrdersDetails(
     IN totalReceivedItems INT UNSIGNED,
     IN orderLimit INT UNSIGNED,
     IN userRole VARCHAR(8),
@@ -239,20 +222,21 @@ DELIMITER ;
 
 -- ------------------------------------------------------this procedure will return cityname when we tell it the zipcode
 
+DROP PROCEDURE IF EXISTS GetCityByZipCode;
+
 DELIMITER //
 
-CREATE PROCEDURE GetCityByZipCode(
-    IN input_zip_code VARCHAR(4),
-    OUT city_name VARCHAR(18)
+CREATE PROCEDURE IF NOT EXISTS GetCityByZipCode(
+    IN input_zip_code VARCHAR(4)
 )
 BEGIN
     DECLARE city_not_found CONDITION FOR SQLSTATE '02000';
-    
+
     DECLARE CONTINUE HANDLER FOR city_not_found
-        SET city_name = 'Not Found';
+        SELECT 'Not Found' AS city_name;
 
     -- Use a prepared statement to further ensure safety against SQL injection
-    SET @sql = 'SELECT city INTO @city_name FROM Cities WHERE zip_code = ? LIMIT 1';
+    SET @sql = 'SELECT city FROM Cities WHERE zip_code = ? LIMIT 1';
 
     PREPARE stmt FROM @sql;
     SET @input_zip_code = input_zip_code;
@@ -260,30 +244,28 @@ BEGIN
     EXECUTE stmt USING @input_zip_code;
 
     DEALLOCATE PREPARE stmt;
-
-    -- Set the output parameter
-    SET city_name = @city_name;
 END //
 
 DELIMITER ;
 
 -- ------------------------------------------------------------this is to check if the product id and quantity is valid
 
+DROP PROCEDURE IF EXISTS ValidateProduct;
+
 DELIMITER //
 
-CREATE PROCEDURE ValidateProduct(
+CREATE PROCEDURE IF NOT EXISTS ValidateProduct(
     IN input_product_id INT UNSIGNED,
-    IN input_quantity INT UNSIGNED,
-    OUT is_valid BOOLEAN
+    IN input_quantity INT UNSIGNED
 )
 BEGIN
     DECLARE product_not_found CONDITION FOR SQLSTATE '02000';
     
     DECLARE CONTINUE HANDLER FOR product_not_found
-        SET is_valid = FALSE;
+        SELECT FALSE AS is_valid;
 
     -- Use a prepared statement for SQL injection protection
-    SET @sql = 'SELECT stock >= ? INTO @is_valid FROM Books WHERE book_id = ?';
+    SET @sql = 'SELECT stock >= ? FROM Books WHERE book_id = ?';
 
     PREPARE stmt FROM @sql;
     SET @input_quantity = input_quantity;
@@ -292,62 +274,101 @@ BEGIN
     EXECUTE stmt USING @input_quantity, @input_product_id;
 
     DEALLOCATE PREPARE stmt;
-
-    -- Set the output parameter
-    SET is_valid = @is_valid;
 END //
 
 DELIMITER ;
 
--- -----------------------------------------------------------this procedure checks if user exists
+
+-- -- -----------------------------------------------------------this procedure checks if user exists
+
+-- DROP PROCEDURE IF EXISTS CheckUserExists;
+
+-- DELIMITER //
+
+-- CREATE PROCEDURE IF NOT EXISTS CheckUserExists(
+--     IN input_email VARCHAR(255)
+-- )
+-- BEGIN
+--     DECLARE user_not_found CONDITION FOR SQLSTATE '02000';
+
+--     DECLARE CONTINUE HANDLER FOR user_not_found
+--         SELECT FALSE AS user_exists;
+
+--     -- Use a prepared statement for SQL injection protection
+--     SET @sql = 'SELECT EXISTS(SELECT 1 FROM Users WHERE email = ?) AS user_exists';
+
+--     PREPARE stmt FROM @sql;
+--     SET @input_email = input_email;
+
+--     EXECUTE stmt USING @input_email;
+
+--     DEALLOCATE PREPARE stmt;
+-- END //
+
+-- DELIMITER ;
+
+-- -----------------------------------------------------------this procedure checks if user phone number exists
+
+DROP PROCEDURE IF EXISTS CheckUserPhoneExists;
 
 DELIMITER //
 
-CREATE PROCEDURE CheckUserExists(
-    IN input_email VARCHAR(255),
-    OUT user_exists BOOLEAN
+CREATE PROCEDURE IF NOT EXISTS CheckUserPhoneExists(
+    IN input_phone_number VARCHAR(11) 
 )
 BEGIN
     DECLARE user_not_found CONDITION FOR SQLSTATE '02000';
-    
+
     DECLARE CONTINUE HANDLER FOR user_not_found
-        SET user_exists = FALSE;
+        SELECT FALSE AS user_exists;
 
     -- Use a prepared statement for SQL injection protection
-    SET @sql = 'SELECT EXISTS(SELECT 1 FROM Users WHERE email = ?) INTO @user_exists';
+    SET @sql = 'SELECT EXISTS(SELECT 1 FROM Users WHERE phone_number = ?) AS user_exists';
 
     PREPARE stmt FROM @sql;
-    SET @input_email = input_email;
+    SET @input_phone_number = input_phone_number;
 
-    EXECUTE stmt USING @input_email;
+    EXECUTE stmt USING @input_phone_number;
 
     DEALLOCATE PREPARE stmt;
-
-    -- Set the output parameter
-    SET user_exists = @user_exists;
 END //
 
 DELIMITER ;
 
 -- --------------------------------------------------this procedure will create a guest account if user does not exists
 
+DROP PROCEDURE IF EXISTS CreateGuestAccount;
+
 DELIMITER //
 
-CREATE PROCEDURE CreateGuestAccount(
+CREATE PROCEDURE IF NOT EXISTS CreateGuestAccount(
+    IN input_name VARCHAR(50),
     IN input_email VARCHAR(255),
-    OUT guest_id INT UNSIGNED
+    IN input_phone_number VARCHAR(11),
+    IN input_role VARCHAR(8),
+    IN input_created_at DATETIME
 )
 BEGIN
+    -- Check that all input parameters are provided
+    IF input_name IS NULL OR input_email IS NULL OR input_phone_number IS NULL OR input_role IS NULL OR input_created_at IS NULL THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'All parameters (name, email, phone_number, role, created_at) must be provided';
+    END IF;
+
     -- Use a prepared statement for SQL injection protection
-    SET @sql = 'INSERT INTO Users (email, role, created_at) VALUES (?, "Guest", NOW())';
+    SET @sql = 'INSERT INTO Users (name, email, phone_number, role, created_at) VALUES (?, ?, ?, ?, ?)';
 
     PREPARE stmt FROM @sql;
+    SET @input_name = input_name;
     SET @input_email = input_email;
+    SET @input_phone_number = input_phone_number;
+    SET @input_role = input_role;
+    SET @input_created_at = input_created_at;
 
-    EXECUTE stmt USING @input_email;
+    EXECUTE stmt USING @input_name, @input_email, @input_phone_number, @input_role, @input_created_at;
 
     -- Get the last inserted ID
-    SET guest_id = LAST_INSERT_ID();
+    SELECT LAST_INSERT_ID() AS guest_id;
 
     DEALLOCATE PREPARE stmt;
 END //
@@ -356,15 +377,16 @@ DELIMITER ;
 
 -- --------------------------------------------------this procedure will store user order data into the table
 
+DROP PROCEDURE IF EXISTS InsertOrder;
+
 DELIMITER //
 
-CREATE PROCEDURE InsertOrder(
+CREATE PROCEDURE IF NOT EXISTS InsertOrder(
     IN p_user_id INT UNSIGNED,
     IN p_address_id INT UNSIGNED,
     IN p_coupon_id INT UNSIGNED,
     IN p_total_price FLOAT UNSIGNED,
-    IN p_order_items JSON,
-    OUT p_order_id INT UNSIGNED
+    IN p_order_items JSON
 )
 BEGIN
     DECLARE i INT DEFAULT 0;
@@ -374,6 +396,7 @@ BEGIN
     DECLARE price FLOAT UNSIGNED;
     DECLARE quantity SMALLINT UNSIGNED;
     DECLARE item_json VARCHAR(1024); -- Adjust the size based on your JSON structure
+    DECLARE order_id INT UNSIGNED; -- Variable to store order ID
 
     -- Calculate the number of items in the JSON array
     SET n = JSON_LENGTH(p_order_items);
@@ -386,7 +409,7 @@ BEGIN
     VALUES (p_user_id, p_address_id, p_coupon_id, p_total_price, NOW());
 
     -- Get the last inserted order ID
-    SET p_order_id = LAST_INSERT_ID();
+    SET order_id = LAST_INSERT_ID();
 
     -- Prepare the statement for inserting order items
     SET @stmt = 'INSERT INTO OrderItems (order_id, book_id, price, quantity) VALUES (?, ?, ?, ?)';
@@ -400,7 +423,7 @@ BEGIN
         SET quantity = JSON_UNQUOTE(JSON_EXTRACT(item, '$.quantity'));
 
         -- Execute the prepared statement with parameters
-        EXECUTE stmt USING p_order_id, book_id, price, quantity;
+        EXECUTE stmt USING order_id, book_id, price, quantity;
 
         SET i = i + 1;
     END WHILE;
@@ -410,11 +433,18 @@ BEGIN
 
     -- Commit the transaction
     COMMIT;
+
+    -- Select the order_id at the end of the procedure
+    SELECT order_id AS new_order_id;
+
+    -- No need to return anything explicitly
 END //
 
 DELIMITER ;
 
 -- ----------------------------------------------------------------------------this procedure will get all products
+
+DROP PROCEDURE IF EXISTS GetProducts;
 
 DELIMITER //
 
@@ -474,9 +504,11 @@ DELIMITER ;
 
 -- ----------------------------------------------------------------------------this procedure will get product regarding it's id
 
+DROP PROCEDURE IF EXISTS GetProductById;
+
 DELIMITER //
 
-CREATE PROCEDURE GetProductById(
+CREATE PROCEDURE IF NOT EXISTS GetProductById(
     IN productId INT UNSIGNED
 )
 BEGIN
@@ -502,9 +534,11 @@ DELIMITER ;
 
 -- ----------------------------------------------------------------------------this procedure will search products regarding insert value
 
+DROP PROCEDURE IF EXISTS SearchProducts;
+
 DELIMITER //
 
-CREATE PROCEDURE SearchProducts(
+CREATE PROCEDURE IF NOT EXISTS SearchProducts(
     IN totalReceivedProducts INT UNSIGNED,
     IN productLimit INT UNSIGNED,
     IN search VARCHAR(255)
@@ -548,9 +582,11 @@ DELIMITER ;
 
 -- ----------------------------------------------------------------------------this procedure will toggle product visibility
 
+DROP PROCEDURE IF EXISTS ToggleProductVisibility;
+
 DELIMITER //
 
-CREATE PROCEDURE ToggleProductVisibility(
+CREATE PROCEDURE IF NOT EXISTS ToggleProductVisibility(
     IN productId INT UNSIGNED
 )
 BEGIN
@@ -579,10 +615,11 @@ DELIMITER ;
 
 -- ----------------------------------------------------------------------------this procedure will return user biling info
 
+DROP PROCEDURE IF EXISTS GetUserInformation;
+
 DELIMITER //
 
--- Create the procedure
-CREATE PROCEDURE GetUserInformation (
+CREATE PROCEDURE IF NOT EXISTS GetUserInformation (
     IN user_id_param INT UNSIGNED
 )
 BEGIN
@@ -621,11 +658,16 @@ DELIMITER ;
 
 -- ----------------------------------------------------------------------------this procedure will check if the email is unique or not
 
+DROP PROCEDURE IF EXISTS CheckEmailUnique;
+
 DELIMITER //
 
-CREATE PROCEDURE CheckEmailUnique(IN userEmail VARCHAR(255), OUT isUnique BOOLEAN)
+CREATE PROCEDURE IF NOT EXISTS CheckEmailUnique(
+    IN userEmail VARCHAR(255)
+)
 BEGIN
     DECLARE emailCount INT;
+    DECLARE isUnique BOOLEAN;
 
     -- Sanitize and validate input (if necessary, depending on your application's context)
 
@@ -642,15 +684,20 @@ BEGIN
     ELSE
         SET isUnique = FALSE;
     END IF;
+
+    -- Return the isUnique flag as a SELECT result
+    SELECT isUnique AS is_email_unique;
 END //
 
 DELIMITER ;
 
 -- ----------------------------------------------------------------------------this procedure will create an account for user
 
+DROP PROCEDURE IF EXISTS CreateUser;
+
 DELIMITER //
 
-CREATE PROCEDURE CreateUser(
+CREATE PROCEDURE IF NOT EXISTS CreateUser(
     IN userName VARCHAR(50),
     IN userEmail VARCHAR(255),
     IN userPhoneNumber VARCHAR(11),
@@ -681,15 +728,17 @@ DELIMITER ;
 
 -- ----------------------------------------------------------------------------this procedure will log user in
 
+DROP PROCEDURE IF EXISTS UserLogin;
+
 DELIMITER //
 
-CREATE PROCEDURE UserLogin(
+CREATE PROCEDURE IF NOT EXISTS UserLogin(
     IN userEmail VARCHAR(255),
-    IN userPassword VARCHAR(255),
-    OUT isValid BOOLEAN
+    IN userPassword VARCHAR(255)
 )
 BEGIN
     DECLARE hashedPassword VARCHAR(255);
+    DECLARE isValid BOOLEAN DEFAULT FALSE;
 
     -- Retrieve hashed password for the given email
     SELECT password INTO hashedPassword
@@ -699,9 +748,10 @@ BEGIN
     -- Check if user exists and password matches
     IF hashedPassword IS NOT NULL AND hashedPassword = userPassword THEN
         SET isValid = TRUE;
-    ELSE
-        SET isValid = FALSE;
     END IF;
+
+    -- Return the isValid flag as a SELECT result
+    SELECT isValid AS is_valid_login;
 END //
 
 DELIMITER ;
