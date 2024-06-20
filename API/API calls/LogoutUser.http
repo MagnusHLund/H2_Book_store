@@ -1,3 +1,3 @@
-POST http://localhost:3000/api/v1/users/logoutUser
+POST http://localhost:1000/api/v1/users/logoutUser
 Content-Type: application/json
-Authorization: Bearer YOUR_JWT_HERE
+Origin: localhost

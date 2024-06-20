@@ -69,7 +69,7 @@ class SecurityManager
         $requiredMixedCase = true;
 
         // Check if the length is above the minimum length.
-        if (strlen($password) <= $minimumLength) {
+        if (strlen($password) < $minimumLength) {
             return false;
         }
 
@@ -106,8 +106,8 @@ class SecurityManager
     {
         try {
             $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length(self::ENCRYPTION_CIPHER));
-            $encrypted = openssl_encrypt($dataToEncrypt, self::ENCRYPTION_CIPHER, $this->encryptionKey, 0, $iv);
-            return base64_encode($iv . $encrypted);
+            $encrypted = openssl_encrypt($dataToEncrypt, self::ENCRYPTION_CIPHER, $this->encryptionKey);
+            return base64_encode($encrypted);
         } catch (Exception $e) {
             MessageManager::sendError(self::GENERIC_ERROR_MESSAGE, 500, "Error encrypting data: " . $e->getMessage());
         }

@@ -1,7 +1,10 @@
 ### Search Products
 GET http://localhost:1000/api/v1/products/searchProducts
 Content-Type: application/json
+Origin: localhost
 
 {
-  "search_query": "your_search_query"
+    "searchInput": "1",
+    "totalReceivedItems": 0,
+    "limit": 12
 }

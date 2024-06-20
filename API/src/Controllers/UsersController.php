@@ -23,10 +23,10 @@ class UsersController
     {
         // Call SP with the UserId as a parameter. Return stored user billing information.
 
-        $billingInfo = "";
+        $billingInfo = Database::callStoredProcedure("");
 
-        $decryptedEmail = $this->securityManager->decryptData($billingInfo->email);
-        $decryptedPhoneNumber = $this->securityManager->decryptData($billingInfo->phoneNumber);
+        $decryptedEmail = $this->securityManager->decryptData($billingInfo['email']);
+        $decryptedPhoneNumber = $this->securityManager->decryptData($billingInfo['phoneNumber']);
 
         $decryptedInfo = "";
 
@@ -35,15 +35,15 @@ class UsersController
 
     /**
      * This function creates a user in the database.
-     * @param object $payload This parameter holds all the data required to create a user.
-     *              `$payload->name`
-     *              `$payload->email`
-     *              `$payload->password`
-     *              `$payload->verifyPassword`
-     *              `$payload->houseNumber`
-     *              `$payload->zipCode`
-     *              `$payload->streetName`
-     *              `$payload->phoneNumber`
+     * @param array $payload This parameter holds all the data required to create a user.
+     *              `$payload['name']`
+     *              `$payload['email']`
+     *              `$payload['password']`
+     *              `$payload['verifyPassword']`
+     *              `$payload['houseNumber']`
+     *              `$payload['zipCode']`
+     *              `$payload['streetName']`
+     *              `$payload['phoneNumber']`
      */
     public function createUser($payload)
     {
@@ -61,36 +61,60 @@ class UsersController
         ) {
             // Call stored procedure to verify that the email does not already exist.
             //$uniqueEmail = Database::callStoredProcedure("CheckEmailUnique", array("userEmail" => $payload['email'], "PDO::PARAM_STR"));
-            $uniqueEmail = Database::testSP();
+            $encryptedEmail = $this->securityManager->encryptData($payload['email']);
+            $uniqueEmail = Database::callStoredProcedure("CheckEmailUnique", ["userEmail" => $encryptedEmail]);
+            $uniqueEmail = array_values($uniqueEmail[0]);
 
-            if ($uniqueEmail) {
+            if ($uniqueEmail[0] != 0) {
                 // If email exists
                 MessageManager::sendError("Email is already in use", 409);
                 exit;
             }
 
-            if ($payload->password != $payload->verifyPassword) {
+            if ($payload['password'] != $payload['verifyPassword']) {
                 MessageManager::sendError("Passwords do not match", 401);
                 exit;
             }
 
-            if (!$this->securityManager->verifyNewPassword($payload->password)) {
+            if (!$this->securityManager->verifyNewPassword($payload['password'])) {
                 MessageManager::sendError("Password does not follow requirements", 401);
                 exit;
             }
 
             $salt = $this->securityManager->generateSalt();
-            $hashedPassword = $this->securityManager->hashPassword($payload->password, $salt);
+            $hashedPassword = $this->securityManager->hashPassword($payload['password'], $salt);
 
-            $encryptedEmail = $this->securityManager->encryptData($payload->email);
-            $phoneNumber = $this->securityManager->encryptData($payload->phoneNumber);
+            $encryptedPhoneNumber = $this->securityManager->encryptData($payload['phoneNumber']);
 
             // Stored procedure to create the user. Return userId.
+            $userId = Database::callStoredProcedure(
+                "CreateUser",
+                [
+                    "userName" => $payload['name'],
+                    "userEmail" => $encryptedEmail,
+                    "userPhoneNumber" => $encryptedPhoneNumber,
+                    "userPassword" => $hashedPassword,
+                    "userSalt" => $salt,
+                    "userRole" => "User",
+                    "userAddressId" => 1
+                ]
+            );
 
-            $jwt = $this->securityManager->encodeJwt($response->userId);
+            $userId = $userId[0]['user_id'];
+
+            if (empty($userId)) {
+                MessageManager::sendError(
+                    "Error creating user in the database",
+                    500,
+                    "Newly created user was not created in the database"
+                );
+            }
+
+            $jwt = $this->securityManager->encodeJwt($userId);
 
             $oneDay = 86400;
             setcookie("jwt", $jwt,  time() + $oneDay, "/", null, null, true);
+            MessageManager::sendSuccess("Account created!");
         } else {
             MessageManager::missingParameters();
         }
@@ -98,28 +122,29 @@ class UsersController
 
     /**
      * This function is used to login a user.
-     * @param object $payload `$payload->email` and `$payload->password` is used to login the user.
+     * @param array $payload `$payload['email']` and `$payload['password']` is used to login the user.
      */
     public function loginUser($payload)
     {
-        if (isset($payload->email, $payload->password)) {
-            // Call SP to receive userId, password and salt, from the user.
-
+        if (isset($payload['email'], $payload['password'])) {
+            // Call SP to receive userId, password and salt, from the user
             $response = "";
             if (empty($response)) {
                 MessageManager::sendError("Invalid credentials", 403);
                 exit;
             }
 
-            if (!$this->securityManager->verifyHashedPassword($payload->password, $response->password, $response->salt)) {
+            if (!$this->securityManager->verifyHashedPassword($payload['password'], $response['password'], $response['salt'])) {
                 MessageManager::sendError("Invalid credentials", 403);
                 exit;
             }
 
-            $jwt = $this->securityManager->encodeJwt($response->userId);
+            $jwt = $this->securityManager->encodeJwt($response['userId']);
 
             $oneDay = 86400;
             setcookie("jwt", $jwt,  time() + $oneDay, "/", null, null, true);
+        } else {
+            MessageManager::missingParameters();
         }
     }
 
