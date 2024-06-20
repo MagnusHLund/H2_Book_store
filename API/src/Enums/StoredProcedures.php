@@ -1,6 +1,6 @@
 <?php
 
-use DavidsBookClub\enums;
+namespace DavidsBookClub\enums;
 
 enum storedProcedures
 {
@@ -20,4 +20,6 @@ enum storedProcedures
     case ToggleProductVisibility;
     case ValidateProduct;
     case VerifyCoupon;
+    case InsertAddress;
+    case GetUserCredentials;
 }

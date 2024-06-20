@@ -1321,30 +1321,23 @@ DELIMITER ;
 
 -- ----------------------------------------------------------------------------this procedure will log user in
 
-DROP PROCEDURE IF EXISTS UserLogin;
+DROP PROCEDURE IF EXISTS GetUserCredentials;
 
 DELIMITER //
 
-CREATE PROCEDURE IF NOT EXISTS UserLogin(
-    IN userEmail VARCHAR(255),
-    IN userPassword VARCHAR(255)
-)
+CREATE PROCEDURE GetUserCredentials(IN userEmail VARCHAR(255))
 BEGIN
-    DECLARE hashedPassword VARCHAR(255);
-    DECLARE isValid BOOLEAN DEFAULT FALSE;
+    DECLARE userPassword VARCHAR(255);
+    DECLARE userSalt VARCHAR(60);
+    DECLARE userId INT UNSIGNED;
 
-    -- Retrieve hashed password for the given email
-    SELECT password INTO hashedPassword
+    -- Assuming your Users table has columns 'password' and 'salt'
+    SELECT password, salt, user_id INTO userPassword, userSalt, userId
     FROM Users
     WHERE email = userEmail;
 
-    -- Check if user exists and password matches
-    IF hashedPassword IS NOT NULL AND hashedPassword = userPassword THEN
-        SET isValid = TRUE;
-    END IF;
-
-    -- Return the isValid flag as a SELECT result
-    SELECT isValid AS is_valid_login;
+    -- Return the password and salt
+    SELECT userPassword AS Password, userSalt AS Salt, userId AS user_id;
 END //
 
 DELIMITER ;

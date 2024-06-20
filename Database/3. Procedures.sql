@@ -168,10 +168,6 @@ CREATE PROCEDURE IF NOT EXISTS GetUserOrdersDetails(
     IN userID INT UNSIGNED
 )
 BEGIN
-    -- Check if the role is 'User'
-    IF userRole <> 'User' THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Access denied: Only users can view their own order details';
-    ELSE
         -- Prepare the SQL statement using parameterized query
         SET @sql = '
             SELECT 
@@ -215,12 +211,11 @@ BEGIN
         
         -- Cleanup
         DEALLOCATE PREPARE stmt;
-    END IF;
 END //
 
 DELIMITER ;
 
--- ------------------------------------------------------this procedure will return cityname when we tell it the zipcode
+-- ------------------------------------------------------this procedure will return cityName when we tell it the zipCode
 
 DROP PROCEDURE IF EXISTS GetCityByZipCode;
 
@@ -613,7 +608,7 @@ END //
 
 DELIMITER ;
 
--- ----------------------------------------------------------------------------this procedure will return user biling info
+-- ----------------------------------------------------------------------------this procedure will return user billing info
 
 DROP PROCEDURE IF EXISTS GetUserInformation;
 
@@ -731,30 +726,23 @@ DELIMITER ;
 
 -- ----------------------------------------------------------------------------this procedure will log user in
 
-DROP PROCEDURE IF EXISTS UserLogin;
+DROP PROCEDURE IF EXISTS GetUserCredentials;
 
 DELIMITER //
 
-CREATE PROCEDURE IF NOT EXISTS UserLogin(
-    IN userEmail VARCHAR(255),
-    IN userPassword VARCHAR(255)
-)
+CREATE PROCEDURE GetUserCredentials(IN userEmail VARCHAR(255))
 BEGIN
-    DECLARE hashedPassword VARCHAR(255);
-    DECLARE isValid BOOLEAN DEFAULT FALSE;
+    DECLARE userPassword VARCHAR(255);
+    DECLARE userSalt VARCHAR(60);
+    DECLARE userId INT UNSIGNED;
 
-    -- Retrieve hashed password for the given email
-    SELECT password INTO hashedPassword
+    -- Assuming your Users table has columns 'password' and 'salt'
+    SELECT password, salt, user_id INTO userPassword, userSalt, userId
     FROM Users
     WHERE email = userEmail;
 
-    -- Check if user exists and password matches
-    IF hashedPassword IS NOT NULL AND hashedPassword = userPassword THEN
-        SET isValid = TRUE;
-    END IF;
-
-    -- Return the isValid flag as a SELECT result
-    SELECT isValid AS is_valid_login;
+    -- Return the password and salt
+    SELECT userPassword AS Password, userSalt AS Salt, userId AS user_id;
 END //
 
 DELIMITER ;

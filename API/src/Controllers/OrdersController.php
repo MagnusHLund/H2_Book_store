@@ -2,6 +2,7 @@
 
 namespace DavidsBookClub\Controllers;
 
+use DavidsBookClub\enums\storedProcedures;
 use DavidsBookClub\Utils\Database;
 use DavidsBookClub\Utils\MessageManager;
 use DavidsBookClub\Utils\SecurityManager;
@@ -18,9 +19,15 @@ class OrdersController
     {
         if (isset($payload['totalReceivedItems'], $payload['limit'])) {
             // Call SP, to make sure that the user (userId provided by the JWT) is an admin.
-            Database::callStoredProcedure("", "");
+            $jwt = SecurityManager::decodeJwt($_COOKIE['jwt']);
+            $userRole = Database::callStoredProcedure(storedProcedures::GetUserRole, ["userId" => $jwt->sub]); // DOES NOT EXIST
+
+            if ($userRole != "Admin") {
+                MessageManager::sendError("Insufficient permissions", 401);
+            }
 
             // Call SP, which gets the amount of total received items and how many to return
+            $orders = Database::callStoredProcedure(storedProcedures::GetOrderDetails, [""]);
 
             if (true) {
                 // If any rows are returned then they get returned to the API caller here
@@ -75,11 +82,17 @@ class OrdersController
         if (isset($payload['searchInput'], $payload['totalReceivedItems'], $payload['limit'])) {
 
             // Call SP to get the user role.
+            $jwt = SecurityManager::decodeJwt($_COOKIE['jwt']);
+            $userRole = Database::callStoredProcedure(storedProcedures::GetUserRole, ["userId" => $jwt->sub]); // DOES NOT EXIST
+
+            if ($userRole != "Admin") {
+                MessageManager::sendError("Insufficient permissions", 401);
+            }
 
 
             // Call SP to find orders matching based on a payload
             $storedProcedureParameters = array("totalReceivedItems" => $payload['totalReceivedItems'], "orderLimit" => $payload['limit'], "userRole" => "admin", "filterValue" => $payload['searchInput']);
-            $orders = Database::callStoredProcedure("GetFilteredOrdersDetails", $storedProcedureParameters);
+            $orders = Database::callStoredProcedure(storedProcedures::GetFilteredOrderDetails, $storedProcedureParameters);
 
             MessageManager::sendSuccess($orders);
         } else {
@@ -96,8 +109,9 @@ class OrdersController
     {
         if (isset($payload['totalReceivedItems'], $payload['limit'])) {
             // Call SP to return the users order.
+            $jwt = SecurityManager::decodeJwt($_COOKIE['jwt']);
 
-            $orders = "";
+            $orders = Database::callStoredProcedure(storedProcedures::GetUserOrdersDetails, ["totalReceivedItems" => $payload['totalReceivedItems'], "limit" => $payload['limit'], "userId" => $jwt->sub]);
             MessageManager::sendSuccess($orders);
         } else {
             MessageManager::missingParameters();
@@ -111,10 +125,8 @@ class OrdersController
     public function getCityFromZipCode($payload)
     {
         if (isset($payload['zipCode'])) {
-            // Call SP to return the city matching with the zip code
-
-            $cityName = "";
-            MessageManager::sendSuccess($cityName);
+            $cityName = Database::callStoredProcedure(storedProcedures::GetCityByZipCode, ["zipCode" => $payload['zipCode']]);
+            MessageManager::sendSuccess($cityName[0]);
         } else {
             MessageManager::missingParameters();
         }
