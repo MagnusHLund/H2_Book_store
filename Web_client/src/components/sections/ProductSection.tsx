@@ -7,10 +7,10 @@ function ProductSection() {
   return (
     <>
       <div className="product-section__upper">
-        <div className="product-section__upper__pic">
+        <div className="product-section__upper--image">
           <ProductImageSection />
         </div>
-        <div className="product-section__upper__info">
+        <div className="product-section__upper--info">
           <ProductOverviewSection />
           <div className="product-section"></div>
         </div>

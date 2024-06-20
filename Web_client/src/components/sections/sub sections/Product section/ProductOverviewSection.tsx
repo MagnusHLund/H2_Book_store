@@ -11,10 +11,9 @@ function ProductOverviewSection() {
         <h4>Genre</h4>
         <h3>Price</h3>
         <div>
-          <QuantitySelector defaultValue="0" />
+          <QuantitySelector defaultValue="1" />
         </div>
       </div>
-      <div></div>
     </div>
   )
 }

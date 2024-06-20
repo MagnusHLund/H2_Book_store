@@ -4,12 +4,17 @@ import { StandardInputProps } from './StandardInputProps'
 
 interface IButton extends StandardInputProps {
   placeholder?: string
+  className?: string
 }
 
-const Button: React.FC<IButton> = ({ placeholder = '', onClick }) => {
+const Button: React.FC<IButton> = ({
+  placeholder = '',
+  onClick,
+  className = '',
+}) => {
   return (
-    <button className="button" onClick={onClick}>
-      {placeholder}{' '}
+    <button className={`button ${className}`} onClick={onClick}>
+      {placeholder}
     </button>
   )
 }
