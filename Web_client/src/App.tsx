@@ -1,7 +1,8 @@
 import './App.scss'
 import { Route, useLocation, Routes } from 'react-router-dom'
-import Home from './components/sections/HomeSection.tsx'
+import HomeSection from './components/sections/HomeSection.tsx'
 import Header from './components/content/Header.tsx'
+import ThankYouSection from './components/sections/ThankYouSection/ThankYouSection'
 
 function App() {
   const location = useLocation()
@@ -15,7 +16,8 @@ function App() {
     <>
       <Header />
       <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<HomeSection />} />
+        <Route path="/thankYou" element={<ThankYouSection />} />
       </Routes>
     </>
   )
