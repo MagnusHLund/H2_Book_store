@@ -1,37 +1,37 @@
 @use './../../App.scss' as app;
 
 .header {
-    width: 100%;
-    height: 5vh;
+  width: 100%;
+  height: 5vh;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 3vh;
+  background-color: app.$primary;
+
+  &__logo {
     display: flex;
-    justify-content: space-evenly;
-    padding: 3vh;
-    background-color: app.$primary;
-
-    align-items: baseline;
+    justify-content: space-around;
     margin-top: 3vh;
+    height: 100%;
+    width: 6.5vw;
+    scale: 300%;
 
-    &__logo {
-        display: flex;
-        justify-content: space-around;
-        margin-top: 3vh;
-        height: 100%;
-        width: 6.5vw;
-        scale: 300%;
+    &--image {
+      height: 60%;
     }
-    
-    &__basket-and-login {
-        display: flex;
-        flex-direction: row;
-        gap: 1.5vw;
-        padding: 0 0 0 0;
-        &__basket {
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            align-items: flex-end;
-            gap: 1.5vw;
-            width: 2.5vw;
-        }
+  }
+
+  &__basket-and-login {
+    display: flex;
+    flex-direction: row;
+    gap: 1.5vw;
+    padding: 0 0 0 0;
+    &__basket {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 1.5vw;
+      width: 2.5vw;
     }
+  }
 }

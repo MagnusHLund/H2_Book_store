@@ -10,9 +10,9 @@ import Login from './components/sections/Login/Login.tsx'
 function App() {
   return (
     <>
-      {/* <Header /> */}
+      {<Header />}
       <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<HomeSection />} />
         <Route path="/product" element={<ProductSection />} />
         <Route path="/thankYou" element={<ThankYouSection />} />
         <Route path="/login" element={<Login />} />
