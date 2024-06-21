@@ -36,7 +36,7 @@ class ComposerStaticInit1a6f3684d60a5884072b26233244cf08
             'Dotenv\\' => 7,
             'DavidsBookClub\\Utils\\' => 21,
             'DavidsBookClub\\Middleware\\' => 26,
-            'DavidsBookClub\\Handlers\\' => 24,
+            'DavidsBookClub\\Controllers\\' => 27,
             'DavidsBookClub\\' => 15,
         ),
     );
@@ -78,9 +78,9 @@ class ComposerStaticInit1a6f3684d60a5884072b26233244cf08
         array (
             0 => __DIR__ . '/../..' . '/src/Middleware',
         ),
-        'DavidsBookClub\\Handlers\\' => 
+        'DavidsBookClub\\Controllers\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/src/Handlers',
+            0 => __DIR__ . '/../..' . '/src/Controllers',
         ),
         'DavidsBookClub\\' => 
         array (

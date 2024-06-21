@@ -14,7 +14,7 @@ class MessageManager
     public static function sendSuccess($responseMessage)
     {
         http_response_code(200);
-        echo json_encode(["Success" => true, "result" => $responseMessage]);
+        echo json_encode(["Success" => true, "result" => $responseMessage], JSON_UNESCAPED_UNICODE);
     }
 
     /**

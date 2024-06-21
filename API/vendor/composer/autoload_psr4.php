@@ -15,6 +15,6 @@ return array(
     'Dotenv\\' => array($vendorDir . '/vlucas/phpdotenv/src'),
     'DavidsBookClub\\Utils\\' => array($baseDir . '/src/Utils'),
     'DavidsBookClub\\Middleware\\' => array($baseDir . '/src/Middleware'),
-    'DavidsBookClub\\Handlers\\' => array($baseDir . '/src/Handlers'),
+    'DavidsBookClub\\Controllers\\' => array($baseDir . '/src/Controllers'),
     'DavidsBookClub\\' => array($baseDir . '/src'),
 );

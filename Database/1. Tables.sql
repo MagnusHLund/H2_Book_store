@@ -111,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `Users`(
     `address_id` INT UNSIGNED,
     `name` VARCHAR(50) NOT NULL,
     `email` VARCHAR(255) NOT NULL,
-    `phone_number` VARCHAR(11) NOT NULL,
+    `phone_number` VARCHAR(255) NOT NULL,
     `password` VARCHAR(255),
     `salt` VARCHAR(60),
     `created_at` DATETIME NOT NULL,
