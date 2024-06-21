@@ -1,12 +1,10 @@
 import './App.scss'
-import AdminNavbar from './components/sections/AdminPanelSection/AdminNavbar'
-import HelloAdmin from './components/sections/AdminPanelSection/HelloAdmin'
+import AdminRouter from './components/sections/AdminPanelSection/AdminRouter'
 
 function App() {
   return (
     <>
-        <AdminNavbar></AdminNavbar>
-        <HelloAdmin></HelloAdmin>
+    <AdminRouter></AdminRouter>
     </>
   )
 }
