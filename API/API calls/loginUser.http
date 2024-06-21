@@ -1,5 +1,6 @@
-POST http://localhost:3000/api/v1/users/loginUser
+POST http://localhost:1000/api/v1/users/loginUser
 Content-Type: application/json
+Origin: localhost
 
 {
   "email": "john.doe@example.com",

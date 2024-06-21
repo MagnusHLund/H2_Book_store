@@ -1,13 +1,12 @@
 .bought-products {
     display: flex;
     flex-wrap: wrap;
-    gap: 2vh; /* Space between products */
+    gap: 2vh;
     justify-content: center;
-    font-family: 'Calibri';
   }
   
-  .product-item {
-    position: relative; /* Enable absolute positioning within this container */
+  .product__item {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -16,45 +15,45 @@
     padding: 1.6vh;
     background-color: #fff;
     box-shadow: 0 0.2vh 0.4vh rgba(0, 0, 0, 0.1);
-    width: 19vh; /* Adjust as needed */
+    width: 19vh;
     margin-bottom: 1vh;
-  }
   
-  .product-image {
-    width: 14vh;
-    height: auto;
-    border-radius: 1vh;
-    margin-bottom: 1vh;
-  }
+    &:hover {
+      background-color: #b9b4b4b9;
+      transform: translateY(-0.2vh);
+    }
   
-  .product-details {
-    text-align: center;
-  }
+    &--image {
+      width: 14vh;
+      height: auto;
+      border-radius: 1vh;
+      margin-bottom: 1vh;
+    }
   
-  .product-name {
-    font-weight: bold;
-    margin-bottom: 4vh;
-  }
-  
-  .product-price {
-    color: #888;
-  }
-  
-  /* Style for the product count badge */
-  .product-count {
-    position: absolute;
-    top: 0.6vh;
-    right: 0.8vh;
-    background-color: #ff5722;
-    color: #fff;
-    padding: 0.2vh 0.6vh;
-    border-radius: 1.2vh;
-    font-size: 0.9rem;
-    font-weight: bold;
-  }
 
-  .product-item:hover {
-    background-color: #b9b4b4b9; /* Darken the background on hover */
-    transform: translateY(-0.2vh); /* Slight lift effect on hover */
+    &__details {
+      text-align: center;
+  
+      &--name {
+        font-weight: bold;
+        margin-bottom: 4vh;
+      }
+  
+      &--price {
+        color: #888;
+      }
+  
+      &--amount {
+        position: absolute;
+        top: 0.6vh;
+        right: 0.8vh;
+        background-color: #ff5722;
+        color: #fff;
+        padding: 0.2vh 0.6vh;
+        border-radius: 1.2vh;
+        font-size: 0.9rem;
+        font-weight: bold;
+      }
+    }
   }
   

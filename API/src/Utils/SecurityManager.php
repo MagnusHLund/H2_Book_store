@@ -48,14 +48,44 @@ class SecurityManager
      * @param string $salt The salt used to generate the hashed password
      * @return bool If the $password matches the $hashedPassword, then it returns true, else false.
      */
-    public function verifyPassword($password, $hashedPassword, $salt)
+    public function verifyHashedPassword($password, $hashedPassword, $salt): bool
     {
         try {
             return password_verify($password . $salt . $this->pepper, $hashedPassword);
         } catch (Exception $e) {
             MessageManager::sendError(self::GENERIC_ERROR_MESSAGE, 500, "Error validating password: " . $e->getMessage());
+            return false;
         }
     }
+
+    /**
+     * This function adds a layer of security, by checking that the password follows the rules.
+     * @param string $password The password which has to be verified
+     */
+    public function verifyNewPassword($password): bool
+    {
+        $minimumLength = 6;
+        $minimumNumbers = 2;
+        $requiredMixedCase = true;
+
+        // Check if the length is above the minimum length.
+        if (strlen($password) < $minimumLength) {
+            return false;
+        }
+
+        // Check if password has the minimally required numbers.
+        if (!preg_match('/(.*\d.*){' . $minimumNumbers . ',}/', $password)) {
+            return false;
+        }
+
+        // Check for mixed case letters
+        if ($requiredMixedCase && !preg_match('/(?=.*[a-z])(?=.*[A-Z])/', $password)) {
+            return false;
+        }
+
+        return true;
+    }
+
 
     /**
      * Generates a string of hexadecimal characters.
@@ -72,10 +102,15 @@ class SecurityManager
      * @param string $dataToEncrypt Data which should be encrypted. This could be an email address, for example.
      * @return string The encrypted version of the data.
      */
-    public function encryptData($dataToEncrypt)
+    public function encryptData($dataToEncrypt, $useIv = true)
     {
+        $iv = null;
         try {
-            $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length(self::ENCRYPTION_CIPHER));
+
+            if ($useIv) {
+                $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length(self::ENCRYPTION_CIPHER));
+            }
+
             $encrypted = openssl_encrypt($dataToEncrypt, self::ENCRYPTION_CIPHER, $this->encryptionKey, 0, $iv);
             return base64_encode($iv . $encrypted);
         } catch (Exception $e) {
@@ -88,11 +123,17 @@ class SecurityManager
      * @param string $dataToDecrypt Data which should be decrypted. This could be a phone number, for example.
      * @return string Plain text of the formerly encrypted data.
      */
-    public function decryptData($dataToDecrypt)
+    public function decryptData($dataToDecrypt, $useIv = true)
     {
+        $iv = null;
+
         try {
             $dataToDecrypt = base64_decode($dataToDecrypt);
-            $iv = substr($dataToDecrypt, 0, openssl_cipher_iv_length(self::ENCRYPTION_CIPHER));
+
+            if ($useIv) {
+                $iv = substr($dataToDecrypt, 0, openssl_cipher_iv_length(self::ENCRYPTION_CIPHER));
+            }
+
             $cipherText = substr($dataToDecrypt, openssl_cipher_iv_length(self::ENCRYPTION_CIPHER));
             return openssl_decrypt($cipherText, self::ENCRYPTION_CIPHER, $this->encryptionKey, 0, $iv);
         } catch (Exception $e) {

@@ -1,22 +1,24 @@
 .thank-you-customer {
     font-family: 'Calibri';
-    display:grid;
+    display: grid;
     text-align: center;
     margin-bottom: 3vh;
-}
-
-.thank-you {
-    font-size: 6vh;
-    place-self: center;
-    margin-top: 12vh;
-}
-
-.customer {
-    font-size: 3vh;
-    place-self: center;
-}
-
-.order {
-    font-size: 3vh;
-    place-self: center;
-}
+  
+    &__message {
+      place-self: center;
+  
+      &--main {
+        font-size: 6vh;
+        margin-top: 12vh;
+      }
+  
+      &--customer {
+        font-size: 3vh;
+      }
+  
+      &--order {
+        font-size: 3vh;
+      }
+    }
+  }
+  

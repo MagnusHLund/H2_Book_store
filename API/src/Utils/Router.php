@@ -2,9 +2,9 @@
 
 namespace DavidsBookClub\Utils;
 
-use DavidsBookClub\Handlers\ProductsController;
-use DavidsBookClub\Handlers\OrdersController;
-use DavidsBookClub\Handlers\UsersController;
+use DavidsBookClub\Controllers\ProductsController;
+use DavidsBookClub\Controllers\OrdersController;
+use DavidsBookClub\Controllers\UsersController;
 
 class Router
 {
@@ -31,6 +31,7 @@ class Router
             ["GET", $users . "getUserBillingInfo", [(new UsersController), "getUserBillingInfo"]],
             ["POST", $users . "createUser", [(new UsersController), "createUser"], ["requestBody"]],
             ["POST", $users . "loginUser", [(new UsersController), "loginUser"], ["requestBody"]],
+            ["POST", $users . "verifyLoggedIn", [(new UsersController), "verifyLoggedIn"]],
             ["POST", $users . "logoutUser", [(new UsersController), "logoutUser"]],
 
             // Order routes
@@ -43,7 +44,7 @@ class Router
 
             // Product routes
             ["GET", $products . "getProducts", [(new ProductsController), "getProducts"]],
-            ["GET", $products . "getProduct", [(new ProductsController), "getProduct"], ["requestBody"]],
+            ["GET", $products . "getProductById", [(new ProductsController), "getProductById"], ["requestBody"]],
             ["GET", $products . "searchProducts", [(new ProductsController), "searchProducts"], ["requestBody"]],
             ["POST", $products . "toggleBookDisplay", [(new ProductsController), "toggleBookDisplay"]],
         ];
@@ -66,7 +67,7 @@ class Router
 
             // If the network request method and path matches, then it calls a specific class.
             if ($method === $routeMethod && strtolower($path) === $routePath) {
-                call_user_func_array([$handler[0], $handler[1]], [[$requestBody], $params]);
+                call_user_func_array([$handler[0], $handler[1]], [$requestBody, $params]);
                 return;
             }
         }
