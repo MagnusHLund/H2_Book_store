@@ -1,0 +1,19 @@
+.basket-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  
+  & img {
+    width: 50%;
+    height: 100%;
+    scale: 75%;
+    outline: gray solid 5px;
+    inset: 20px;
+  }
+  
+  &__product {
+    display: flex;
+    align-items: center;
+    gap: 1vh; 
+  }
+}

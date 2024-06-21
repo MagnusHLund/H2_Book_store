@@ -17,7 +17,7 @@ const Button: React.FC<IButton> = ({ placeholder = "", onClick  , transparent = 
     })
     
     return (
-        <button className={fullClassName} onClick={onClick}> { placeholder } { children } </button>
+        <button className={fullClassName} onClick={onClick}> { children } { placeholder } </button>
     )
 }
 

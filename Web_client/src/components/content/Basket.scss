@@ -1,38 +1,41 @@
 .basket-container {
   display: flex;
+  z-index: 1000;
   flex-direction: column;
-  overflow-y: auto;
-  gap: 2vh;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 30vw;
+  height: 50vh;
+  box-shadow: 2px 2px 5px 2px gray;
   background-color: white;
-  border: 0.5vh gray;
+  border-radius: 1vh;
+  border: 5px grey;
   
-  @keyframes scale-in-top {
-    0% {
-      -webkit-transform: scale(0);
-      transform: scale(0);
-      -webkit-transform-origin: 50% 0%;
-      transform-origin: 50% 0%;
-      opacity: 1;
-    }
-    100% {
-      -webkit-transform: scale(1);
-      transform: scale(1);
-      -webkit-transform-origin: 50% 0%;
-      transform-origin: 50% 0%;
-      opacity: 1;
-    }
-  }
-  
-  &__scale-in-top {
-    -webkit-animation: scale-in-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-    animation: scale-in-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  &__not-visible {
+    visibility: hidden;
+    padding: 0 0 0 0;
   }
 
-  & h1 {
-    
+  & h2 {
+    position: absolute;
+    margin-top: 4vh;
+    margin-left: 2.5vw;
+    font-weight: normal;
+    font-family: "Archivo";
+    top: 0;
+    left: 0;
   }
   
-  &__product {
-    
+  &__products-container {
+    display: flex;
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex-direction: column;
+    gap: 10vh;
+    margin-top: 7.5vh;
+    width: 90%;
+    height: 90%;
+    border-width: 5px;
   }
 }

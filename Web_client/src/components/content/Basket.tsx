@@ -1,14 +1,17 @@
 import { IconContext } from 'react-icons'
 import { LuShoppingBasket } from 'react-icons/lu'
 import Button from '../inputs/Button.tsx'
+import cn from 'classnames'
 import './Basket.scss'
 import React, { useState } from 'react'
+import BasketItem from "./BasketItem.tsx"
 
 interface BasketProps {
     toggleBasket: () => void
 }
 
 const Basket: React.FC<BasketProps> = ({ toggleBasket }) => {
+    
     const [isBasketVisible, setIsBasketVisible] = useState(false)
     const handleToggleBasket = () => {
         setIsBasketVisible(!isBasketVisible)
@@ -18,20 +21,19 @@ const Basket: React.FC<BasketProps> = ({ toggleBasket }) => {
     return (
         <>
             <BasketIcon toggleBasket={handleToggleBasket} />
-            {isBasketVisible && (
-                <div className="basket-container basket-container__scale-in-top">
-                    <p>Your basket is visible now!</p>
-                    <p>Your basket is visible now!</p>
-                    <p>Your basket is visible now!</p>
-                    <p>Your basket is visible now!</p>
-                    <p>Your basket is visible now!</p>
+            <div className={cn('basket-container', {
+                'basket-container__not-visible': !isBasketVisible,
+            })}>
+                <h2> Items in basket: </h2>
+                <div className='basket-container__products-container'>
+                    <BasketItem></BasketItem>
                 </div>
-            )}
+            </div>
         </>
     )
 }
 
-const BasketIcon: React.FC<BasketProps> = ({ toggleBasket }) => {
+const BasketIcon: React.FC<BasketProps> = ({toggleBasket}) => {
     return (
         <Button transparent={true} onClick={toggleBasket}>
             <IconContext.Provider
