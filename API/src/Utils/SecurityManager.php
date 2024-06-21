@@ -69,7 +69,7 @@ class SecurityManager
         $requiredMixedCase = true;
 
         // Check if the length is above the minimum length.
-        if (strlen($password) <= $minimumLength) {
+        if (strlen($password) < $minimumLength) {
             return false;
         }
 
@@ -102,10 +102,15 @@ class SecurityManager
      * @param string $dataToEncrypt Data which should be encrypted. This could be an email address, for example.
      * @return string The encrypted version of the data.
      */
-    public function encryptData($dataToEncrypt)
+    public function encryptData($dataToEncrypt, $useIv = true)
     {
+        $iv = null;
         try {
-            $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length(self::ENCRYPTION_CIPHER));
+
+            if ($useIv) {
+                $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length(self::ENCRYPTION_CIPHER));
+            }
+
             $encrypted = openssl_encrypt($dataToEncrypt, self::ENCRYPTION_CIPHER, $this->encryptionKey, 0, $iv);
             return base64_encode($iv . $encrypted);
         } catch (Exception $e) {
@@ -118,11 +123,17 @@ class SecurityManager
      * @param string $dataToDecrypt Data which should be decrypted. This could be a phone number, for example.
      * @return string Plain text of the formerly encrypted data.
      */
-    public function decryptData($dataToDecrypt)
+    public function decryptData($dataToDecrypt, $useIv = true)
     {
+        $iv = null;
+
         try {
             $dataToDecrypt = base64_decode($dataToDecrypt);
-            $iv = substr($dataToDecrypt, 0, openssl_cipher_iv_length(self::ENCRYPTION_CIPHER));
+
+            if ($useIv) {
+                $iv = substr($dataToDecrypt, 0, openssl_cipher_iv_length(self::ENCRYPTION_CIPHER));
+            }
+
             $cipherText = substr($dataToDecrypt, openssl_cipher_iv_length(self::ENCRYPTION_CIPHER));
             return openssl_decrypt($cipherText, self::ENCRYPTION_CIPHER, $this->encryptionKey, 0, $iv);
         } catch (Exception $e) {

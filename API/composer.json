@@ -12,8 +12,9 @@
     "psr-4": {
       "DavidsBookClub\\": "src/",
       "DavidsBookClub\\Utils\\": "src/Utils/",
-      "DavidsBookClub\\Controllers\\": "src/Controllers/",
-      "DavidsBookClub\\Middleware\\": "src/Middleware/"
+      "DavidsBookClub\\Enums\\": "src/Enums/",
+      "DavidsBookClub\\Middleware\\": "src/Middleware/",
+      "DavidsBookClub\\Controllers\\": "src/Controllers/"
     }
   }
 }

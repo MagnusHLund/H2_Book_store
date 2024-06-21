@@ -1,6 +1,7 @@
 ### Create Order
 POST http://localhost:1000/api/v1/orders/createOrder
 Content-Type: application/json
+Origin: localhost
 
 {
   "full_name": "your_full_name",
