@@ -1,0 +1,41 @@
+.basket-container {
+  display: flex;
+  z-index: 1000;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 30vw;
+  height: 50vh;
+  box-shadow: 2px 2px 5px 2px gray;
+  background-color: white;
+  border-radius: 1vh;
+  border: 5px grey;
+  
+  &__not-visible {
+    visibility: hidden;
+    padding: 0 0 0 0;
+  }
+
+  & h2 {
+    position: absolute;
+    margin-top: 4vh;
+    margin-left: 2.5vw;
+    font-weight: normal;
+    font-family: "Archivo";
+    top: 0;
+    left: 0;
+  }
+  
+  &__products-container {
+    display: flex;
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex-direction: column;
+    gap: 10vh;
+    margin-top: 7.5vh;
+    width: 90%;
+    height: 90%;
+    border-width: 5px;
+  }
+}
