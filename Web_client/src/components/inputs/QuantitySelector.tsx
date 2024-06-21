@@ -7,6 +7,8 @@ interface IQuantitySelector {
   defaultValue: string
 }
 
+const MIN_QUANTITY = 1
+
 const QuantitySelector: React.FC<IQuantitySelector> = ({ defaultValue }) => {
   // Initialize state with the default value parsed as an integer
   const [quantity, setQuantity] = useState<number>(parseInt(defaultValue, 10))
@@ -18,16 +20,16 @@ const QuantitySelector: React.FC<IQuantitySelector> = ({ defaultValue }) => {
 
   // Handle decrement action
   const handleDecrement = () => {
-    setQuantity((prevQuantity) => Math.max(1, prevQuantity - 1))
+    setQuantity((prevQuantity) => Math.max(MIN_QUANTITY, prevQuantity - 1))
   }
 
   // Handle input change
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = parseInt(e.target.value, 10)
-    if (!isNaN(newValue) && newValue >= 1) {
+    if (!isNaN(newValue) && newValue >= MIN_QUANTITY) {
       setQuantity(newValue)
-    } else if (newValue < 1) {
-      setQuantity(1)
+    } else if (newValue < MIN_QUANTITY) {
+      setQuantity(MIN_QUANTITY)
     }
   }
 
@@ -37,19 +39,19 @@ const QuantitySelector: React.FC<IQuantitySelector> = ({ defaultValue }) => {
         onClick={handleDecrement}
         placeholder="-"
         className="quantity-selector__button--left"
-      ></Button>
+      />
       <TextInput
         value={quantity.toString()}
         onChange={handleInputChange}
         placeholder={quantity.toString()}
         type="text"
-        className="text-input_box"
+        className="text-input__box"
       />
       <Button
         onClick={handleIncrement}
         placeholder="+"
         className="quantity-selector__button--right"
-      ></Button>
+      />
     </div>
   )
 }
