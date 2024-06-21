@@ -1,9 +1,16 @@
+@use './../../App.scss' as app;
 .button {
     border-radius: 1vh;
     border: none;
-    background-color: red;
+    background-color: app.$accent;
     color: white;
     font-weight: bold;
+    box-shadow: 0 2px #999; 
+    padding-left: 2vh;
+    padding-right: 2vh;
+    padding-top: 0.5vh;
+    padding-bottom: 0.5vh;
+    cursor: pointer;
     box-shadow: 0 4px #999;
     padding: 0.5vh 2vh;
     height: 4vh;
@@ -23,10 +30,10 @@
         }
     }
     &:hover:focus:active {
-        background-color: gray;
-        color: black;
-        box-shadow: 0 4px #666;
+        background-color: app.$detail;
+        // color: black;
+        box-shadow: 0 2px #666;
         cursor: pointer;
-        transform: translateY(4px);
+        transform: translateY(2px);
     }
 }
