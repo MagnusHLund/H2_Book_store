@@ -1,6 +1,7 @@
 ### Get Product
-GET http://localhost:1000/api/v1/products/getProduct
+GET http://localhost:1000/api/v1/products/getProductById
 Content-Type: application/json
+Origin: localhost
 
 {
   "book_id": "your_book_id"

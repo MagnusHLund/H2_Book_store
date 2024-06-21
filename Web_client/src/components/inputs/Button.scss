@@ -11,8 +11,24 @@
     padding-top: 0.5vh;
     padding-bottom: 0.5vh;
     cursor: pointer;
+    box-shadow: 0 4px #999;
+    padding: 0.5vh 2vh;
     height: 4vh;
-
+    
+    &.transparent {
+        background-color: transparent;
+        color: transparent;
+        box-shadow: none;
+        padding: 0;
+        width: auto;
+        cursor: pointer;
+        &:hover:focus:active {
+            background-color: transparent;
+            color: transparent;
+            box-shadow: none;
+            transform: none;
+        }
+    }
     &:hover:focus:active {
         background-color: app.$detail;
         // color: black;

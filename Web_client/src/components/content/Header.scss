@@ -3,25 +3,35 @@
 .header {
     width: 100%;
     height: 5vh;
-
     display: flex;
     justify-content: space-evenly;
     padding: 3vh;
     background-color: app.$primary;
 
-    
+    align-items: baseline;
+    margin-top: 3vh;
 
     &__logo {
         display: flex;
         justify-content: space-around;
         margin-top: 3vh;
-        margin-right: 15vh;
         height: 100%;
-        width: 0;
+        width: 6.5vw;
         scale: 300%;
     }
-
-    &__basket--icon {
-            margin-right: 3vh;
+    
+    &__basket-and-login {
+        display: flex;
+        flex-direction: row;
+        gap: 1.5vw;
+        padding: 0 0 0 0;
+        &__basket {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: flex-end;
+            gap: 1.5vw;
+            width: 2.5vw;
+        }
     }
 }
